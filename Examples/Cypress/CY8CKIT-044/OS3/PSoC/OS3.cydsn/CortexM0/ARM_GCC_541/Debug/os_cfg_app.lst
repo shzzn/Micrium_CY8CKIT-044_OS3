@@ -1,0 +1,1887 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"os_cfg_app.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	OSCfg_IdleTaskStk,512,4
+  20              		.comm	OSCfg_ISRStk,400,4
+  21              		.comm	OSCfg_MsgPool,512,4
+  22              		.comm	OSCfg_StatTaskStk,512,4
+  23              		.comm	OSCfg_TickTaskStk,512,4
+  24              		.comm	OSCfg_TmrTaskStk,512,4
+  25              		.global	OSCfg_IdleTaskStkBasePtr
+  26              		.section	.rodata
+  27              		.align	2
+  28              		.type	OSCfg_IdleTaskStkBasePtr, %object
+  29              		.size	OSCfg_IdleTaskStkBasePtr, 4
+  30              	OSCfg_IdleTaskStkBasePtr:
+  31 0000 00000000 		.word	OSCfg_IdleTaskStk
+  32              		.global	OSCfg_IdleTaskStkLimit
+  33              		.align	2
+  34              		.type	OSCfg_IdleTaskStkLimit, %object
+  35              		.size	OSCfg_IdleTaskStkLimit, 4
+  36              	OSCfg_IdleTaskStkLimit:
+  37 0004 0C000000 		.word	12
+  38              		.global	OSCfg_IdleTaskStkSize
+  39              		.align	2
+  40              		.type	OSCfg_IdleTaskStkSize, %object
+  41              		.size	OSCfg_IdleTaskStkSize, 4
+  42              	OSCfg_IdleTaskStkSize:
+  43 0008 80000000 		.word	128
+  44              		.global	OSCfg_IdleTaskStkSizeRAM
+  45              		.align	2
+  46              		.type	OSCfg_IdleTaskStkSizeRAM, %object
+  47              		.size	OSCfg_IdleTaskStkSizeRAM, 4
+  48              	OSCfg_IdleTaskStkSizeRAM:
+  49 000c 00020000 		.word	512
+  50              		.global	OSCfg_IntQBasePtr
+  51              		.align	2
+  52              		.type	OSCfg_IntQBasePtr, %object
+  53              		.size	OSCfg_IntQBasePtr, 4
+  54              	OSCfg_IntQBasePtr:
+  55 0010 00000000 		.space	4
+  56              		.global	OSCfg_IntQSize
+  57              		.align	1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 2
+
+
+  58              		.type	OSCfg_IntQSize, %object
+  59              		.size	OSCfg_IntQSize, 2
+  60              	OSCfg_IntQSize:
+  61 0014 0000     		.space	2
+  62              		.global	OSCfg_IntQSizeRAM
+  63 0016 0000     		.align	2
+  64              		.type	OSCfg_IntQSizeRAM, %object
+  65              		.size	OSCfg_IntQSizeRAM, 4
+  66              	OSCfg_IntQSizeRAM:
+  67 0018 00000000 		.space	4
+  68              		.global	OSCfg_IntQTaskStkBasePtr
+  69              		.align	2
+  70              		.type	OSCfg_IntQTaskStkBasePtr, %object
+  71              		.size	OSCfg_IntQTaskStkBasePtr, 4
+  72              	OSCfg_IntQTaskStkBasePtr:
+  73 001c 00000000 		.space	4
+  74              		.global	OSCfg_IntQTaskStkLimit
+  75              		.align	2
+  76              		.type	OSCfg_IntQTaskStkLimit, %object
+  77              		.size	OSCfg_IntQTaskStkLimit, 4
+  78              	OSCfg_IntQTaskStkLimit:
+  79 0020 00000000 		.space	4
+  80              		.global	OSCfg_IntQTaskStkSize
+  81              		.align	2
+  82              		.type	OSCfg_IntQTaskStkSize, %object
+  83              		.size	OSCfg_IntQTaskStkSize, 4
+  84              	OSCfg_IntQTaskStkSize:
+  85 0024 00000000 		.space	4
+  86              		.global	OSCfg_IntQTaskStkSizeRAM
+  87              		.align	2
+  88              		.type	OSCfg_IntQTaskStkSizeRAM, %object
+  89              		.size	OSCfg_IntQTaskStkSizeRAM, 4
+  90              	OSCfg_IntQTaskStkSizeRAM:
+  91 0028 00000000 		.space	4
+  92              		.global	OSCfg_ISRStkBasePtr
+  93              		.align	2
+  94              		.type	OSCfg_ISRStkBasePtr, %object
+  95              		.size	OSCfg_ISRStkBasePtr, 4
+  96              	OSCfg_ISRStkBasePtr:
+  97 002c 00000000 		.word	OSCfg_ISRStk
+  98              		.global	OSCfg_ISRStkSize
+  99              		.align	2
+ 100              		.type	OSCfg_ISRStkSize, %object
+ 101              		.size	OSCfg_ISRStkSize, 4
+ 102              	OSCfg_ISRStkSize:
+ 103 0030 64000000 		.word	100
+ 104              		.global	OSCfg_ISRStkSizeRAM
+ 105              		.align	2
+ 106              		.type	OSCfg_ISRStkSizeRAM, %object
+ 107              		.size	OSCfg_ISRStkSizeRAM, 4
+ 108              	OSCfg_ISRStkSizeRAM:
+ 109 0034 90010000 		.word	400
+ 110              		.global	OSCfg_MsgPoolSize
+ 111              		.align	1
+ 112              		.type	OSCfg_MsgPoolSize, %object
+ 113              		.size	OSCfg_MsgPoolSize, 2
+ 114              	OSCfg_MsgPoolSize:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 3
+
+
+ 115 0038 2000     		.short	32
+ 116              		.global	OSCfg_MsgPoolSizeRAM
+ 117 003a 0000     		.align	2
+ 118              		.type	OSCfg_MsgPoolSizeRAM, %object
+ 119              		.size	OSCfg_MsgPoolSizeRAM, 4
+ 120              	OSCfg_MsgPoolSizeRAM:
+ 121 003c 00020000 		.word	512
+ 122              		.global	OSCfg_MsgPoolBasePtr
+ 123              		.align	2
+ 124              		.type	OSCfg_MsgPoolBasePtr, %object
+ 125              		.size	OSCfg_MsgPoolBasePtr, 4
+ 126              	OSCfg_MsgPoolBasePtr:
+ 127 0040 00000000 		.word	OSCfg_MsgPool
+ 128              		.global	OSCfg_StatTaskPrio
+ 129              		.type	OSCfg_StatTaskPrio, %object
+ 130              		.size	OSCfg_StatTaskPrio, 1
+ 131              	OSCfg_StatTaskPrio:
+ 132 0044 1E       		.byte	30
+ 133              		.global	OSCfg_StatTaskRate_Hz
+ 134 0045 000000   		.align	2
+ 135              		.type	OSCfg_StatTaskRate_Hz, %object
+ 136              		.size	OSCfg_StatTaskRate_Hz, 4
+ 137              	OSCfg_StatTaskRate_Hz:
+ 138 0048 0A000000 		.word	10
+ 139              		.global	OSCfg_StatTaskStkBasePtr
+ 140              		.align	2
+ 141              		.type	OSCfg_StatTaskStkBasePtr, %object
+ 142              		.size	OSCfg_StatTaskStkBasePtr, 4
+ 143              	OSCfg_StatTaskStkBasePtr:
+ 144 004c 00000000 		.word	OSCfg_StatTaskStk
+ 145              		.global	OSCfg_StatTaskStkLimit
+ 146              		.align	2
+ 147              		.type	OSCfg_StatTaskStkLimit, %object
+ 148              		.size	OSCfg_StatTaskStkLimit, 4
+ 149              	OSCfg_StatTaskStkLimit:
+ 150 0050 0C000000 		.word	12
+ 151              		.global	OSCfg_StatTaskStkSize
+ 152              		.align	2
+ 153              		.type	OSCfg_StatTaskStkSize, %object
+ 154              		.size	OSCfg_StatTaskStkSize, 4
+ 155              	OSCfg_StatTaskStkSize:
+ 156 0054 80000000 		.word	128
+ 157              		.global	OSCfg_StatTaskStkSizeRAM
+ 158              		.align	2
+ 159              		.type	OSCfg_StatTaskStkSizeRAM, %object
+ 160              		.size	OSCfg_StatTaskStkSizeRAM, 4
+ 161              	OSCfg_StatTaskStkSizeRAM:
+ 162 0058 00020000 		.word	512
+ 163              		.global	OSCfg_StkSizeMin
+ 164              		.align	2
+ 165              		.type	OSCfg_StkSizeMin, %object
+ 166              		.size	OSCfg_StkSizeMin, 4
+ 167              	OSCfg_StkSizeMin:
+ 168 005c 40000000 		.word	64
+ 169              		.global	OSCfg_TickRate_Hz
+ 170              		.align	2
+ 171              		.type	OSCfg_TickRate_Hz, %object
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 4
+
+
+ 172              		.size	OSCfg_TickRate_Hz, 4
+ 173              	OSCfg_TickRate_Hz:
+ 174 0060 E8030000 		.word	1000
+ 175              		.global	OSCfg_TickTaskPrio
+ 176              		.type	OSCfg_TickTaskPrio, %object
+ 177              		.size	OSCfg_TickTaskPrio, 1
+ 178              	OSCfg_TickTaskPrio:
+ 179 0064 0A       		.byte	10
+ 180              		.global	OSCfg_TickTaskStkBasePtr
+ 181 0065 000000   		.align	2
+ 182              		.type	OSCfg_TickTaskStkBasePtr, %object
+ 183              		.size	OSCfg_TickTaskStkBasePtr, 4
+ 184              	OSCfg_TickTaskStkBasePtr:
+ 185 0068 00000000 		.word	OSCfg_TickTaskStk
+ 186              		.global	OSCfg_TickTaskStkLimit
+ 187              		.align	2
+ 188              		.type	OSCfg_TickTaskStkLimit, %object
+ 189              		.size	OSCfg_TickTaskStkLimit, 4
+ 190              	OSCfg_TickTaskStkLimit:
+ 191 006c 0C000000 		.word	12
+ 192              		.global	OSCfg_TickTaskStkSize
+ 193              		.align	2
+ 194              		.type	OSCfg_TickTaskStkSize, %object
+ 195              		.size	OSCfg_TickTaskStkSize, 4
+ 196              	OSCfg_TickTaskStkSize:
+ 197 0070 80000000 		.word	128
+ 198              		.global	OSCfg_TickTaskStkSizeRAM
+ 199              		.align	2
+ 200              		.type	OSCfg_TickTaskStkSizeRAM, %object
+ 201              		.size	OSCfg_TickTaskStkSizeRAM, 4
+ 202              	OSCfg_TickTaskStkSizeRAM:
+ 203 0074 00020000 		.word	512
+ 204              		.global	OSCfg_TmrTaskPrio
+ 205              		.type	OSCfg_TmrTaskPrio, %object
+ 206              		.size	OSCfg_TmrTaskPrio, 1
+ 207              	OSCfg_TmrTaskPrio:
+ 208 0078 1D       		.byte	29
+ 209              		.global	OSCfg_TmrTaskRate_Hz
+ 210 0079 000000   		.align	2
+ 211              		.type	OSCfg_TmrTaskRate_Hz, %object
+ 212              		.size	OSCfg_TmrTaskRate_Hz, 4
+ 213              	OSCfg_TmrTaskRate_Hz:
+ 214 007c 0A000000 		.word	10
+ 215              		.global	OSCfg_TmrTaskStkBasePtr
+ 216              		.align	2
+ 217              		.type	OSCfg_TmrTaskStkBasePtr, %object
+ 218              		.size	OSCfg_TmrTaskStkBasePtr, 4
+ 219              	OSCfg_TmrTaskStkBasePtr:
+ 220 0080 00000000 		.word	OSCfg_TmrTaskStk
+ 221              		.global	OSCfg_TmrTaskStkLimit
+ 222              		.align	2
+ 223              		.type	OSCfg_TmrTaskStkLimit, %object
+ 224              		.size	OSCfg_TmrTaskStkLimit, 4
+ 225              	OSCfg_TmrTaskStkLimit:
+ 226 0084 0C000000 		.word	12
+ 227              		.global	OSCfg_TmrTaskStkSize
+ 228              		.align	2
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 5
+
+
+ 229              		.type	OSCfg_TmrTaskStkSize, %object
+ 230              		.size	OSCfg_TmrTaskStkSize, 4
+ 231              	OSCfg_TmrTaskStkSize:
+ 232 0088 80000000 		.word	128
+ 233              		.global	OSCfg_TmrTaskStkSizeRAM
+ 234              		.align	2
+ 235              		.type	OSCfg_TmrTaskStkSizeRAM, %object
+ 236              		.size	OSCfg_TmrTaskStkSizeRAM, 4
+ 237              	OSCfg_TmrTaskStkSizeRAM:
+ 238 008c 00020000 		.word	512
+ 239              		.global	OSCfg_DataSizeRAM
+ 240              		.align	2
+ 241              		.type	OSCfg_DataSizeRAM, %object
+ 242              		.size	OSCfg_DataSizeRAM, 4
+ 243              	OSCfg_DataSizeRAM:
+ 244 0090 900B0000 		.word	2960
+ 245              		.section	.text.OSCfg_Init,"ax",%progbits
+ 246              		.align	2
+ 247              		.global	OSCfg_Init
+ 248              		.code	16
+ 249              		.thumb_func
+ 250              		.type	OSCfg_Init, %function
+ 251              	OSCfg_Init:
+ 252              	.LFB0:
+ 253              		.file 1 "..\\..\\..\\..\\..\\..\\Software\\uCOS-III\\Source\\os_cfg_app.c"
+   1:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** /*
+   2:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+   3:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                                      uC/OS-III
+   4:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                                 The Real-Time Kernel
+   5:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+   6:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                  (c) Copyright 2009-2015; Micrium, Inc.; Weston, FL
+   7:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                           All rights reserved.  Protected by international copyright laws.
+   8:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+   9:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                       OS CONFIGURATION (APPLICATION SPECIFICS)
+  10:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+  11:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * File    : OS_CFG_APP.C
+  12:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * By      : JJL
+  13:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * Version : V3.05.01
+  14:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+  15:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * LICENSING TERMS:
+  16:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * ---------------
+  17:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           uC/OS-III is provided in source form for FREE short-term evaluation, for educational us
+  18:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           for peaceful research.  If you plan or intend to use uC/OS-III in a commercial applicat
+  19:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           product then, you need to contact Micrium to properly license uC/OS-III for its use in 
+  20:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           application/product.   We provide ALL the source code for your convenience and to help 
+  21:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can 
+  22:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           it commercially without paying a licensing fee.
+  23:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+  24:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           Knowledge of the source code may NOT be used to develop a similar product.
+  25:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+  26:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           Please help us continue to provide the embedded community with the finest software avai
+  27:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           Your honesty is greatly appreciated.
+  28:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+  29:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           You can find our product's user manual, API reference, release notes and
+  30:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           more information at https://doc.micrium.com.
+  31:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *           You can contact us at www.micrium.com.
+  32:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 6
+
+
+  33:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * Note(s) : DO NOT CHANGE THIS FILE!
+  34:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+  35:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** */
+  36:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  37:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #define  MICRIUM_SOURCE
+  38:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #include <os_cfg_app.h>
+  39:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #include "os.h"
+  40:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  41:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #ifdef VSC_INCLUDE_SOURCE_FILE_NAMES
+  42:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** const  CPU_CHAR  *os_cfg_app__c = "$Id: $";
+  43:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  44:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  45:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TASK_IDLE_EN == DEF_ENABLED)
+  46:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #define  OS_CFG_IDLE_TASK_STK_LIMIT      ((OS_CFG_IDLE_TASK_STK_SIZE  * OS_CFG_TASK_STK_LIMIT_PCT_E
+  47:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  48:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  49:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_POST_DEFERRED_EN == DEF_ENABLED)
+  50:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #define  OS_CFG_INT_Q_TASK_STK_LIMIT     ((OS_CFG_INT_Q_TASK_STK_SIZE * OS_CFG_TASK_STK_LIMIT_PCT_E
+  51:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  52:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  53:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_STAT_TASK_EN == DEF_ENABLED)
+  54:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #define  OS_CFG_STAT_TASK_STK_LIMIT      ((OS_CFG_STAT_TASK_STK_SIZE  * OS_CFG_TASK_STK_LIMIT_PCT_E
+  55:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  56:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  57:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TASK_TICK_EN == DEF_ENABLED)
+  58:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #define  OS_CFG_TICK_TASK_STK_LIMIT      ((OS_CFG_TICK_TASK_STK_SIZE  * OS_CFG_TASK_STK_LIMIT_PCT_E
+  59:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  60:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  61:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TMR_EN == DEF_ENABLED)
+  62:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #define  OS_CFG_TMR_TASK_STK_LIMIT       ((OS_CFG_TMR_TASK_STK_SIZE   * OS_CFG_TASK_STK_LIMIT_PCT_E
+  63:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  64:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  65:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** /*
+  66:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+  67:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                                    DATA STORAGE
+  68:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+  69:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** */
+  70:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  71:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TASK_IDLE_EN == DEF_ENABLED)
+  72:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK        OSCfg_IdleTaskStk   [OS_CFG_IDLE_TASK_STK_SIZE];
+  73:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  74:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  75:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_POST_DEFERRED_EN == DEF_ENABLED)
+  76:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_INT_Q       OSCfg_IntQ          [OS_CFG_INT_Q_SIZE];
+  77:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK        OSCfg_IntQTaskStk   [OS_CFG_INT_Q_TASK_STK_SIZE];
+  78:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  79:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  80:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_STK_SIZE > 0u)
+  81:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK        OSCfg_ISRStk        [OS_CFG_ISR_STK_SIZE];
+  82:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  83:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  84:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_MSG_EN == DEF_ENABLED)
+  85:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_MSG         OSCfg_MsgPool       [OS_CFG_MSG_POOL_SIZE];
+  86:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  87:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  88:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_STAT_TASK_EN == DEF_ENABLED)
+  89:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK        OSCfg_StatTaskStk   [OS_CFG_STAT_TASK_STK_SIZE];
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 7
+
+
+  90:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  91:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  92:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK        OSCfg_TickTaskStk   [OS_CFG_TICK_TASK_STK_SIZE];
+  93:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  94:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TMR_EN == DEF_ENABLED)
+  95:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK        OSCfg_TmrTaskStk    [OS_CFG_TMR_TASK_STK_SIZE];
+  96:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+  97:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+  98:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** /*
+  99:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ 100:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                                      CONSTANTS
+ 101:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ 102:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** */
+ 103:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 104:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TASK_IDLE_EN == DEF_ENABLED)
+ 105:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_IdleTaskStkBasePtr   = &OSCfg_IdleTaskStk[0];
+ 106:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IdleTaskStkLimit     =  OS_CFG_IDLE_TASK_STK_LIMIT;
+ 107:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IdleTaskStkSize      =  OS_CFG_IDLE_TASK_STK_SIZE;
+ 108:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_IdleTaskStkSizeRAM   =  sizeof(OSCfg_IdleTaskStk);
+ 109:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #else
+ 110:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_IdleTaskStkBasePtr   = DEF_NULL;
+ 111:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IdleTaskStkLimit     = 0u;
+ 112:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IdleTaskStkSize      = 0u;
+ 113:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_IdleTaskStkSizeRAM   = 0u;
+ 114:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 115:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 116:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 117:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_POST_DEFERRED_EN == DEF_ENABLED)
+ 118:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_INT_Q     * const  OSCfg_IntQBasePtr          = &OSCfg_IntQ[0];
+ 119:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_OBJ_QTY     const  OSCfg_IntQSize             =  OS_CFG_INT_Q_SIZE;
+ 120:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_IntQSizeRAM          =  sizeof(OSCfg_IntQ);
+ 121:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_IntQTaskStkBasePtr   = &OSCfg_IntQTaskStk[0];
+ 122:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IntQTaskStkLimit     =  OS_CFG_INT_Q_TASK_STK_LIMIT;
+ 123:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IntQTaskStkSize      =  OS_CFG_INT_Q_TASK_STK_SIZE;
+ 124:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_IntQTaskStkSizeRAM   =  sizeof(OSCfg_IntQTaskStk);
+ 125:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #else
+ 126:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_INT_Q     * const  OSCfg_IntQBasePtr          = DEF_NULL;
+ 127:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_OBJ_QTY     const  OSCfg_IntQSize             = 0u;
+ 128:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_IntQSizeRAM          = 0u;
+ 129:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_IntQTaskStkBasePtr   = DEF_NULL;
+ 130:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IntQTaskStkLimit     = 0u;
+ 131:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_IntQTaskStkSize      = 0u;
+ 132:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_IntQTaskStkSizeRAM   = 0u;
+ 133:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 134:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 135:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 136:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_STK_SIZE > 0u)
+ 137:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_ISRStkBasePtr        = &OSCfg_ISRStk[0];
+ 138:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_ISRStkSize           =  OS_CFG_ISR_STK_SIZE;
+ 139:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_ISRStkSizeRAM        =  sizeof(OSCfg_ISRStk);
+ 140:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #else
+ 141:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_ISRStkBasePtr        =  DEF_NULL;
+ 142:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_ISRStkSize           =  0u;
+ 143:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_ISRStkSizeRAM        =  0u;
+ 144:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 145:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 146:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 8
+
+
+ 147:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_MSG_EN == DEF_ENABLED)
+ 148:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_MSG_SIZE    const  OSCfg_MsgPoolSize          =  OS_CFG_MSG_POOL_SIZE;
+ 149:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_MsgPoolSizeRAM       =  sizeof(OSCfg_MsgPool);
+ 150:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_MSG       * const  OSCfg_MsgPoolBasePtr       = &OSCfg_MsgPool[0];
+ 151:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #else
+ 152:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_MSG_SIZE    const  OSCfg_MsgPoolSize          =  0u;
+ 153:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_MsgPoolSizeRAM       =  0u;
+ 154:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_MSG       * const  OSCfg_MsgPoolBasePtr       =  DEF_NULL;
+ 155:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 156:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 157:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 158:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_STAT_TASK_EN == DEF_ENABLED)
+ 159:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_PRIO        const  OSCfg_StatTaskPrio         =  OS_CFG_STAT_TASK_PRIO;
+ 160:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_RATE_HZ     const  OSCfg_StatTaskRate_Hz      =  OS_CFG_STAT_TASK_RATE_HZ;
+ 161:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_StatTaskStkBasePtr   = &OSCfg_StatTaskStk[0];
+ 162:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_StatTaskStkLimit     =  OS_CFG_STAT_TASK_STK_LIMIT;
+ 163:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_StatTaskStkSize      =  OS_CFG_STAT_TASK_STK_SIZE;
+ 164:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_StatTaskStkSizeRAM   =  sizeof(OSCfg_StatTaskStk);
+ 165:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #else
+ 166:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_PRIO        const  OSCfg_StatTaskPrio         =  0u;
+ 167:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_RATE_HZ     const  OSCfg_StatTaskRate_Hz      =  0u;
+ 168:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_StatTaskStkBasePtr   =  DEF_NULL;
+ 169:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_StatTaskStkLimit     =  0u;
+ 170:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_StatTaskStkSize      =  0u;
+ 171:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_StatTaskStkSizeRAM   =  0u;
+ 172:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 173:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 174:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 175:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_StkSizeMin           =  OS_CFG_STK_SIZE_MIN;
+ 176:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 177:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 178:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_RATE_HZ     const  OSCfg_TickRate_Hz          =  OS_CFG_TICK_RATE_HZ;
+ 179:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_PRIO        const  OSCfg_TickTaskPrio         =  OS_CFG_TICK_TASK_PRIO;
+ 180:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_TickTaskStkBasePtr   = &OSCfg_TickTaskStk[0];
+ 181:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_TickTaskStkLimit     =  OS_CFG_TICK_TASK_STK_LIMIT;
+ 182:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_TickTaskStkSize      =  OS_CFG_TICK_TASK_STK_SIZE;
+ 183:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_TickTaskStkSizeRAM   =  sizeof(OSCfg_TickTaskStk);
+ 184:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 185:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 186:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TMR_EN == DEF_ENABLED)
+ 187:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_PRIO        const  OSCfg_TmrTaskPrio          =  OS_CFG_TMR_TASK_PRIO;
+ 188:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_RATE_HZ     const  OSCfg_TmrTaskRate_Hz       =  OS_CFG_TMR_TASK_RATE_HZ;
+ 189:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_TmrTaskStkBasePtr    = &OSCfg_TmrTaskStk[0];
+ 190:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_TmrTaskStkLimit      =  OS_CFG_TMR_TASK_STK_LIMIT;
+ 191:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_TmrTaskStkSize       =  OS_CFG_TMR_TASK_STK_SIZE;
+ 192:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_TmrTaskStkSizeRAM    =  sizeof(OSCfg_TmrTaskStk);
+ 193:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #else
+ 194:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_PRIO        const  OSCfg_TmrTaskPrio          =  0u;
+ 195:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** OS_RATE_HZ     const  OSCfg_TmrTaskRate_Hz       =  0u;
+ 196:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK      * const  OSCfg_TmrTaskStkBasePtr    =  DEF_NULL;
+ 197:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_TmrTaskStkLimit      =  0u;
+ 198:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_STK_SIZE   const  OSCfg_TmrTaskStkSize       =  0u;
+ 199:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_TmrTaskStkSizeRAM    =  0u;
+ 200:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 201:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 202:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 203:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** /*
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 9
+
+
+ 204:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ 205:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                         TOTAL SIZE OF APPLICATION CONFIGURATION
+ 206:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ 207:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** */
+ 208:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 209:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** CPU_INT32U     const  OSCfg_DataSizeRAM          = 0u
+ 210:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 211:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TASK_IDLE_EN == DEF_ENABLED)
+ 212:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_IdleTaskStk)
+ 213:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 214:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 215:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_POST_DEFERRED_EN == DEF_ENABLED)
+ 216:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_IntQ)
+ 217:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_IntQTaskStk)
+ 218:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 219:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 220:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_MSG_EN == DEF_ENABLED)
+ 221:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_MsgPool)
+ 222:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 223:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 224:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_STAT_TASK_EN == DEF_ENABLED)
+ 225:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_StatTaskStk)
+ 226:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 227:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 228:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TMR_EN == DEF_ENABLED)
+ 229:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_TmrTaskStk)
+ 230:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 231:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 232:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_STK_SIZE > 0u)
+ 233:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_ISRStk)
+ 234:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 235:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****                                                  + sizeof(OSCfg_TickTaskStk);
+ 236:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 237:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 238:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** /*
+ 239:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ 240:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                                             OS CONFIGURATION INITIALIZATION
+ 241:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+ 242:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * Description: This function is used to make sure that debug variables that are unused in the appli
+ 243:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *              optimized away.  This function might not be necessary for all compilers.  In this ca
+ 244:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *              DELETE the code in this function while still leaving the declaration of the function
+ 245:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+ 246:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * Arguments  : none
+ 247:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+ 248:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * Returns    : none
+ 249:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *
+ 250:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** * Note(s)    : (1) This code doesn't do anything, it simply prevents the compiler from optimizing o
+ 251:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                  variables which are declared in this file.
+ 252:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *              (2) You may decide to 'compile out' the code (by using #if 0/#endif) INSIDE the func
+ 253:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** *                  DOES NOT optimize out the 'const' variables above.
+ 254:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** ***************************************************************************************************
+ 255:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** */
+ 256:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 257:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** void  OSCfg_Init (void)
+ 258:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** {
+ 254              		.loc 1 258 0
+ 255              		.cfi_startproc
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 10
+
+
+ 256              		@ args = 0, pretend = 0, frame = 0
+ 257              		@ frame_needed = 1, uses_anonymous_args = 0
+ 258 0000 80B5     		push	{r7, lr}
+ 259              		.cfi_def_cfa_offset 8
+ 260              		.cfi_offset 7, -8
+ 261              		.cfi_offset 14, -4
+ 262 0002 00AF     		add	r7, sp, #0
+ 263              		.cfi_def_cfa_register 7
+ 259:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_DataSizeRAM;
+ 260:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 261:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TASK_IDLE_EN == DEF_ENABLED)
+ 262:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IdleTaskStkBasePtr;
+ 263:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IdleTaskStkLimit;
+ 264:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IdleTaskStkSize;
+ 265:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IdleTaskStkSizeRAM;
+ 266:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 267:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 268:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_ISR_POST_DEFERRED_EN == DEF_ENABLED)
+ 269:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQBasePtr;
+ 270:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQSize;
+ 271:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQSizeRAM;
+ 272:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQTaskStkBasePtr;
+ 273:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQTaskStkLimit;
+ 274:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQTaskStkSize;
+ 275:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_IntQTaskStkSizeRAM;
+ 276:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 277:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 278:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_ISRStkBasePtr;
+ 279:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_ISRStkSize;
+ 280:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_ISRStkSizeRAM;
+ 281:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 282:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_MSG_EN == DEF_ENABLED)
+ 283:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_MsgPoolSize;
+ 284:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_MsgPoolSizeRAM;
+ 285:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_MsgPoolBasePtr;
+ 286:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 287:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 288:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_STAT_TASK_EN == DEF_ENABLED)
+ 289:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StatTaskPrio;
+ 290:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StatTaskRate_Hz;
+ 291:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StatTaskStkBasePtr;
+ 292:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StatTaskStkLimit;
+ 293:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StatTaskStkSize;
+ 294:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StatTaskStkSizeRAM;
+ 295:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 296:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 297:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_StkSizeMin;
+ 298:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 299:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TickRate_Hz;
+ 300:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TickTaskPrio;
+ 301:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TickTaskStkBasePtr;
+ 302:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TickTaskStkLimit;
+ 303:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TickTaskStkSize;
+ 304:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TickTaskStkSizeRAM;
+ 305:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** 
+ 306:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #if (OS_CFG_TMR_EN == DEF_ENABLED)
+ 307:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TmrTaskPrio;
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 11
+
+
+ 308:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TmrTaskRate_Hz;
+ 309:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TmrTaskStkBasePtr;
+ 310:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TmrTaskStkLimit;
+ 311:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TmrTaskStkSize;
+ 312:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c ****     (void)&OSCfg_TmrTaskStkSizeRAM;
+ 313:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** #endif
+ 314:..\..\..\..\..\..\Software\uCOS-III\Source/os_cfg_app.c **** }
+ 264              		.loc 1 314 0
+ 265 0004 C046     		nop
+ 266 0006 BD46     		mov	sp, r7
+ 267              		@ sp needed
+ 268 0008 80BD     		pop	{r7, pc}
+ 269              		.cfi_endproc
+ 270              	.LFE0:
+ 271              		.size	OSCfg_Init, .-OSCfg_Init
+ 272 000a C046     		.text
+ 273              	.Letext0:
+ 274              		.file 2 "..\\..\\..\\..\\..\\..\\Software\\uC-CPU\\ARM-Cortex-M0\\GNU/cpu.h"
+ 275              		.file 3 "..\\..\\..\\..\\..\\..\\Software\\uC-CPU/cpu_core.h"
+ 276              		.file 4 "..\\..\\..\\..\\..\\..\\Software\\uCOS-III\\Source\\os_type.h"
+ 277              		.file 5 "..\\..\\..\\..\\..\\..\\Software\\uCOS-III\\Source\\os.h"
+ 278              		.section	.debug_info,"",%progbits
+ 279              	.Ldebug_info0:
+ 280 0000 B7040000 		.4byte	0x4b7
+ 281 0004 0400     		.2byte	0x4
+ 282 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 283 000a 04       		.byte	0x4
+ 284 000b 01       		.uleb128 0x1
+ 285 000c 15020000 		.4byte	.LASF72
+ 286 0010 0C       		.byte	0xc
+ 287 0011 48040000 		.4byte	.LASF73
+ 288 0015 F6000000 		.4byte	.LASF74
+ 289 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 290 001d 00000000 		.4byte	0
+ 291 0021 00000000 		.4byte	.Ldebug_line0
+ 292 0025 02       		.uleb128 0x2
+ 293 0026 01       		.byte	0x1
+ 294 0027 08       		.byte	0x8
+ 295 0028 E4030000 		.4byte	.LASF0
+ 296 002c 02       		.uleb128 0x2
+ 297 002d 01       		.byte	0x1
+ 298 002e 08       		.byte	0x8
+ 299 002f B7020000 		.4byte	.LASF1
+ 300 0033 03       		.uleb128 0x3
+ 301 0034 C7030000 		.4byte	.LASF3
+ 302 0038 02       		.byte	0x2
+ 303 0039 7E       		.byte	0x7e
+ 304 003a 2C000000 		.4byte	0x2c
+ 305 003e 02       		.uleb128 0x2
+ 306 003f 01       		.byte	0x1
+ 307 0040 06       		.byte	0x6
+ 308 0041 0D030000 		.4byte	.LASF2
+ 309 0045 03       		.uleb128 0x3
+ 310 0046 B9050000 		.4byte	.LASF4
+ 311 004a 02       		.byte	0x2
+ 312 004b 80       		.byte	0x80
+ 313 004c 50000000 		.4byte	0x50
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 12
+
+
+ 314 0050 02       		.uleb128 0x2
+ 315 0051 02       		.byte	0x2
+ 316 0052 07       		.byte	0x7
+ 317 0053 9B030000 		.4byte	.LASF5
+ 318 0057 02       		.uleb128 0x2
+ 319 0058 02       		.byte	0x2
+ 320 0059 05       		.byte	0x5
+ 321 005a 8B000000 		.4byte	.LASF6
+ 322 005e 03       		.uleb128 0x3
+ 323 005f 19040000 		.4byte	.LASF7
+ 324 0063 02       		.byte	0x2
+ 325 0064 82       		.byte	0x82
+ 326 0065 69000000 		.4byte	0x69
+ 327 0069 02       		.uleb128 0x2
+ 328 006a 04       		.byte	0x4
+ 329 006b 07       		.byte	0x7
+ 330 006c 37030000 		.4byte	.LASF8
+ 331 0070 04       		.uleb128 0x4
+ 332 0071 04       		.byte	0x4
+ 333 0072 05       		.byte	0x5
+ 334 0073 696E7400 		.ascii	"int\000"
+ 335 0077 02       		.uleb128 0x2
+ 336 0078 08       		.byte	0x8
+ 337 0079 07       		.byte	0x7
+ 338 007a 19030000 		.4byte	.LASF9
+ 339 007e 02       		.uleb128 0x2
+ 340 007f 08       		.byte	0x8
+ 341 0080 05       		.byte	0x5
+ 342 0081 DC010000 		.4byte	.LASF10
+ 343 0085 02       		.uleb128 0x2
+ 344 0086 04       		.byte	0x4
+ 345 0087 04       		.byte	0x4
+ 346 0088 D6010000 		.4byte	.LASF11
+ 347 008c 02       		.uleb128 0x2
+ 348 008d 08       		.byte	0x8
+ 349 008e 04       		.byte	0x4
+ 350 008f A6040000 		.4byte	.LASF12
+ 351 0093 05       		.uleb128 0x5
+ 352 0094 04       		.byte	0x4
+ 353 0095 03       		.uleb128 0x3
+ 354 0096 CD010000 		.4byte	.LASF13
+ 355 009a 02       		.byte	0x2
+ 356 009b BA       		.byte	0xba
+ 357 009c 5E000000 		.4byte	0x5e
+ 358 00a0 03       		.uleb128 0x3
+ 359 00a1 39050000 		.4byte	.LASF14
+ 360 00a5 02       		.byte	0x2
+ 361 00a6 E5       		.byte	0xe5
+ 362 00a7 5E000000 		.4byte	0x5e
+ 363 00ab 03       		.uleb128 0x3
+ 364 00ac E9000000 		.4byte	.LASF15
+ 365 00b0 02       		.byte	0x2
+ 366 00b1 E6       		.byte	0xe6
+ 367 00b2 95000000 		.4byte	0x95
+ 368 00b6 03       		.uleb128 0x3
+ 369 00b7 C7040000 		.4byte	.LASF16
+ 370 00bb 03       		.byte	0x3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 13
+
+
+ 371 00bc C3       		.byte	0xc3
+ 372 00bd 5E000000 		.4byte	0x5e
+ 373 00c1 03       		.uleb128 0x3
+ 374 00c2 2A040000 		.4byte	.LASF17
+ 375 00c6 03       		.byte	0x3
+ 376 00c7 C6       		.byte	0xc6
+ 377 00c8 B6000000 		.4byte	0xb6
+ 378 00cc 03       		.uleb128 0x3
+ 379 00cd A3020000 		.4byte	.LASF18
+ 380 00d1 04       		.byte	0x4
+ 381 00d2 42       		.byte	0x42
+ 382 00d3 45000000 		.4byte	0x45
+ 383 00d7 03       		.uleb128 0x3
+ 384 00d8 3E000000 		.4byte	.LASF19
+ 385 00dc 04       		.byte	0x4
+ 386 00dd 46       		.byte	0x46
+ 387 00de 45000000 		.4byte	0x45
+ 388 00e2 03       		.uleb128 0x3
+ 389 00e3 11040000 		.4byte	.LASF20
+ 390 00e7 04       		.byte	0x4
+ 391 00e8 4D       		.byte	0x4d
+ 392 00e9 33000000 		.4byte	0x33
+ 393 00ed 03       		.uleb128 0x3
+ 394 00ee 5A030000 		.4byte	.LASF21
+ 395 00f2 04       		.byte	0x4
+ 396 00f3 51       		.byte	0x51
+ 397 00f4 5E000000 		.4byte	0x5e
+ 398 00f8 06       		.uleb128 0x6
+ 399 00f9 30030000 		.4byte	.LASF22
+ 400 00fd 05       		.byte	0x5
+ 401 00fe C402     		.2byte	0x2c4
+ 402 0100 04010000 		.4byte	0x104
+ 403 0104 07       		.uleb128 0x7
+ 404 0105 F4020000 		.4byte	.LASF75
+ 405 0109 10       		.byte	0x10
+ 406 010a 05       		.byte	0x5
+ 407 010b A303     		.2byte	0x3a3
+ 408 010d 46010000 		.4byte	0x146
+ 409 0111 08       		.uleb128 0x8
+ 410 0112 6E050000 		.4byte	.LASF23
+ 411 0116 05       		.byte	0x5
+ 412 0117 A403     		.2byte	0x3a4
+ 413 0119 57010000 		.4byte	0x157
+ 414 011d 00       		.byte	0
+ 415 011e 08       		.uleb128 0x8
+ 416 011f C5020000 		.4byte	.LASF24
+ 417 0123 05       		.byte	0x5
+ 418 0124 A503     		.2byte	0x3a5
+ 419 0126 93000000 		.4byte	0x93
+ 420 012a 04       		.byte	0x4
+ 421 012b 08       		.uleb128 0x8
+ 422 012c AF020000 		.4byte	.LASF25
+ 423 0130 05       		.byte	0x5
+ 424 0131 A603     		.2byte	0x3a6
+ 425 0133 CC000000 		.4byte	0xcc
+ 426 0137 08       		.byte	0x8
+ 427 0138 08       		.uleb128 0x8
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 14
+
+
+ 428 0139 24040000 		.4byte	.LASF26
+ 429 013d 05       		.byte	0x5
+ 430 013e A803     		.2byte	0x3a8
+ 431 0140 C1000000 		.4byte	0xc1
+ 432 0144 0C       		.byte	0xc
+ 433 0145 00       		.byte	0
+ 434 0146 06       		.uleb128 0x6
+ 435 0147 DA020000 		.4byte	.LASF27
+ 436 014b 05       		.byte	0x5
+ 437 014c CA02     		.2byte	0x2ca
+ 438 014e 52010000 		.4byte	0x152
+ 439 0152 09       		.uleb128 0x9
+ 440 0153 BE040000 		.4byte	.LASF76
+ 441 0157 0A       		.uleb128 0xa
+ 442 0158 04       		.byte	0x4
+ 443 0159 F8000000 		.4byte	0xf8
+ 444 015d 0A       		.uleb128 0xa
+ 445 015e 04       		.byte	0x4
+ 446 015f A0000000 		.4byte	0xa0
+ 447 0163 02       		.uleb128 0x2
+ 448 0164 04       		.byte	0x4
+ 449 0165 07       		.byte	0x7
+ 450 0166 95000000 		.4byte	.LASF28
+ 451 016a 0B       		.uleb128 0xb
+ 452 016b 90030000 		.4byte	.LASF77
+ 453 016f 01       		.byte	0x1
+ 454 0170 0101     		.2byte	0x101
+ 455 0172 00000000 		.4byte	.LFB0
+ 456 0176 0A000000 		.4byte	.LFE0-.LFB0
+ 457 017a 01       		.uleb128 0x1
+ 458 017b 9C       		.byte	0x9c
+ 459 017c 0C       		.uleb128 0xc
+ 460 017d 65030000 		.4byte	.LASF29
+ 461 0181 01       		.byte	0x1
+ 462 0182 69       		.byte	0x69
+ 463 0183 8D010000 		.4byte	0x18d
+ 464 0187 05       		.uleb128 0x5
+ 465 0188 03       		.byte	0x3
+ 466 0189 00000000 		.4byte	OSCfg_IdleTaskStkBasePtr
+ 467 018d 0D       		.uleb128 0xd
+ 468 018e 5D010000 		.4byte	0x15d
+ 469 0192 0C       		.uleb128 0xc
+ 470 0193 12000000 		.4byte	.LASF30
+ 471 0197 01       		.byte	0x1
+ 472 0198 6A       		.byte	0x6a
+ 473 0199 A3010000 		.4byte	0x1a3
+ 474 019d 05       		.uleb128 0x5
+ 475 019e 03       		.byte	0x3
+ 476 019f 00000000 		.4byte	OSCfg_IdleTaskStkLimit
+ 477 01a3 0D       		.uleb128 0xd
+ 478 01a4 AB000000 		.4byte	0xab
+ 479 01a8 0C       		.uleb128 0xc
+ 480 01a9 EA010000 		.4byte	.LASF31
+ 481 01ad 01       		.byte	0x1
+ 482 01ae 6B       		.byte	0x6b
+ 483 01af A3010000 		.4byte	0x1a3
+ 484 01b3 05       		.uleb128 0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 15
+
+
+ 485 01b4 03       		.byte	0x3
+ 486 01b5 00000000 		.4byte	OSCfg_IdleTaskStkSize
+ 487 01b9 0C       		.uleb128 0xc
+ 488 01ba 5E010000 		.4byte	.LASF32
+ 489 01be 01       		.byte	0x1
+ 490 01bf 6C       		.byte	0x6c
+ 491 01c0 CA010000 		.4byte	0x1ca
+ 492 01c4 05       		.uleb128 0x5
+ 493 01c5 03       		.byte	0x3
+ 494 01c6 00000000 		.4byte	OSCfg_IdleTaskStkSizeRAM
+ 495 01ca 0D       		.uleb128 0xd
+ 496 01cb 5E000000 		.4byte	0x5e
+ 497 01cf 0C       		.uleb128 0xc
+ 498 01d0 A7050000 		.4byte	.LASF33
+ 499 01d4 01       		.byte	0x1
+ 500 01d5 7E       		.byte	0x7e
+ 501 01d6 E6010000 		.4byte	0x1e6
+ 502 01da 05       		.uleb128 0x5
+ 503 01db 03       		.byte	0x3
+ 504 01dc 00000000 		.4byte	OSCfg_IntQBasePtr
+ 505 01e0 0A       		.uleb128 0xa
+ 506 01e1 04       		.byte	0x4
+ 507 01e2 46010000 		.4byte	0x146
+ 508 01e6 0D       		.uleb128 0xd
+ 509 01e7 E0010000 		.4byte	0x1e0
+ 510 01eb 0C       		.uleb128 0xc
+ 511 01ec DA000000 		.4byte	.LASF34
+ 512 01f0 01       		.byte	0x1
+ 513 01f1 7F       		.byte	0x7f
+ 514 01f2 FC010000 		.4byte	0x1fc
+ 515 01f6 05       		.uleb128 0x5
+ 516 01f7 03       		.byte	0x3
+ 517 01f8 00000000 		.4byte	OSCfg_IntQSize
+ 518 01fc 0D       		.uleb128 0xd
+ 519 01fd D7000000 		.4byte	0xd7
+ 520 0201 0C       		.uleb128 0xc
+ 521 0202 7E030000 		.4byte	.LASF35
+ 522 0206 01       		.byte	0x1
+ 523 0207 80       		.byte	0x80
+ 524 0208 CA010000 		.4byte	0x1ca
+ 525 020c 05       		.uleb128 0x5
+ 526 020d 03       		.byte	0x3
+ 527 020e 00000000 		.4byte	OSCfg_IntQSizeRAM
+ 528 0212 0C       		.uleb128 0xc
+ 529 0213 41050000 		.4byte	.LASF36
+ 530 0217 01       		.byte	0x1
+ 531 0218 81       		.byte	0x81
+ 532 0219 8D010000 		.4byte	0x18d
+ 533 021d 05       		.uleb128 0x5
+ 534 021e 03       		.byte	0x3
+ 535 021f 00000000 		.4byte	OSCfg_IntQTaskStkBasePtr
+ 536 0223 0C       		.uleb128 0xc
+ 537 0224 B1000000 		.4byte	.LASF37
+ 538 0228 01       		.byte	0x1
+ 539 0229 82       		.byte	0x82
+ 540 022a A3010000 		.4byte	0x1a3
+ 541 022e 05       		.uleb128 0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 16
+
+
+ 542 022f 03       		.byte	0x3
+ 543 0230 00000000 		.4byte	OSCfg_IntQTaskStkLimit
+ 544 0234 0C       		.uleb128 0xc
+ 545 0235 44030000 		.4byte	.LASF38
+ 546 0239 01       		.byte	0x1
+ 547 023a 83       		.byte	0x83
+ 548 023b A3010000 		.4byte	0x1a3
+ 549 023f 05       		.uleb128 0x5
+ 550 0240 03       		.byte	0x3
+ 551 0241 00000000 		.4byte	OSCfg_IntQTaskStkSize
+ 552 0245 0C       		.uleb128 0xc
+ 553 0246 B4010000 		.4byte	.LASF39
+ 554 024a 01       		.byte	0x1
+ 555 024b 84       		.byte	0x84
+ 556 024c CA010000 		.4byte	0x1ca
+ 557 0250 05       		.uleb128 0x5
+ 558 0251 03       		.byte	0x3
+ 559 0252 00000000 		.4byte	OSCfg_IntQTaskStkSizeRAM
+ 560 0256 0C       		.uleb128 0xc
+ 561 0257 5A050000 		.4byte	.LASF40
+ 562 025b 01       		.byte	0x1
+ 563 025c 89       		.byte	0x89
+ 564 025d 8D010000 		.4byte	0x18d
+ 565 0261 05       		.uleb128 0x5
+ 566 0262 03       		.byte	0x3
+ 567 0263 00000000 		.4byte	OSCfg_ISRStkBasePtr
+ 568 0267 0C       		.uleb128 0xc
+ 569 0268 8E010000 		.4byte	.LASF41
+ 570 026c 01       		.byte	0x1
+ 571 026d 8A       		.byte	0x8a
+ 572 026e A3010000 		.4byte	0x1a3
+ 573 0272 05       		.uleb128 0x5
+ 574 0273 03       		.byte	0x3
+ 575 0274 00000000 		.4byte	OSCfg_ISRStkSize
+ 576 0278 0C       		.uleb128 0xc
+ 577 0279 5E000000 		.4byte	.LASF42
+ 578 027d 01       		.byte	0x1
+ 579 027e 8B       		.byte	0x8b
+ 580 027f CA010000 		.4byte	0x1ca
+ 581 0283 05       		.uleb128 0x5
+ 582 0284 03       		.byte	0x3
+ 583 0285 00000000 		.4byte	OSCfg_ISRStkSizeRAM
+ 584 0289 0C       		.uleb128 0xc
+ 585 028a E9030000 		.4byte	.LASF43
+ 586 028e 01       		.byte	0x1
+ 587 028f 94       		.byte	0x94
+ 588 0290 9A020000 		.4byte	0x29a
+ 589 0294 05       		.uleb128 0x5
+ 590 0295 03       		.byte	0x3
+ 591 0296 00000000 		.4byte	OSCfg_MsgPoolSize
+ 592 029a 0D       		.uleb128 0xd
+ 593 029b CC000000 		.4byte	0xcc
+ 594 029f 0C       		.uleb128 0xc
+ 595 02a0 49000000 		.4byte	.LASF44
+ 596 02a4 01       		.byte	0x1
+ 597 02a5 95       		.byte	0x95
+ 598 02a6 CA010000 		.4byte	0x1ca
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 17
+
+
+ 599 02aa 05       		.uleb128 0x5
+ 600 02ab 03       		.byte	0x3
+ 601 02ac 00000000 		.4byte	OSCfg_MsgPoolSizeRAM
+ 602 02b0 0C       		.uleb128 0xc
+ 603 02b1 00020000 		.4byte	.LASF45
+ 604 02b5 01       		.byte	0x1
+ 605 02b6 96       		.byte	0x96
+ 606 02b7 C1020000 		.4byte	0x2c1
+ 607 02bb 05       		.uleb128 0x5
+ 608 02bc 03       		.byte	0x3
+ 609 02bd 00000000 		.4byte	OSCfg_MsgPoolBasePtr
+ 610 02c1 0D       		.uleb128 0xd
+ 611 02c2 57010000 		.4byte	0x157
+ 612 02c6 0C       		.uleb128 0xc
+ 613 02c7 26050000 		.4byte	.LASF46
+ 614 02cb 01       		.byte	0x1
+ 615 02cc 9F       		.byte	0x9f
+ 616 02cd D7020000 		.4byte	0x2d7
+ 617 02d1 05       		.uleb128 0x5
+ 618 02d2 03       		.byte	0x3
+ 619 02d3 00000000 		.4byte	OSCfg_StatTaskPrio
+ 620 02d7 0D       		.uleb128 0xd
+ 621 02d8 E2000000 		.4byte	0xe2
+ 622 02dc 0C       		.uleb128 0xc
+ 623 02dd FB030000 		.4byte	.LASF47
+ 624 02e1 01       		.byte	0x1
+ 625 02e2 A0       		.byte	0xa0
+ 626 02e3 ED020000 		.4byte	0x2ed
+ 627 02e7 05       		.uleb128 0x5
+ 628 02e8 03       		.byte	0x3
+ 629 02e9 00000000 		.4byte	OSCfg_StatTaskRate_Hz
+ 630 02ed 0D       		.uleb128 0xd
+ 631 02ee ED000000 		.4byte	0xed
+ 632 02f2 0C       		.uleb128 0xc
+ 633 02f3 AE030000 		.4byte	.LASF48
+ 634 02f7 01       		.byte	0x1
+ 635 02f8 A1       		.byte	0xa1
+ 636 02f9 8D010000 		.4byte	0x18d
+ 637 02fd 05       		.uleb128 0x5
+ 638 02fe 03       		.byte	0x3
+ 639 02ff 00000000 		.4byte	OSCfg_StatTaskStkBasePtr
+ 640 0303 0C       		.uleb128 0xc
+ 641 0304 31040000 		.4byte	.LASF49
+ 642 0308 01       		.byte	0x1
+ 643 0309 A2       		.byte	0xa2
+ 644 030a A3010000 		.4byte	0x1a3
+ 645 030e 05       		.uleb128 0x5
+ 646 030f 03       		.byte	0x3
+ 647 0310 00000000 		.4byte	OSCfg_StatTaskStkLimit
+ 648 0314 0C       		.uleb128 0xc
+ 649 0315 FA040000 		.4byte	.LASF50
+ 650 0319 01       		.byte	0x1
+ 651 031a A3       		.byte	0xa3
+ 652 031b A3010000 		.4byte	0x1a3
+ 653 031f 05       		.uleb128 0x5
+ 654 0320 03       		.byte	0x3
+ 655 0321 00000000 		.4byte	OSCfg_StatTaskStkSize
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 18
+
+
+ 656 0325 0C       		.uleb128 0xc
+ 657 0326 8D040000 		.4byte	.LASF51
+ 658 032a 01       		.byte	0x1
+ 659 032b A4       		.byte	0xa4
+ 660 032c CA010000 		.4byte	0x1ca
+ 661 0330 05       		.uleb128 0x5
+ 662 0331 03       		.byte	0x3
+ 663 0332 00000000 		.4byte	OSCfg_StatTaskStkSizeRAM
+ 664 0336 0C       		.uleb128 0xc
+ 665 0337 AD040000 		.4byte	.LASF52
+ 666 033b 01       		.byte	0x1
+ 667 033c AF       		.byte	0xaf
+ 668 033d A3010000 		.4byte	0x1a3
+ 669 0341 05       		.uleb128 0x5
+ 670 0342 03       		.byte	0x3
+ 671 0343 00000000 		.4byte	OSCfg_StkSizeMin
+ 672 0347 0C       		.uleb128 0xc
+ 673 0348 FB020000 		.4byte	.LASF53
+ 674 034c 01       		.byte	0x1
+ 675 034d B2       		.byte	0xb2
+ 676 034e ED020000 		.4byte	0x2ed
+ 677 0352 05       		.uleb128 0x5
+ 678 0353 03       		.byte	0x3
+ 679 0354 00000000 		.4byte	OSCfg_TickRate_Hz
+ 680 0358 0C       		.uleb128 0xc
+ 681 0359 9E000000 		.4byte	.LASF54
+ 682 035d 01       		.byte	0x1
+ 683 035e B3       		.byte	0xb3
+ 684 035f D7020000 		.4byte	0x2d7
+ 685 0363 05       		.uleb128 0x5
+ 686 0364 03       		.byte	0x3
+ 687 0365 00000000 		.4byte	OSCfg_TickTaskPrio
+ 688 0369 0C       		.uleb128 0xc
+ 689 036a 8E050000 		.4byte	.LASF55
+ 690 036e 01       		.byte	0x1
+ 691 036f B4       		.byte	0xb4
+ 692 0370 8D010000 		.4byte	0x18d
+ 693 0374 05       		.uleb128 0x5
+ 694 0375 03       		.byte	0x3
+ 695 0376 00000000 		.4byte	OSCfg_TickTaskStkBasePtr
+ 696 037a 0C       		.uleb128 0xc
+ 697 037b 77010000 		.4byte	.LASF56
+ 698 037f 01       		.byte	0x1
+ 699 0380 B5       		.byte	0xb5
+ 700 0381 A3010000 		.4byte	0x1a3
+ 701 0385 05       		.uleb128 0x5
+ 702 0386 03       		.byte	0x3
+ 703 0387 00000000 		.4byte	OSCfg_TickTaskStkLimit
+ 704 038b 0C       		.uleb128 0xc
+ 705 038c 48010000 		.4byte	.LASF57
+ 706 0390 01       		.byte	0x1
+ 707 0391 B6       		.byte	0xb6
+ 708 0392 A3010000 		.4byte	0x1a3
+ 709 0396 05       		.uleb128 0x5
+ 710 0397 03       		.byte	0x3
+ 711 0398 00000000 		.4byte	OSCfg_TickTaskStkSize
+ 712 039c 0C       		.uleb128 0xc
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 19
+
+
+ 713 039d 72000000 		.4byte	.LASF58
+ 714 03a1 01       		.byte	0x1
+ 715 03a2 B7       		.byte	0xb7
+ 716 03a3 CA010000 		.4byte	0x1ca
+ 717 03a7 05       		.uleb128 0x5
+ 718 03a8 03       		.byte	0x3
+ 719 03a9 00000000 		.4byte	OSCfg_TickTaskStkSizeRAM
+ 720 03ad 0C       		.uleb128 0xc
+ 721 03ae 00000000 		.4byte	.LASF59
+ 722 03b2 01       		.byte	0x1
+ 723 03b3 BB       		.byte	0xbb
+ 724 03b4 D7020000 		.4byte	0x2d7
+ 725 03b8 05       		.uleb128 0x5
+ 726 03b9 03       		.byte	0x3
+ 727 03ba 00000000 		.4byte	OSCfg_TmrTaskPrio
+ 728 03be 0C       		.uleb128 0xc
+ 729 03bf 29000000 		.4byte	.LASF60
+ 730 03c3 01       		.byte	0x1
+ 731 03c4 BC       		.byte	0xbc
+ 732 03c5 ED020000 		.4byte	0x2ed
+ 733 03c9 05       		.uleb128 0x5
+ 734 03ca 03       		.byte	0x3
+ 735 03cb 00000000 		.4byte	OSCfg_TmrTaskRate_Hz
+ 736 03cf 0C       		.uleb128 0xc
+ 737 03d0 D0040000 		.4byte	.LASF61
+ 738 03d4 01       		.byte	0x1
+ 739 03d5 BD       		.byte	0xbd
+ 740 03d6 8D010000 		.4byte	0x18d
+ 741 03da 05       		.uleb128 0x5
+ 742 03db 03       		.byte	0x3
+ 743 03dc 00000000 		.4byte	OSCfg_TmrTaskStkBasePtr
+ 744 03e0 0C       		.uleb128 0xc
+ 745 03e1 10050000 		.4byte	.LASF62
+ 746 03e5 01       		.byte	0x1
+ 747 03e6 BE       		.byte	0xbe
+ 748 03e7 A3010000 		.4byte	0x1a3
+ 749 03eb 05       		.uleb128 0x5
+ 750 03ec 03       		.byte	0x3
+ 751 03ed 00000000 		.4byte	OSCfg_TmrTaskStkLimit
+ 752 03f1 0C       		.uleb128 0xc
+ 753 03f2 9F010000 		.4byte	.LASF63
+ 754 03f6 01       		.byte	0x1
+ 755 03f7 BF       		.byte	0xbf
+ 756 03f8 A3010000 		.4byte	0x1a3
+ 757 03fc 05       		.uleb128 0x5
+ 758 03fd 03       		.byte	0x3
+ 759 03fe 00000000 		.4byte	OSCfg_TmrTaskStkSize
+ 760 0402 0C       		.uleb128 0xc
+ 761 0403 76050000 		.4byte	.LASF64
+ 762 0407 01       		.byte	0x1
+ 763 0408 C0       		.byte	0xc0
+ 764 0409 CA010000 		.4byte	0x1ca
+ 765 040d 05       		.uleb128 0x5
+ 766 040e 03       		.byte	0x3
+ 767 040f 00000000 		.4byte	OSCfg_TmrTaskStkSizeRAM
+ 768 0413 0E       		.uleb128 0xe
+ 769 0414 A0000000 		.4byte	0xa0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 20
+
+
+ 770 0418 23040000 		.4byte	0x423
+ 771 041c 0F       		.uleb128 0xf
+ 772 041d 63010000 		.4byte	0x163
+ 773 0421 7F       		.byte	0x7f
+ 774 0422 00       		.byte	0
+ 775 0423 0C       		.uleb128 0xc
+ 776 0424 C4050000 		.4byte	.LASF65
+ 777 0428 01       		.byte	0x1
+ 778 0429 48       		.byte	0x48
+ 779 042a 13040000 		.4byte	0x413
+ 780 042e 05       		.uleb128 0x5
+ 781 042f 03       		.byte	0x3
+ 782 0430 00000000 		.4byte	OSCfg_IdleTaskStk
+ 783 0434 0E       		.uleb128 0xe
+ 784 0435 A0000000 		.4byte	0xa0
+ 785 0439 44040000 		.4byte	0x444
+ 786 043d 0F       		.uleb128 0xf
+ 787 043e 63010000 		.4byte	0x163
+ 788 0442 63       		.byte	0x63
+ 789 0443 00       		.byte	0
+ 790 0444 0C       		.uleb128 0xc
+ 791 0445 80040000 		.4byte	.LASF66
+ 792 0449 01       		.byte	0x1
+ 793 044a 51       		.byte	0x51
+ 794 044b 34040000 		.4byte	0x434
+ 795 044f 05       		.uleb128 0x5
+ 796 0450 03       		.byte	0x3
+ 797 0451 00000000 		.4byte	OSCfg_ISRStk
+ 798 0455 0E       		.uleb128 0xe
+ 799 0456 F8000000 		.4byte	0xf8
+ 800 045a 65040000 		.4byte	0x465
+ 801 045e 0F       		.uleb128 0xf
+ 802 045f 63010000 		.4byte	0x163
+ 803 0463 1F       		.byte	0x1f
+ 804 0464 00       		.byte	0
+ 805 0465 0C       		.uleb128 0xc
+ 806 0466 CC020000 		.4byte	.LASF67
+ 807 046a 01       		.byte	0x1
+ 808 046b 55       		.byte	0x55
+ 809 046c 55040000 		.4byte	0x455
+ 810 0470 05       		.uleb128 0x5
+ 811 0471 03       		.byte	0x3
+ 812 0472 00000000 		.4byte	OSCfg_MsgPool
+ 813 0476 0C       		.uleb128 0xc
+ 814 0477 D2030000 		.4byte	.LASF68
+ 815 047b 01       		.byte	0x1
+ 816 047c 59       		.byte	0x59
+ 817 047d 13040000 		.4byte	0x413
+ 818 0481 05       		.uleb128 0x5
+ 819 0482 03       		.byte	0x3
+ 820 0483 00000000 		.4byte	OSCfg_StatTaskStk
+ 821 0487 0C       		.uleb128 0xc
+ 822 0488 C8000000 		.4byte	.LASF69
+ 823 048c 01       		.byte	0x1
+ 824 048d 5C       		.byte	0x5c
+ 825 048e 13040000 		.4byte	0x413
+ 826 0492 05       		.uleb128 0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 21
+
+
+ 827 0493 03       		.byte	0x3
+ 828 0494 00000000 		.4byte	OSCfg_TickTaskStk
+ 829 0498 0C       		.uleb128 0xc
+ 830 0499 E3020000 		.4byte	.LASF70
+ 831 049d 01       		.byte	0x1
+ 832 049e 5F       		.byte	0x5f
+ 833 049f 13040000 		.4byte	0x413
+ 834 04a3 05       		.uleb128 0x5
+ 835 04a4 03       		.byte	0x3
+ 836 04a5 00000000 		.4byte	OSCfg_TmrTaskStk
+ 837 04a9 0C       		.uleb128 0xc
+ 838 04aa E8040000 		.4byte	.LASF71
+ 839 04ae 01       		.byte	0x1
+ 840 04af D1       		.byte	0xd1
+ 841 04b0 CA010000 		.4byte	0x1ca
+ 842 04b4 05       		.uleb128 0x5
+ 843 04b5 03       		.byte	0x3
+ 844 04b6 00000000 		.4byte	OSCfg_DataSizeRAM
+ 845 04ba 00       		.byte	0
+ 846              		.section	.debug_abbrev,"",%progbits
+ 847              	.Ldebug_abbrev0:
+ 848 0000 01       		.uleb128 0x1
+ 849 0001 11       		.uleb128 0x11
+ 850 0002 01       		.byte	0x1
+ 851 0003 25       		.uleb128 0x25
+ 852 0004 0E       		.uleb128 0xe
+ 853 0005 13       		.uleb128 0x13
+ 854 0006 0B       		.uleb128 0xb
+ 855 0007 03       		.uleb128 0x3
+ 856 0008 0E       		.uleb128 0xe
+ 857 0009 1B       		.uleb128 0x1b
+ 858 000a 0E       		.uleb128 0xe
+ 859 000b 55       		.uleb128 0x55
+ 860 000c 17       		.uleb128 0x17
+ 861 000d 11       		.uleb128 0x11
+ 862 000e 01       		.uleb128 0x1
+ 863 000f 10       		.uleb128 0x10
+ 864 0010 17       		.uleb128 0x17
+ 865 0011 00       		.byte	0
+ 866 0012 00       		.byte	0
+ 867 0013 02       		.uleb128 0x2
+ 868 0014 24       		.uleb128 0x24
+ 869 0015 00       		.byte	0
+ 870 0016 0B       		.uleb128 0xb
+ 871 0017 0B       		.uleb128 0xb
+ 872 0018 3E       		.uleb128 0x3e
+ 873 0019 0B       		.uleb128 0xb
+ 874 001a 03       		.uleb128 0x3
+ 875 001b 0E       		.uleb128 0xe
+ 876 001c 00       		.byte	0
+ 877 001d 00       		.byte	0
+ 878 001e 03       		.uleb128 0x3
+ 879 001f 16       		.uleb128 0x16
+ 880 0020 00       		.byte	0
+ 881 0021 03       		.uleb128 0x3
+ 882 0022 0E       		.uleb128 0xe
+ 883 0023 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 22
+
+
+ 884 0024 0B       		.uleb128 0xb
+ 885 0025 3B       		.uleb128 0x3b
+ 886 0026 0B       		.uleb128 0xb
+ 887 0027 49       		.uleb128 0x49
+ 888 0028 13       		.uleb128 0x13
+ 889 0029 00       		.byte	0
+ 890 002a 00       		.byte	0
+ 891 002b 04       		.uleb128 0x4
+ 892 002c 24       		.uleb128 0x24
+ 893 002d 00       		.byte	0
+ 894 002e 0B       		.uleb128 0xb
+ 895 002f 0B       		.uleb128 0xb
+ 896 0030 3E       		.uleb128 0x3e
+ 897 0031 0B       		.uleb128 0xb
+ 898 0032 03       		.uleb128 0x3
+ 899 0033 08       		.uleb128 0x8
+ 900 0034 00       		.byte	0
+ 901 0035 00       		.byte	0
+ 902 0036 05       		.uleb128 0x5
+ 903 0037 0F       		.uleb128 0xf
+ 904 0038 00       		.byte	0
+ 905 0039 0B       		.uleb128 0xb
+ 906 003a 0B       		.uleb128 0xb
+ 907 003b 00       		.byte	0
+ 908 003c 00       		.byte	0
+ 909 003d 06       		.uleb128 0x6
+ 910 003e 16       		.uleb128 0x16
+ 911 003f 00       		.byte	0
+ 912 0040 03       		.uleb128 0x3
+ 913 0041 0E       		.uleb128 0xe
+ 914 0042 3A       		.uleb128 0x3a
+ 915 0043 0B       		.uleb128 0xb
+ 916 0044 3B       		.uleb128 0x3b
+ 917 0045 05       		.uleb128 0x5
+ 918 0046 49       		.uleb128 0x49
+ 919 0047 13       		.uleb128 0x13
+ 920 0048 00       		.byte	0
+ 921 0049 00       		.byte	0
+ 922 004a 07       		.uleb128 0x7
+ 923 004b 13       		.uleb128 0x13
+ 924 004c 01       		.byte	0x1
+ 925 004d 03       		.uleb128 0x3
+ 926 004e 0E       		.uleb128 0xe
+ 927 004f 0B       		.uleb128 0xb
+ 928 0050 0B       		.uleb128 0xb
+ 929 0051 3A       		.uleb128 0x3a
+ 930 0052 0B       		.uleb128 0xb
+ 931 0053 3B       		.uleb128 0x3b
+ 932 0054 05       		.uleb128 0x5
+ 933 0055 01       		.uleb128 0x1
+ 934 0056 13       		.uleb128 0x13
+ 935 0057 00       		.byte	0
+ 936 0058 00       		.byte	0
+ 937 0059 08       		.uleb128 0x8
+ 938 005a 0D       		.uleb128 0xd
+ 939 005b 00       		.byte	0
+ 940 005c 03       		.uleb128 0x3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 23
+
+
+ 941 005d 0E       		.uleb128 0xe
+ 942 005e 3A       		.uleb128 0x3a
+ 943 005f 0B       		.uleb128 0xb
+ 944 0060 3B       		.uleb128 0x3b
+ 945 0061 05       		.uleb128 0x5
+ 946 0062 49       		.uleb128 0x49
+ 947 0063 13       		.uleb128 0x13
+ 948 0064 38       		.uleb128 0x38
+ 949 0065 0B       		.uleb128 0xb
+ 950 0066 00       		.byte	0
+ 951 0067 00       		.byte	0
+ 952 0068 09       		.uleb128 0x9
+ 953 0069 13       		.uleb128 0x13
+ 954 006a 00       		.byte	0
+ 955 006b 03       		.uleb128 0x3
+ 956 006c 0E       		.uleb128 0xe
+ 957 006d 3C       		.uleb128 0x3c
+ 958 006e 19       		.uleb128 0x19
+ 959 006f 00       		.byte	0
+ 960 0070 00       		.byte	0
+ 961 0071 0A       		.uleb128 0xa
+ 962 0072 0F       		.uleb128 0xf
+ 963 0073 00       		.byte	0
+ 964 0074 0B       		.uleb128 0xb
+ 965 0075 0B       		.uleb128 0xb
+ 966 0076 49       		.uleb128 0x49
+ 967 0077 13       		.uleb128 0x13
+ 968 0078 00       		.byte	0
+ 969 0079 00       		.byte	0
+ 970 007a 0B       		.uleb128 0xb
+ 971 007b 2E       		.uleb128 0x2e
+ 972 007c 00       		.byte	0
+ 973 007d 3F       		.uleb128 0x3f
+ 974 007e 19       		.uleb128 0x19
+ 975 007f 03       		.uleb128 0x3
+ 976 0080 0E       		.uleb128 0xe
+ 977 0081 3A       		.uleb128 0x3a
+ 978 0082 0B       		.uleb128 0xb
+ 979 0083 3B       		.uleb128 0x3b
+ 980 0084 05       		.uleb128 0x5
+ 981 0085 27       		.uleb128 0x27
+ 982 0086 19       		.uleb128 0x19
+ 983 0087 11       		.uleb128 0x11
+ 984 0088 01       		.uleb128 0x1
+ 985 0089 12       		.uleb128 0x12
+ 986 008a 06       		.uleb128 0x6
+ 987 008b 40       		.uleb128 0x40
+ 988 008c 18       		.uleb128 0x18
+ 989 008d 9742     		.uleb128 0x2117
+ 990 008f 19       		.uleb128 0x19
+ 991 0090 00       		.byte	0
+ 992 0091 00       		.byte	0
+ 993 0092 0C       		.uleb128 0xc
+ 994 0093 34       		.uleb128 0x34
+ 995 0094 00       		.byte	0
+ 996 0095 03       		.uleb128 0x3
+ 997 0096 0E       		.uleb128 0xe
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 24
+
+
+ 998 0097 3A       		.uleb128 0x3a
+ 999 0098 0B       		.uleb128 0xb
+ 1000 0099 3B       		.uleb128 0x3b
+ 1001 009a 0B       		.uleb128 0xb
+ 1002 009b 49       		.uleb128 0x49
+ 1003 009c 13       		.uleb128 0x13
+ 1004 009d 3F       		.uleb128 0x3f
+ 1005 009e 19       		.uleb128 0x19
+ 1006 009f 02       		.uleb128 0x2
+ 1007 00a0 18       		.uleb128 0x18
+ 1008 00a1 00       		.byte	0
+ 1009 00a2 00       		.byte	0
+ 1010 00a3 0D       		.uleb128 0xd
+ 1011 00a4 26       		.uleb128 0x26
+ 1012 00a5 00       		.byte	0
+ 1013 00a6 49       		.uleb128 0x49
+ 1014 00a7 13       		.uleb128 0x13
+ 1015 00a8 00       		.byte	0
+ 1016 00a9 00       		.byte	0
+ 1017 00aa 0E       		.uleb128 0xe
+ 1018 00ab 01       		.uleb128 0x1
+ 1019 00ac 01       		.byte	0x1
+ 1020 00ad 49       		.uleb128 0x49
+ 1021 00ae 13       		.uleb128 0x13
+ 1022 00af 01       		.uleb128 0x1
+ 1023 00b0 13       		.uleb128 0x13
+ 1024 00b1 00       		.byte	0
+ 1025 00b2 00       		.byte	0
+ 1026 00b3 0F       		.uleb128 0xf
+ 1027 00b4 21       		.uleb128 0x21
+ 1028 00b5 00       		.byte	0
+ 1029 00b6 49       		.uleb128 0x49
+ 1030 00b7 13       		.uleb128 0x13
+ 1031 00b8 2F       		.uleb128 0x2f
+ 1032 00b9 0B       		.uleb128 0xb
+ 1033 00ba 00       		.byte	0
+ 1034 00bb 00       		.byte	0
+ 1035 00bc 00       		.byte	0
+ 1036              		.section	.debug_aranges,"",%progbits
+ 1037 0000 1C000000 		.4byte	0x1c
+ 1038 0004 0200     		.2byte	0x2
+ 1039 0006 00000000 		.4byte	.Ldebug_info0
+ 1040 000a 04       		.byte	0x4
+ 1041 000b 00       		.byte	0
+ 1042 000c 0000     		.2byte	0
+ 1043 000e 0000     		.2byte	0
+ 1044 0010 00000000 		.4byte	.LFB0
+ 1045 0014 0A000000 		.4byte	.LFE0-.LFB0
+ 1046 0018 00000000 		.4byte	0
+ 1047 001c 00000000 		.4byte	0
+ 1048              		.section	.debug_ranges,"",%progbits
+ 1049              	.Ldebug_ranges0:
+ 1050 0000 00000000 		.4byte	.LFB0
+ 1051 0004 0A000000 		.4byte	.LFE0
+ 1052 0008 00000000 		.4byte	0
+ 1053 000c 00000000 		.4byte	0
+ 1054              		.section	.debug_line,"",%progbits
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 25
+
+
+ 1055              	.Ldebug_line0:
+ 1056 0000 E9000000 		.section	.debug_str,"MS",%progbits,1
+ 1056      0200D000 
+ 1056      00000201 
+ 1056      FB0E0D00 
+ 1056      01010101 
+ 1057              	.LASF59:
+ 1058 0000 4F534366 		.ascii	"OSCfg_TmrTaskPrio\000"
+ 1058      675F546D 
+ 1058      72546173 
+ 1058      6B507269 
+ 1058      6F00
+ 1059              	.LASF30:
+ 1060 0012 4F534366 		.ascii	"OSCfg_IdleTaskStkLimit\000"
+ 1060      675F4964 
+ 1060      6C655461 
+ 1060      736B5374 
+ 1060      6B4C696D 
+ 1061              	.LASF60:
+ 1062 0029 4F534366 		.ascii	"OSCfg_TmrTaskRate_Hz\000"
+ 1062      675F546D 
+ 1062      72546173 
+ 1062      6B526174 
+ 1062      655F487A 
+ 1063              	.LASF19:
+ 1064 003e 4F535F4F 		.ascii	"OS_OBJ_QTY\000"
+ 1064      424A5F51 
+ 1064      545900
+ 1065              	.LASF44:
+ 1066 0049 4F534366 		.ascii	"OSCfg_MsgPoolSizeRAM\000"
+ 1066      675F4D73 
+ 1066      67506F6F 
+ 1066      6C53697A 
+ 1066      6552414D 
+ 1067              	.LASF42:
+ 1068 005e 4F534366 		.ascii	"OSCfg_ISRStkSizeRAM\000"
+ 1068      675F4953 
+ 1068      5253746B 
+ 1068      53697A65 
+ 1068      52414D00 
+ 1069              	.LASF58:
+ 1070 0072 4F534366 		.ascii	"OSCfg_TickTaskStkSizeRAM\000"
+ 1070      675F5469 
+ 1070      636B5461 
+ 1070      736B5374 
+ 1070      6B53697A 
+ 1071              	.LASF6:
+ 1072 008b 73686F72 		.ascii	"short int\000"
+ 1072      7420696E 
+ 1072      7400
+ 1073              	.LASF28:
+ 1074 0095 73697A65 		.ascii	"sizetype\000"
+ 1074      74797065 
+ 1074      00
+ 1075              	.LASF54:
+ 1076 009e 4F534366 		.ascii	"OSCfg_TickTaskPrio\000"
+ 1076      675F5469 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 26
+
+
+ 1076      636B5461 
+ 1076      736B5072 
+ 1076      696F00
+ 1077              	.LASF37:
+ 1078 00b1 4F534366 		.ascii	"OSCfg_IntQTaskStkLimit\000"
+ 1078      675F496E 
+ 1078      74515461 
+ 1078      736B5374 
+ 1078      6B4C696D 
+ 1079              	.LASF69:
+ 1080 00c8 4F534366 		.ascii	"OSCfg_TickTaskStk\000"
+ 1080      675F5469 
+ 1080      636B5461 
+ 1080      736B5374 
+ 1080      6B00
+ 1081              	.LASF34:
+ 1082 00da 4F534366 		.ascii	"OSCfg_IntQSize\000"
+ 1082      675F496E 
+ 1082      74515369 
+ 1082      7A6500
+ 1083              	.LASF15:
+ 1084 00e9 4350555F 		.ascii	"CPU_STK_SIZE\000"
+ 1084      53544B5F 
+ 1084      53495A45 
+ 1084      00
+ 1085              	.LASF74:
+ 1086 00f6 443A5C43 		.ascii	"D:\\CYTEST\\Micrium_CY8CKIT-044_OS3\\Examples\\Cypr"
+ 1086      59544553 
+ 1086      545C4D69 
+ 1086      63726975 
+ 1086      6D5F4359 
+ 1087 0125 6573735C 		.ascii	"ess\\CY8CKIT-044\\OS3\\PSoC\\OS3.cydsn\000"
+ 1087      43593843 
+ 1087      4B49542D 
+ 1087      3034345C 
+ 1087      4F53335C 
+ 1088              	.LASF57:
+ 1089 0148 4F534366 		.ascii	"OSCfg_TickTaskStkSize\000"
+ 1089      675F5469 
+ 1089      636B5461 
+ 1089      736B5374 
+ 1089      6B53697A 
+ 1090              	.LASF32:
+ 1091 015e 4F534366 		.ascii	"OSCfg_IdleTaskStkSizeRAM\000"
+ 1091      675F4964 
+ 1091      6C655461 
+ 1091      736B5374 
+ 1091      6B53697A 
+ 1092              	.LASF56:
+ 1093 0177 4F534366 		.ascii	"OSCfg_TickTaskStkLimit\000"
+ 1093      675F5469 
+ 1093      636B5461 
+ 1093      736B5374 
+ 1093      6B4C696D 
+ 1094              	.LASF41:
+ 1095 018e 4F534366 		.ascii	"OSCfg_ISRStkSize\000"
+ 1095      675F4953 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 27
+
+
+ 1095      5253746B 
+ 1095      53697A65 
+ 1095      00
+ 1096              	.LASF63:
+ 1097 019f 4F534366 		.ascii	"OSCfg_TmrTaskStkSize\000"
+ 1097      675F546D 
+ 1097      72546173 
+ 1097      6B53746B 
+ 1097      53697A65 
+ 1098              	.LASF39:
+ 1099 01b4 4F534366 		.ascii	"OSCfg_IntQTaskStkSizeRAM\000"
+ 1099      675F496E 
+ 1099      74515461 
+ 1099      736B5374 
+ 1099      6B53697A 
+ 1100              	.LASF13:
+ 1101 01cd 4350555F 		.ascii	"CPU_ADDR\000"
+ 1101      41444452 
+ 1101      00
+ 1102              	.LASF11:
+ 1103 01d6 666C6F61 		.ascii	"float\000"
+ 1103      7400
+ 1104              	.LASF10:
+ 1105 01dc 6C6F6E67 		.ascii	"long long int\000"
+ 1105      206C6F6E 
+ 1105      6720696E 
+ 1105      7400
+ 1106              	.LASF31:
+ 1107 01ea 4F534366 		.ascii	"OSCfg_IdleTaskStkSize\000"
+ 1107      675F4964 
+ 1107      6C655461 
+ 1107      736B5374 
+ 1107      6B53697A 
+ 1108              	.LASF45:
+ 1109 0200 4F534366 		.ascii	"OSCfg_MsgPoolBasePtr\000"
+ 1109      675F4D73 
+ 1109      67506F6F 
+ 1109      6C426173 
+ 1109      65507472 
+ 1110              	.LASF72:
+ 1111 0215 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1111      43313120 
+ 1111      352E342E 
+ 1111      31203230 
+ 1111      31363036 
+ 1112 0248 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1112      20726576 
+ 1112      6973696F 
+ 1112      6E203233 
+ 1112      37373135 
+ 1113 027b 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1113      66756E63 
+ 1113      74696F6E 
+ 1113      2D736563 
+ 1113      74696F6E 
+ 1114              	.LASF18:
+ 1115 02a3 4F535F4D 		.ascii	"OS_MSG_SIZE\000"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 28
+
+
+ 1115      53475F53 
+ 1115      495A4500 
+ 1116              	.LASF25:
+ 1117 02af 4D736753 		.ascii	"MsgSize\000"
+ 1117      697A6500 
+ 1118              	.LASF1:
+ 1119 02b7 756E7369 		.ascii	"unsigned char\000"
+ 1119      676E6564 
+ 1119      20636861 
+ 1119      7200
+ 1120              	.LASF24:
+ 1121 02c5 4D736750 		.ascii	"MsgPtr\000"
+ 1121      747200
+ 1122              	.LASF67:
+ 1123 02cc 4F534366 		.ascii	"OSCfg_MsgPool\000"
+ 1123      675F4D73 
+ 1123      67506F6F 
+ 1123      6C00
+ 1124              	.LASF27:
+ 1125 02da 4F535F49 		.ascii	"OS_INT_Q\000"
+ 1125      4E545F51 
+ 1125      00
+ 1126              	.LASF70:
+ 1127 02e3 4F534366 		.ascii	"OSCfg_TmrTaskStk\000"
+ 1127      675F546D 
+ 1127      72546173 
+ 1127      6B53746B 
+ 1127      00
+ 1128              	.LASF75:
+ 1129 02f4 6F735F6D 		.ascii	"os_msg\000"
+ 1129      736700
+ 1130              	.LASF53:
+ 1131 02fb 4F534366 		.ascii	"OSCfg_TickRate_Hz\000"
+ 1131      675F5469 
+ 1131      636B5261 
+ 1131      74655F48 
+ 1131      7A00
+ 1132              	.LASF2:
+ 1133 030d 7369676E 		.ascii	"signed char\000"
+ 1133      65642063 
+ 1133      68617200 
+ 1134              	.LASF9:
+ 1135 0319 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1135      206C6F6E 
+ 1135      6720756E 
+ 1135      7369676E 
+ 1135      65642069 
+ 1136              	.LASF22:
+ 1137 0330 4F535F4D 		.ascii	"OS_MSG\000"
+ 1137      534700
+ 1138              	.LASF8:
+ 1139 0337 756E7369 		.ascii	"unsigned int\000"
+ 1139      676E6564 
+ 1139      20696E74 
+ 1139      00
+ 1140              	.LASF38:
+ 1141 0344 4F534366 		.ascii	"OSCfg_IntQTaskStkSize\000"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 29
+
+
+ 1141      675F496E 
+ 1141      74515461 
+ 1141      736B5374 
+ 1141      6B53697A 
+ 1142              	.LASF21:
+ 1143 035a 4F535F52 		.ascii	"OS_RATE_HZ\000"
+ 1143      4154455F 
+ 1143      485A00
+ 1144              	.LASF29:
+ 1145 0365 4F534366 		.ascii	"OSCfg_IdleTaskStkBasePtr\000"
+ 1145      675F4964 
+ 1145      6C655461 
+ 1145      736B5374 
+ 1145      6B426173 
+ 1146              	.LASF35:
+ 1147 037e 4F534366 		.ascii	"OSCfg_IntQSizeRAM\000"
+ 1147      675F496E 
+ 1147      74515369 
+ 1147      7A655241 
+ 1147      4D00
+ 1148              	.LASF77:
+ 1149 0390 4F534366 		.ascii	"OSCfg_Init\000"
+ 1149      675F496E 
+ 1149      697400
+ 1150              	.LASF5:
+ 1151 039b 73686F72 		.ascii	"short unsigned int\000"
+ 1151      7420756E 
+ 1151      7369676E 
+ 1151      65642069 
+ 1151      6E7400
+ 1152              	.LASF48:
+ 1153 03ae 4F534366 		.ascii	"OSCfg_StatTaskStkBasePtr\000"
+ 1153      675F5374 
+ 1153      61745461 
+ 1153      736B5374 
+ 1153      6B426173 
+ 1154              	.LASF3:
+ 1155 03c7 4350555F 		.ascii	"CPU_INT08U\000"
+ 1155      494E5430 
+ 1155      385500
+ 1156              	.LASF68:
+ 1157 03d2 4F534366 		.ascii	"OSCfg_StatTaskStk\000"
+ 1157      675F5374 
+ 1157      61745461 
+ 1157      736B5374 
+ 1157      6B00
+ 1158              	.LASF0:
+ 1159 03e4 63686172 		.ascii	"char\000"
+ 1159      00
+ 1160              	.LASF43:
+ 1161 03e9 4F534366 		.ascii	"OSCfg_MsgPoolSize\000"
+ 1161      675F4D73 
+ 1161      67506F6F 
+ 1161      6C53697A 
+ 1161      6500
+ 1162              	.LASF47:
+ 1163 03fb 4F534366 		.ascii	"OSCfg_StatTaskRate_Hz\000"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 30
+
+
+ 1163      675F5374 
+ 1163      61745461 
+ 1163      736B5261 
+ 1163      74655F48 
+ 1164              	.LASF20:
+ 1165 0411 4F535F50 		.ascii	"OS_PRIO\000"
+ 1165      52494F00 
+ 1166              	.LASF7:
+ 1167 0419 4350555F 		.ascii	"CPU_INT32U\000"
+ 1167      494E5433 
+ 1167      325500
+ 1168              	.LASF26:
+ 1169 0424 4D736754 		.ascii	"MsgTS\000"
+ 1169      5300
+ 1170              	.LASF17:
+ 1171 042a 4350555F 		.ascii	"CPU_TS\000"
+ 1171      545300
+ 1172              	.LASF49:
+ 1173 0431 4F534366 		.ascii	"OSCfg_StatTaskStkLimit\000"
+ 1173      675F5374 
+ 1173      61745461 
+ 1173      736B5374 
+ 1173      6B4C696D 
+ 1174              	.LASF73:
+ 1175 0448 2E2E5C2E 		.ascii	"..\\..\\..\\..\\..\\..\\Software\\uCOS-III\\Source\\"
+ 1175      2E5C2E2E 
+ 1175      5C2E2E5C 
+ 1175      2E2E5C2E 
+ 1175      2E5C536F 
+ 1176 0473 6F735F63 		.ascii	"os_cfg_app.c\000"
+ 1176      66675F61 
+ 1176      70702E63 
+ 1176      00
+ 1177              	.LASF66:
+ 1178 0480 4F534366 		.ascii	"OSCfg_ISRStk\000"
+ 1178      675F4953 
+ 1178      5253746B 
+ 1178      00
+ 1179              	.LASF51:
+ 1180 048d 4F534366 		.ascii	"OSCfg_StatTaskStkSizeRAM\000"
+ 1180      675F5374 
+ 1180      61745461 
+ 1180      736B5374 
+ 1180      6B53697A 
+ 1181              	.LASF12:
+ 1182 04a6 646F7562 		.ascii	"double\000"
+ 1182      6C6500
+ 1183              	.LASF52:
+ 1184 04ad 4F534366 		.ascii	"OSCfg_StkSizeMin\000"
+ 1184      675F5374 
+ 1184      6B53697A 
+ 1184      654D696E 
+ 1184      00
+ 1185              	.LASF76:
+ 1186 04be 6F735F69 		.ascii	"os_int_q\000"
+ 1186      6E745F71 
+ 1186      00
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 31
+
+
+ 1187              	.LASF16:
+ 1188 04c7 4350555F 		.ascii	"CPU_TS32\000"
+ 1188      54533332 
+ 1188      00
+ 1189              	.LASF61:
+ 1190 04d0 4F534366 		.ascii	"OSCfg_TmrTaskStkBasePtr\000"
+ 1190      675F546D 
+ 1190      72546173 
+ 1190      6B53746B 
+ 1190      42617365 
+ 1191              	.LASF71:
+ 1192 04e8 4F534366 		.ascii	"OSCfg_DataSizeRAM\000"
+ 1192      675F4461 
+ 1192      74615369 
+ 1192      7A655241 
+ 1192      4D00
+ 1193              	.LASF50:
+ 1194 04fa 4F534366 		.ascii	"OSCfg_StatTaskStkSize\000"
+ 1194      675F5374 
+ 1194      61745461 
+ 1194      736B5374 
+ 1194      6B53697A 
+ 1195              	.LASF62:
+ 1196 0510 4F534366 		.ascii	"OSCfg_TmrTaskStkLimit\000"
+ 1196      675F546D 
+ 1196      72546173 
+ 1196      6B53746B 
+ 1196      4C696D69 
+ 1197              	.LASF46:
+ 1198 0526 4F534366 		.ascii	"OSCfg_StatTaskPrio\000"
+ 1198      675F5374 
+ 1198      61745461 
+ 1198      736B5072 
+ 1198      696F00
+ 1199              	.LASF14:
+ 1200 0539 4350555F 		.ascii	"CPU_STK\000"
+ 1200      53544B00 
+ 1201              	.LASF36:
+ 1202 0541 4F534366 		.ascii	"OSCfg_IntQTaskStkBasePtr\000"
+ 1202      675F496E 
+ 1202      74515461 
+ 1202      736B5374 
+ 1202      6B426173 
+ 1203              	.LASF40:
+ 1204 055a 4F534366 		.ascii	"OSCfg_ISRStkBasePtr\000"
+ 1204      675F4953 
+ 1204      5253746B 
+ 1204      42617365 
+ 1204      50747200 
+ 1205              	.LASF23:
+ 1206 056e 4E657874 		.ascii	"NextPtr\000"
+ 1206      50747200 
+ 1207              	.LASF64:
+ 1208 0576 4F534366 		.ascii	"OSCfg_TmrTaskStkSizeRAM\000"
+ 1208      675F546D 
+ 1208      72546173 
+ 1208      6B53746B 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccPLLgme.s 			page 32
+
+
+ 1208      53697A65 
+ 1209              	.LASF55:
+ 1210 058e 4F534366 		.ascii	"OSCfg_TickTaskStkBasePtr\000"
+ 1210      675F5469 
+ 1210      636B5461 
+ 1210      736B5374 
+ 1210      6B426173 
+ 1211              	.LASF33:
+ 1212 05a7 4F534366 		.ascii	"OSCfg_IntQBasePtr\000"
+ 1212      675F496E 
+ 1212      74514261 
+ 1212      73655074 
+ 1212      7200
+ 1213              	.LASF4:
+ 1214 05b9 4350555F 		.ascii	"CPU_INT16U\000"
+ 1214      494E5431 
+ 1214      365500
+ 1215              	.LASF65:
+ 1216 05c4 4F534366 		.ascii	"OSCfg_IdleTaskStk\000"
+ 1216      675F4964 
+ 1216      6C655461 
+ 1216      736B5374 
+ 1216      6B00
+ 1217              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

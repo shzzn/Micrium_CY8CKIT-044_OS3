@@ -1,0 +1,6 @@
+D:\CYTEST\Micrium_CY8CKIT-044_OS3\Examples\Cypress\CY8CKIT-044\OS3\PSoC\OS3.cydsn\OS3.cyprj|265ef499-f29c-4a0c-90c4-313a1efdc128
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|7a0f3987-30e6-4fa0-8e6b-c53c208b8a55
+C:\Users\Administrator\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|afd1dd74-d7ef-4596-890d-f68e3f38ae65
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|2aefbd8e-0851-467a-ba70-944cc594e153
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|54319564-2302-43d1-86a2-8a2c6e3cc06b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|2838c25b-c6e5-44db-975d-18d2d85a48ff

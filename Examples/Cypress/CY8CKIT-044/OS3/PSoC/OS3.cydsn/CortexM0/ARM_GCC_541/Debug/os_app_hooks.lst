@@ -1,0 +1,2528 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"os_app_hooks.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.App_OS_SetAllHooks,"ax",%progbits
+  20              		.align	2
+  21              		.global	App_OS_SetAllHooks
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	App_OS_SetAllHooks, %function
+  25              	App_OS_SetAllHooks:
+  26              	.LFB0:
+  27              		.file 1 "..\\..\\os_app_hooks.c"
+   1:..\../os_app_hooks.c **** /*
+   2:..\../os_app_hooks.c **** ***************************************************************************************************
+   3:..\../os_app_hooks.c **** *                                                      uC/OS-III
+   4:..\../os_app_hooks.c **** *                                                 The Real-Time Kernel
+   5:..\../os_app_hooks.c **** *
+   6:..\../os_app_hooks.c **** *                                  (c) Copyright 2009-2015; Micrium, Inc.; Weston, FL
+   7:..\../os_app_hooks.c **** *                           All rights reserved.  Protected by international copyright laws.
+   8:..\../os_app_hooks.c **** *
+   9:..\../os_app_hooks.c **** *                                                  APPLICATION HOOKS
+  10:..\../os_app_hooks.c **** *
+  11:..\../os_app_hooks.c **** * File    : OS_APP_HOOKS.C
+  12:..\../os_app_hooks.c **** * By      : JJL
+  13:..\../os_app_hooks.c **** * Version : V3.05.01
+  14:..\../os_app_hooks.c **** *
+  15:..\../os_app_hooks.c **** * LICENSING TERMS:
+  16:..\../os_app_hooks.c **** * ---------------
+  17:..\../os_app_hooks.c **** *           uC/OS-III is provided in source form for FREE short-term evaluation, for educational us
+  18:..\../os_app_hooks.c **** *           for peaceful research.  If you plan or intend to use uC/OS-III in a commercial applicat
+  19:..\../os_app_hooks.c **** *           product then, you need to contact Micrium to properly license uC/OS-III for its use in 
+  20:..\../os_app_hooks.c **** *           application/product.   We provide ALL the source code for your convenience and to help 
+  21:..\../os_app_hooks.c **** *           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can 
+  22:..\../os_app_hooks.c **** *           it commercially without paying a licensing fee.
+  23:..\../os_app_hooks.c **** *
+  24:..\../os_app_hooks.c **** *           Knowledge of the source code may NOT be used to develop a similar product.
+  25:..\../os_app_hooks.c **** *
+  26:..\../os_app_hooks.c **** *           Please help us continue to provide the embedded community with the finest software avai
+  27:..\../os_app_hooks.c **** *           Your honesty is greatly appreciated.
+  28:..\../os_app_hooks.c **** *
+  29:..\../os_app_hooks.c **** *           You can find our product's user manual, API reference, release notes and
+  30:..\../os_app_hooks.c **** *           more information at https://doc.micrium.com.
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 2
+
+
+  31:..\../os_app_hooks.c **** *           You can contact us at www.micrium.com.
+  32:..\../os_app_hooks.c **** ***************************************************************************************************
+  33:..\../os_app_hooks.c **** */
+  34:..\../os_app_hooks.c **** 
+  35:..\../os_app_hooks.c **** #define   MICRIUM_SOURCE
+  36:..\../os_app_hooks.c **** #include  <os.h>
+  37:..\../os_app_hooks.c **** #include  "os_app_hooks.h"
+  38:..\../os_app_hooks.c **** 
+  39:..\../os_app_hooks.c **** 
+  40:..\../os_app_hooks.c **** /*
+  41:..\../os_app_hooks.c **** ***************************************************************************************************
+  42:..\../os_app_hooks.c **** *                                              SET ALL APPLICATION HOOKS
+  43:..\../os_app_hooks.c **** *
+  44:..\../os_app_hooks.c **** * Description: Set ALL application hooks.
+  45:..\../os_app_hooks.c **** *
+  46:..\../os_app_hooks.c **** * Arguments  : none.
+  47:..\../os_app_hooks.c **** *
+  48:..\../os_app_hooks.c **** * Note(s)    : none
+  49:..\../os_app_hooks.c **** ***************************************************************************************************
+  50:..\../os_app_hooks.c **** */
+  51:..\../os_app_hooks.c **** 
+  52:..\../os_app_hooks.c **** void  App_OS_SetAllHooks (void)
+  53:..\../os_app_hooks.c **** {
+  28              		.loc 1 53 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  54:..\../os_app_hooks.c **** #if OS_CFG_APP_HOOKS_EN > 0u
+  55:..\../os_app_hooks.c ****     CPU_SR_ALLOC();
+  56:..\../os_app_hooks.c **** 
+  57:..\../os_app_hooks.c **** 
+  58:..\../os_app_hooks.c ****     CPU_CRITICAL_ENTER();
+  59:..\../os_app_hooks.c ****     OS_AppIdleTaskHookPtr   = App_OS_IdleTaskHook;
+  60:..\../os_app_hooks.c **** 
+  61:..\../os_app_hooks.c **** #if (OS_CFG_TASK_STK_REDZONE_EN == DEF_ENABLED)
+  62:..\../os_app_hooks.c ****     OS_AppRedzoneHitHookPtr = App_OS_RedzoneHitHook;
+  63:..\../os_app_hooks.c **** #endif
+  64:..\../os_app_hooks.c **** 
+  65:..\../os_app_hooks.c ****     OS_AppStatTaskHookPtr   = App_OS_StatTaskHook;
+  66:..\../os_app_hooks.c **** 
+  67:..\../os_app_hooks.c ****     OS_AppTaskCreateHookPtr = App_OS_TaskCreateHook;
+  68:..\../os_app_hooks.c **** 
+  69:..\../os_app_hooks.c ****     OS_AppTaskDelHookPtr    = App_OS_TaskDelHook;
+  70:..\../os_app_hooks.c **** 
+  71:..\../os_app_hooks.c ****     OS_AppTaskReturnHookPtr = App_OS_TaskReturnHook;
+  72:..\../os_app_hooks.c **** 
+  73:..\../os_app_hooks.c ****     OS_AppTaskSwHookPtr     = App_OS_TaskSwHook;
+  74:..\../os_app_hooks.c **** 
+  75:..\../os_app_hooks.c ****     OS_AppTimeTickHookPtr   = App_OS_TimeTickHook;
+  76:..\../os_app_hooks.c ****     CPU_CRITICAL_EXIT();
+  77:..\../os_app_hooks.c **** #endif
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 3
+
+
+  78:..\../os_app_hooks.c **** }
+  38              		.loc 1 78 0
+  39 0004 C046     		nop
+  40 0006 BD46     		mov	sp, r7
+  41              		@ sp needed
+  42 0008 80BD     		pop	{r7, pc}
+  43              		.cfi_endproc
+  44              	.LFE0:
+  45              		.size	App_OS_SetAllHooks, .-App_OS_SetAllHooks
+  46 000a C046     		.section	.text.App_OS_ClrAllHooks,"ax",%progbits
+  47              		.align	2
+  48              		.global	App_OS_ClrAllHooks
+  49              		.code	16
+  50              		.thumb_func
+  51              		.type	App_OS_ClrAllHooks, %function
+  52              	App_OS_ClrAllHooks:
+  53              	.LFB1:
+  79:..\../os_app_hooks.c **** 
+  80:..\../os_app_hooks.c **** 
+  81:..\../os_app_hooks.c **** /*
+  82:..\../os_app_hooks.c **** ***************************************************************************************************
+  83:..\../os_app_hooks.c **** *                                             CLEAR ALL APPLICATION HOOKS
+  84:..\../os_app_hooks.c **** *
+  85:..\../os_app_hooks.c **** * Description: Clear ALL application hooks.
+  86:..\../os_app_hooks.c **** *
+  87:..\../os_app_hooks.c **** * Arguments  : none.
+  88:..\../os_app_hooks.c **** *
+  89:..\../os_app_hooks.c **** * Note(s)    : none
+  90:..\../os_app_hooks.c **** ***************************************************************************************************
+  91:..\../os_app_hooks.c **** */
+  92:..\../os_app_hooks.c **** 
+  93:..\../os_app_hooks.c **** void  App_OS_ClrAllHooks (void)
+  94:..\../os_app_hooks.c **** {
+  54              		.loc 1 94 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 1, uses_anonymous_args = 0
+  58 0000 80B5     		push	{r7, lr}
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 7, -8
+  61              		.cfi_offset 14, -4
+  62 0002 00AF     		add	r7, sp, #0
+  63              		.cfi_def_cfa_register 7
+  95:..\../os_app_hooks.c **** #if OS_CFG_APP_HOOKS_EN > 0u
+  96:..\../os_app_hooks.c ****     CPU_SR_ALLOC();
+  97:..\../os_app_hooks.c **** 
+  98:..\../os_app_hooks.c **** 
+  99:..\../os_app_hooks.c ****     CPU_CRITICAL_ENTER();
+ 100:..\../os_app_hooks.c ****     OS_AppIdleTaskHookPtr   = (OS_APP_HOOK_VOID)0;
+ 101:..\../os_app_hooks.c **** 
+ 102:..\../os_app_hooks.c **** #if (OS_CFG_TASK_STK_REDZONE_EN == DEF_ENABLED)
+ 103:..\../os_app_hooks.c ****     OS_AppRedzoneHitHookPtr = (OS_APP_HOOK_TCB)0;
+ 104:..\../os_app_hooks.c **** #endif
+ 105:..\../os_app_hooks.c **** 
+ 106:..\../os_app_hooks.c ****     OS_AppStatTaskHookPtr   = (OS_APP_HOOK_VOID)0;
+ 107:..\../os_app_hooks.c **** 
+ 108:..\../os_app_hooks.c ****     OS_AppTaskCreateHookPtr = (OS_APP_HOOK_TCB)0;
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 4
+
+
+ 109:..\../os_app_hooks.c **** 
+ 110:..\../os_app_hooks.c ****     OS_AppTaskDelHookPtr    = (OS_APP_HOOK_TCB)0;
+ 111:..\../os_app_hooks.c **** 
+ 112:..\../os_app_hooks.c ****     OS_AppTaskReturnHookPtr = (OS_APP_HOOK_TCB)0;
+ 113:..\../os_app_hooks.c **** 
+ 114:..\../os_app_hooks.c ****     OS_AppTaskSwHookPtr     = (OS_APP_HOOK_VOID)0;
+ 115:..\../os_app_hooks.c **** 
+ 116:..\../os_app_hooks.c ****     OS_AppTimeTickHookPtr   = (OS_APP_HOOK_VOID)0;
+ 117:..\../os_app_hooks.c ****     CPU_CRITICAL_EXIT();
+ 118:..\../os_app_hooks.c **** #endif
+ 119:..\../os_app_hooks.c **** }
+  64              		.loc 1 119 0
+  65 0004 C046     		nop
+  66 0006 BD46     		mov	sp, r7
+  67              		@ sp needed
+  68 0008 80BD     		pop	{r7, pc}
+  69              		.cfi_endproc
+  70              	.LFE1:
+  71              		.size	App_OS_ClrAllHooks, .-App_OS_ClrAllHooks
+  72              		.section	.text.App_OS_IdleTaskHook,"ax",%progbits
+  73              		.align	2
+  74              		.global	App_OS_IdleTaskHook
+  75              		.code	16
+  76              		.thumb_func
+  77              		.type	App_OS_IdleTaskHook, %function
+  78              	App_OS_IdleTaskHook:
+  79              	.LFB2:
+ 120:..\../os_app_hooks.c **** 
+ 121:..\../os_app_hooks.c **** /*
+ 122:..\../os_app_hooks.c **** ***************************************************************************************************
+ 123:..\../os_app_hooks.c **** *                                              APPLICATION IDLE TASK HOOK
+ 124:..\../os_app_hooks.c **** *
+ 125:..\../os_app_hooks.c **** * Description: This function is called by the idle task.  This hook has been added to allow you to 
+ 126:..\../os_app_hooks.c **** *              STOP the CPU to conserve power.
+ 127:..\../os_app_hooks.c **** *
+ 128:..\../os_app_hooks.c **** * Arguments  : none
+ 129:..\../os_app_hooks.c **** *
+ 130:..\../os_app_hooks.c **** * Note(s)    : none
+ 131:..\../os_app_hooks.c **** ***************************************************************************************************
+ 132:..\../os_app_hooks.c **** */
+ 133:..\../os_app_hooks.c **** 
+ 134:..\../os_app_hooks.c **** void  App_OS_IdleTaskHook (void)
+ 135:..\../os_app_hooks.c **** {
+  80              		.loc 1 135 0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 1, uses_anonymous_args = 0
+  84 0000 80B5     		push	{r7, lr}
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 7, -8
+  87              		.cfi_offset 14, -4
+  88 0002 00AF     		add	r7, sp, #0
+  89              		.cfi_def_cfa_register 7
+ 136:..\../os_app_hooks.c **** 
+ 137:..\../os_app_hooks.c **** }
+  90              		.loc 1 137 0
+  91 0004 C046     		nop
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 5
+
+
+  92 0006 BD46     		mov	sp, r7
+  93              		@ sp needed
+  94 0008 80BD     		pop	{r7, pc}
+  95              		.cfi_endproc
+  96              	.LFE2:
+  97              		.size	App_OS_IdleTaskHook, .-App_OS_IdleTaskHook
+  98              		.section	.text.App_OS_StatTaskHook,"ax",%progbits
+  99              		.align	2
+ 100              		.global	App_OS_StatTaskHook
+ 101              		.code	16
+ 102              		.thumb_func
+ 103              		.type	App_OS_StatTaskHook, %function
+ 104              	App_OS_StatTaskHook:
+ 105              	.LFB3:
+ 138:..\../os_app_hooks.c **** 
+ 139:..\../os_app_hooks.c **** /*
+ 140:..\../os_app_hooks.c **** ***************************************************************************************************
+ 141:..\../os_app_hooks.c **** *                                             APPLICATION REDZONE HIT HOOK
+ 142:..\../os_app_hooks.c **** *
+ 143:..\../os_app_hooks.c **** * Description: This function is called when a task's stack overflowed.
+ 144:..\../os_app_hooks.c **** *
+ 145:..\../os_app_hooks.c **** * Arguments  : p_tcb   is a pointer to the task control block of the offending task. NULL if ISR.
+ 146:..\../os_app_hooks.c **** *
+ 147:..\../os_app_hooks.c **** * Note(s)    : None.
+ 148:..\../os_app_hooks.c **** ***************************************************************************************************
+ 149:..\../os_app_hooks.c **** */
+ 150:..\../os_app_hooks.c **** #if (OS_CFG_TASK_STK_REDZONE_EN == DEF_ENABLED)
+ 151:..\../os_app_hooks.c **** void  App_OS_RedzoneHitHook (OS_TCB  *p_tcb)
+ 152:..\../os_app_hooks.c **** {
+ 153:..\../os_app_hooks.c ****     (void)&p_tcb;
+ 154:..\../os_app_hooks.c ****     CPU_SW_EXCEPTION(;);
+ 155:..\../os_app_hooks.c **** }
+ 156:..\../os_app_hooks.c **** #endif
+ 157:..\../os_app_hooks.c **** 
+ 158:..\../os_app_hooks.c **** 
+ 159:..\../os_app_hooks.c **** /*
+ 160:..\../os_app_hooks.c **** ***************************************************************************************************
+ 161:..\../os_app_hooks.c **** *                                           APPLICATION STATISTIC TASK HOOK
+ 162:..\../os_app_hooks.c **** *
+ 163:..\../os_app_hooks.c **** * Description: This function is called every second by uC/OS-III's statistics task.  This allows yo
+ 164:..\../os_app_hooks.c **** *              functionality to the statistics task.
+ 165:..\../os_app_hooks.c **** *
+ 166:..\../os_app_hooks.c **** * Arguments  : none
+ 167:..\../os_app_hooks.c **** *
+ 168:..\../os_app_hooks.c **** * Note(s)    : none
+ 169:..\../os_app_hooks.c **** ***************************************************************************************************
+ 170:..\../os_app_hooks.c **** */
+ 171:..\../os_app_hooks.c **** 
+ 172:..\../os_app_hooks.c **** void  App_OS_StatTaskHook (void)
+ 173:..\../os_app_hooks.c **** {
+ 106              		.loc 1 173 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 1, uses_anonymous_args = 0
+ 110 0000 80B5     		push	{r7, lr}
+ 111              		.cfi_def_cfa_offset 8
+ 112              		.cfi_offset 7, -8
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 6
+
+
+ 113              		.cfi_offset 14, -4
+ 114 0002 00AF     		add	r7, sp, #0
+ 115              		.cfi_def_cfa_register 7
+ 174:..\../os_app_hooks.c **** 
+ 175:..\../os_app_hooks.c **** }
+ 116              		.loc 1 175 0
+ 117 0004 C046     		nop
+ 118 0006 BD46     		mov	sp, r7
+ 119              		@ sp needed
+ 120 0008 80BD     		pop	{r7, pc}
+ 121              		.cfi_endproc
+ 122              	.LFE3:
+ 123              		.size	App_OS_StatTaskHook, .-App_OS_StatTaskHook
+ 124              		.section	.text.App_OS_TaskCreateHook,"ax",%progbits
+ 125              		.align	2
+ 126              		.global	App_OS_TaskCreateHook
+ 127              		.code	16
+ 128              		.thumb_func
+ 129              		.type	App_OS_TaskCreateHook, %function
+ 130              	App_OS_TaskCreateHook:
+ 131              	.LFB4:
+ 176:..\../os_app_hooks.c **** 
+ 177:..\../os_app_hooks.c **** 
+ 178:..\../os_app_hooks.c **** /*
+ 179:..\../os_app_hooks.c **** ***************************************************************************************************
+ 180:..\../os_app_hooks.c **** *                                            APPLICATION TASK CREATION HOOK
+ 181:..\../os_app_hooks.c **** *
+ 182:..\../os_app_hooks.c **** * Description: This function is called when a task is created.
+ 183:..\../os_app_hooks.c **** *
+ 184:..\../os_app_hooks.c **** * Arguments  : p_tcb   is a pointer to the task control block of the task being created.
+ 185:..\../os_app_hooks.c **** *
+ 186:..\../os_app_hooks.c **** * Note(s)    : none
+ 187:..\../os_app_hooks.c **** ***************************************************************************************************
+ 188:..\../os_app_hooks.c **** */
+ 189:..\../os_app_hooks.c **** 
+ 190:..\../os_app_hooks.c **** void  App_OS_TaskCreateHook (OS_TCB  *p_tcb)
+ 191:..\../os_app_hooks.c **** {
+ 132              		.loc 1 191 0
+ 133              		.cfi_startproc
+ 134              		@ args = 0, pretend = 0, frame = 8
+ 135              		@ frame_needed = 1, uses_anonymous_args = 0
+ 136 0000 80B5     		push	{r7, lr}
+ 137              		.cfi_def_cfa_offset 8
+ 138              		.cfi_offset 7, -8
+ 139              		.cfi_offset 14, -4
+ 140 0002 82B0     		sub	sp, sp, #8
+ 141              		.cfi_def_cfa_offset 16
+ 142 0004 00AF     		add	r7, sp, #0
+ 143              		.cfi_def_cfa_register 7
+ 144 0006 7860     		str	r0, [r7, #4]
+ 192:..\../os_app_hooks.c ****     (void)&p_tcb;
+ 193:..\../os_app_hooks.c **** }
+ 145              		.loc 1 193 0
+ 146 0008 C046     		nop
+ 147 000a BD46     		mov	sp, r7
+ 148 000c 02B0     		add	sp, sp, #8
+ 149              		@ sp needed
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 7
+
+
+ 150 000e 80BD     		pop	{r7, pc}
+ 151              		.cfi_endproc
+ 152              	.LFE4:
+ 153              		.size	App_OS_TaskCreateHook, .-App_OS_TaskCreateHook
+ 154              		.section	.text.App_OS_TaskDelHook,"ax",%progbits
+ 155              		.align	2
+ 156              		.global	App_OS_TaskDelHook
+ 157              		.code	16
+ 158              		.thumb_func
+ 159              		.type	App_OS_TaskDelHook, %function
+ 160              	App_OS_TaskDelHook:
+ 161              	.LFB5:
+ 194:..\../os_app_hooks.c **** 
+ 195:..\../os_app_hooks.c **** 
+ 196:..\../os_app_hooks.c **** /*
+ 197:..\../os_app_hooks.c **** ***************************************************************************************************
+ 198:..\../os_app_hooks.c **** *                                            APPLICATION TASK DELETION HOOK
+ 199:..\../os_app_hooks.c **** *
+ 200:..\../os_app_hooks.c **** * Description: This function is called when a task is deleted.
+ 201:..\../os_app_hooks.c **** *
+ 202:..\../os_app_hooks.c **** * Arguments  : p_tcb   is a pointer to the task control block of the task being deleted.
+ 203:..\../os_app_hooks.c **** *
+ 204:..\../os_app_hooks.c **** * Note(s)    : none
+ 205:..\../os_app_hooks.c **** ***************************************************************************************************
+ 206:..\../os_app_hooks.c **** */
+ 207:..\../os_app_hooks.c **** 
+ 208:..\../os_app_hooks.c **** void  App_OS_TaskDelHook (OS_TCB  *p_tcb)
+ 209:..\../os_app_hooks.c **** {
+ 162              		.loc 1 209 0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 8
+ 165              		@ frame_needed = 1, uses_anonymous_args = 0
+ 166 0000 80B5     		push	{r7, lr}
+ 167              		.cfi_def_cfa_offset 8
+ 168              		.cfi_offset 7, -8
+ 169              		.cfi_offset 14, -4
+ 170 0002 82B0     		sub	sp, sp, #8
+ 171              		.cfi_def_cfa_offset 16
+ 172 0004 00AF     		add	r7, sp, #0
+ 173              		.cfi_def_cfa_register 7
+ 174 0006 7860     		str	r0, [r7, #4]
+ 210:..\../os_app_hooks.c ****     (void)&p_tcb;
+ 211:..\../os_app_hooks.c **** }
+ 175              		.loc 1 211 0
+ 176 0008 C046     		nop
+ 177 000a BD46     		mov	sp, r7
+ 178 000c 02B0     		add	sp, sp, #8
+ 179              		@ sp needed
+ 180 000e 80BD     		pop	{r7, pc}
+ 181              		.cfi_endproc
+ 182              	.LFE5:
+ 183              		.size	App_OS_TaskDelHook, .-App_OS_TaskDelHook
+ 184              		.section	.text.App_OS_TaskReturnHook,"ax",%progbits
+ 185              		.align	2
+ 186              		.global	App_OS_TaskReturnHook
+ 187              		.code	16
+ 188              		.thumb_func
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 8
+
+
+ 189              		.type	App_OS_TaskReturnHook, %function
+ 190              	App_OS_TaskReturnHook:
+ 191              	.LFB6:
+ 212:..\../os_app_hooks.c **** 
+ 213:..\../os_app_hooks.c **** 
+ 214:..\../os_app_hooks.c **** /*
+ 215:..\../os_app_hooks.c **** ***************************************************************************************************
+ 216:..\../os_app_hooks.c **** *                                             APPLICATION TASK RETURN HOOK
+ 217:..\../os_app_hooks.c **** *
+ 218:..\../os_app_hooks.c **** * Description: This function is called if a task accidentally returns.  In other words, a task shou
+ 219:..\../os_app_hooks.c **** *              infinite loop or delete itself when done.
+ 220:..\../os_app_hooks.c **** *
+ 221:..\../os_app_hooks.c **** * Arguments  : p_tcb     is a pointer to the OS_TCB of the task that is returning.
+ 222:..\../os_app_hooks.c **** *
+ 223:..\../os_app_hooks.c **** * Note(s)    : none
+ 224:..\../os_app_hooks.c **** ***************************************************************************************************
+ 225:..\../os_app_hooks.c **** */
+ 226:..\../os_app_hooks.c **** 
+ 227:..\../os_app_hooks.c **** void  App_OS_TaskReturnHook (OS_TCB  *p_tcb)
+ 228:..\../os_app_hooks.c **** {
+ 192              		.loc 1 228 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 8
+ 195              		@ frame_needed = 1, uses_anonymous_args = 0
+ 196 0000 80B5     		push	{r7, lr}
+ 197              		.cfi_def_cfa_offset 8
+ 198              		.cfi_offset 7, -8
+ 199              		.cfi_offset 14, -4
+ 200 0002 82B0     		sub	sp, sp, #8
+ 201              		.cfi_def_cfa_offset 16
+ 202 0004 00AF     		add	r7, sp, #0
+ 203              		.cfi_def_cfa_register 7
+ 204 0006 7860     		str	r0, [r7, #4]
+ 229:..\../os_app_hooks.c ****     (void)&p_tcb;
+ 230:..\../os_app_hooks.c **** }
+ 205              		.loc 1 230 0
+ 206 0008 C046     		nop
+ 207 000a BD46     		mov	sp, r7
+ 208 000c 02B0     		add	sp, sp, #8
+ 209              		@ sp needed
+ 210 000e 80BD     		pop	{r7, pc}
+ 211              		.cfi_endproc
+ 212              	.LFE6:
+ 213              		.size	App_OS_TaskReturnHook, .-App_OS_TaskReturnHook
+ 214              		.section	.text.App_OS_TaskSwHook,"ax",%progbits
+ 215              		.align	2
+ 216              		.global	App_OS_TaskSwHook
+ 217              		.code	16
+ 218              		.thumb_func
+ 219              		.type	App_OS_TaskSwHook, %function
+ 220              	App_OS_TaskSwHook:
+ 221              	.LFB7:
+ 231:..\../os_app_hooks.c **** 
+ 232:..\../os_app_hooks.c **** 
+ 233:..\../os_app_hooks.c **** /*
+ 234:..\../os_app_hooks.c **** ***************************************************************************************************
+ 235:..\../os_app_hooks.c **** *                                             APPLICATION TASK SWITCH HOOK
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 9
+
+
+ 236:..\../os_app_hooks.c **** *
+ 237:..\../os_app_hooks.c **** * Description: This function is called when a task switch is performed.  This allows you to perform
+ 238:..\../os_app_hooks.c **** *              during a context switch.
+ 239:..\../os_app_hooks.c **** *
+ 240:..\../os_app_hooks.c **** * Arguments  : none
+ 241:..\../os_app_hooks.c **** *
+ 242:..\../os_app_hooks.c **** * Note(s)    : 1) Interrupts are disabled during this call.
+ 243:..\../os_app_hooks.c **** *              2) It is assumed that the global pointer 'OSTCBHighRdyPtr' points to the TCB of the 
+ 244:..\../os_app_hooks.c **** *                 'switched in' (i.e. the highest priority task) and, 'OSTCBCurPtr' points to the t
+ 245:..\../os_app_hooks.c **** *                 (i.e. the preempted task).
+ 246:..\../os_app_hooks.c **** ***************************************************************************************************
+ 247:..\../os_app_hooks.c **** */
+ 248:..\../os_app_hooks.c **** 
+ 249:..\../os_app_hooks.c **** void  App_OS_TaskSwHook (void)
+ 250:..\../os_app_hooks.c **** {
+ 222              		.loc 1 250 0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 1, uses_anonymous_args = 0
+ 226 0000 80B5     		push	{r7, lr}
+ 227              		.cfi_def_cfa_offset 8
+ 228              		.cfi_offset 7, -8
+ 229              		.cfi_offset 14, -4
+ 230 0002 00AF     		add	r7, sp, #0
+ 231              		.cfi_def_cfa_register 7
+ 251:..\../os_app_hooks.c **** 
+ 252:..\../os_app_hooks.c **** }
+ 232              		.loc 1 252 0
+ 233 0004 C046     		nop
+ 234 0006 BD46     		mov	sp, r7
+ 235              		@ sp needed
+ 236 0008 80BD     		pop	{r7, pc}
+ 237              		.cfi_endproc
+ 238              	.LFE7:
+ 239              		.size	App_OS_TaskSwHook, .-App_OS_TaskSwHook
+ 240              		.section	.text.App_OS_TimeTickHook,"ax",%progbits
+ 241              		.align	2
+ 242              		.global	App_OS_TimeTickHook
+ 243              		.code	16
+ 244              		.thumb_func
+ 245              		.type	App_OS_TimeTickHook, %function
+ 246              	App_OS_TimeTickHook:
+ 247              	.LFB8:
+ 253:..\../os_app_hooks.c **** 
+ 254:..\../os_app_hooks.c **** 
+ 255:..\../os_app_hooks.c **** /*
+ 256:..\../os_app_hooks.c **** ***************************************************************************************************
+ 257:..\../os_app_hooks.c **** *                                                APPLICATION TICK HOOK
+ 258:..\../os_app_hooks.c **** *
+ 259:..\../os_app_hooks.c **** * Description: This function is called every tick.
+ 260:..\../os_app_hooks.c **** *
+ 261:..\../os_app_hooks.c **** * Arguments  : none
+ 262:..\../os_app_hooks.c **** *
+ 263:..\../os_app_hooks.c **** * Note(s)    : 1) This function is assumed to be called from the Tick ISR.
+ 264:..\../os_app_hooks.c **** ***************************************************************************************************
+ 265:..\../os_app_hooks.c **** */
+ 266:..\../os_app_hooks.c **** 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 10
+
+
+ 267:..\../os_app_hooks.c **** void  App_OS_TimeTickHook (void)
+ 268:..\../os_app_hooks.c **** {
+ 248              		.loc 1 268 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 1, uses_anonymous_args = 0
+ 252 0000 80B5     		push	{r7, lr}
+ 253              		.cfi_def_cfa_offset 8
+ 254              		.cfi_offset 7, -8
+ 255              		.cfi_offset 14, -4
+ 256 0002 00AF     		add	r7, sp, #0
+ 257              		.cfi_def_cfa_register 7
+ 269:..\../os_app_hooks.c **** 
+ 270:..\../os_app_hooks.c **** }
+ 258              		.loc 1 270 0
+ 259 0004 C046     		nop
+ 260 0006 BD46     		mov	sp, r7
+ 261              		@ sp needed
+ 262 0008 80BD     		pop	{r7, pc}
+ 263              		.cfi_endproc
+ 264              	.LFE8:
+ 265              		.size	App_OS_TimeTickHook, .-App_OS_TimeTickHook
+ 266              		.text
+ 267              	.Letext0:
+ 268              		.file 2 "..\\..\\..\\..\\..\\..\\Software\\uC-CPU\\ARM-Cortex-M0\\GNU/cpu.h"
+ 269              		.file 3 "..\\..\\..\\..\\..\\..\\Software\\uC-CPU/cpu_core.h"
+ 270              		.file 4 "..\\..\\..\\..\\..\\..\\Software\\uCOS-III\\Source/os_type.h"
+ 271              		.file 5 "..\\..\\..\\..\\..\\..\\Software\\uCOS-III\\Source/os.h"
+ 272              		.section	.debug_info,"",%progbits
+ 273              	.Ldebug_info0:
+ 274 0000 1B080000 		.4byte	0x81b
+ 275 0004 0400     		.2byte	0x4
+ 276 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 277 000a 04       		.byte	0x4
+ 278 000b 01       		.uleb128 0x1
+ 279 000c D6000000 		.4byte	.LASF133
+ 280 0010 0C       		.byte	0xc
+ 281 0011 A6010000 		.4byte	.LASF134
+ 282 0015 1D000000 		.4byte	.LASF135
+ 283 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 284 001d 00000000 		.4byte	0
+ 285 0021 00000000 		.4byte	.Ldebug_line0
+ 286 0025 02       		.uleb128 0x2
+ 287 0026 CF020000 		.4byte	.LASF2
+ 288 002a 02       		.byte	0x2
+ 289 002b 7C       		.byte	0x7c
+ 290 002c 30000000 		.4byte	0x30
+ 291 0030 03       		.uleb128 0x3
+ 292 0031 01       		.byte	0x1
+ 293 0032 08       		.byte	0x8
+ 294 0033 6F030000 		.4byte	.LASF0
+ 295 0037 03       		.uleb128 0x3
+ 296 0038 01       		.byte	0x1
+ 297 0039 08       		.byte	0x8
+ 298 003a 9B050000 		.4byte	.LASF1
+ 299 003e 02       		.uleb128 0x2
+ 300 003f 5E020000 		.4byte	.LASF3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 11
+
+
+ 301 0043 02       		.byte	0x2
+ 302 0044 7E       		.byte	0x7e
+ 303 0045 37000000 		.4byte	0x37
+ 304 0049 03       		.uleb128 0x3
+ 305 004a 01       		.byte	0x1
+ 306 004b 06       		.byte	0x6
+ 307 004c F8050000 		.4byte	.LASF4
+ 308 0050 02       		.uleb128 0x2
+ 309 0051 FF030000 		.4byte	.LASF5
+ 310 0055 02       		.byte	0x2
+ 311 0056 80       		.byte	0x80
+ 312 0057 5B000000 		.4byte	0x5b
+ 313 005b 03       		.uleb128 0x3
+ 314 005c 02       		.byte	0x2
+ 315 005d 07       		.byte	0x7
+ 316 005e 0A060000 		.4byte	.LASF6
+ 317 0062 03       		.uleb128 0x3
+ 318 0063 02       		.byte	0x2
+ 319 0064 05       		.byte	0x5
+ 320 0065 96040000 		.4byte	.LASF7
+ 321 0069 02       		.uleb128 0x2
+ 322 006a A9000000 		.4byte	.LASF8
+ 323 006e 02       		.byte	0x2
+ 324 006f 82       		.byte	0x82
+ 325 0070 74000000 		.4byte	0x74
+ 326 0074 03       		.uleb128 0x3
+ 327 0075 04       		.byte	0x4
+ 328 0076 07       		.byte	0x7
+ 329 0077 52050000 		.4byte	.LASF9
+ 330 007b 04       		.uleb128 0x4
+ 331 007c 04       		.byte	0x4
+ 332 007d 05       		.byte	0x5
+ 333 007e 696E7400 		.ascii	"int\000"
+ 334 0082 03       		.uleb128 0x3
+ 335 0083 08       		.byte	0x8
+ 336 0084 07       		.byte	0x7
+ 337 0085 2F020000 		.4byte	.LASF10
+ 338 0089 03       		.uleb128 0x3
+ 339 008a 08       		.byte	0x8
+ 340 008b 05       		.byte	0x5
+ 341 008c DE030000 		.4byte	.LASF11
+ 342 0090 03       		.uleb128 0x3
+ 343 0091 04       		.byte	0x4
+ 344 0092 04       		.byte	0x4
+ 345 0093 15020000 		.4byte	.LASF12
+ 346 0097 03       		.uleb128 0x3
+ 347 0098 08       		.byte	0x8
+ 348 0099 04       		.byte	0x4
+ 349 009a 4F060000 		.4byte	.LASF13
+ 350 009e 05       		.uleb128 0x5
+ 351 009f 04       		.byte	0x4
+ 352 00a0 A4000000 		.4byte	0xa4
+ 353 00a4 06       		.uleb128 0x6
+ 354 00a5 AF000000 		.4byte	0xaf
+ 355 00a9 07       		.uleb128 0x7
+ 356 00aa AF000000 		.4byte	0xaf
+ 357 00ae 00       		.byte	0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 12
+
+
+ 358 00af 08       		.uleb128 0x8
+ 359 00b0 04       		.byte	0x4
+ 360 00b1 02       		.uleb128 0x2
+ 361 00b2 81050000 		.4byte	.LASF14
+ 362 00b6 02       		.byte	0x2
+ 363 00b7 BA       		.byte	0xba
+ 364 00b8 69000000 		.4byte	0x69
+ 365 00bc 02       		.uleb128 0x2
+ 366 00bd B1060000 		.4byte	.LASF15
+ 367 00c1 02       		.byte	0x2
+ 368 00c2 E5       		.byte	0xe5
+ 369 00c3 69000000 		.4byte	0x69
+ 370 00c7 02       		.uleb128 0x2
+ 371 00c8 D8020000 		.4byte	.LASF16
+ 372 00cc 02       		.byte	0x2
+ 373 00cd E6       		.byte	0xe6
+ 374 00ce B1000000 		.4byte	0xb1
+ 375 00d2 02       		.uleb128 0x2
+ 376 00d3 12040000 		.4byte	.LASF17
+ 377 00d7 03       		.byte	0x3
+ 378 00d8 C3       		.byte	0xc3
+ 379 00d9 69000000 		.4byte	0x69
+ 380 00dd 02       		.uleb128 0x2
+ 381 00de D7030000 		.4byte	.LASF18
+ 382 00e2 03       		.byte	0x3
+ 383 00e3 C6       		.byte	0xc6
+ 384 00e4 D2000000 		.4byte	0xd2
+ 385 00e8 02       		.uleb128 0x2
+ 386 00e9 8A000000 		.4byte	.LASF19
+ 387 00ed 04       		.byte	0x4
+ 388 00ee 32       		.byte	0x32
+ 389 00ef 50000000 		.4byte	0x50
+ 390 00f3 02       		.uleb128 0x2
+ 391 00f4 07000000 		.4byte	.LASF20
+ 392 00f8 04       		.byte	0x4
+ 393 00f9 36       		.byte	0x36
+ 394 00fa 69000000 		.4byte	0x69
+ 395 00fe 02       		.uleb128 0x2
+ 396 00ff 8A050000 		.4byte	.LASF21
+ 397 0103 04       		.byte	0x4
+ 398 0104 38       		.byte	0x38
+ 399 0105 69000000 		.4byte	0x69
+ 400 0109 02       		.uleb128 0x2
+ 401 010a 1D060000 		.4byte	.LASF22
+ 402 010e 04       		.byte	0x4
+ 403 010f 3A       		.byte	0x3a
+ 404 0110 69000000 		.4byte	0x69
+ 405 0114 02       		.uleb128 0x2
+ 406 0115 E5020000 		.4byte	.LASF23
+ 407 0119 04       		.byte	0x4
+ 408 011a 41       		.byte	0x41
+ 409 011b 50000000 		.4byte	0x50
+ 410 011f 02       		.uleb128 0x2
+ 411 0120 B0020000 		.4byte	.LASF24
+ 412 0124 04       		.byte	0x4
+ 413 0125 42       		.byte	0x42
+ 414 0126 50000000 		.4byte	0x50
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 13
+
+
+ 415 012a 02       		.uleb128 0x2
+ 416 012b 04050000 		.4byte	.LASF25
+ 417 012f 04       		.byte	0x4
+ 418 0130 44       		.byte	0x44
+ 419 0131 3E000000 		.4byte	0x3e
+ 420 0135 02       		.uleb128 0x2
+ 421 0136 ED010000 		.4byte	.LASF26
+ 422 013a 04       		.byte	0x4
+ 423 013b 46       		.byte	0x46
+ 424 013c 50000000 		.4byte	0x50
+ 425 0140 02       		.uleb128 0x2
+ 426 0141 74030000 		.4byte	.LASF27
+ 427 0145 04       		.byte	0x4
+ 428 0146 47       		.byte	0x47
+ 429 0147 69000000 		.4byte	0x69
+ 430 014b 02       		.uleb128 0x2
+ 431 014c B2050000 		.4byte	.LASF28
+ 432 0150 04       		.byte	0x4
+ 433 0151 49       		.byte	0x49
+ 434 0152 50000000 		.4byte	0x50
+ 435 0156 02       		.uleb128 0x2
+ 436 0157 0D020000 		.4byte	.LASF29
+ 437 015b 04       		.byte	0x4
+ 438 015c 4D       		.byte	0x4d
+ 439 015d 3E000000 		.4byte	0x3e
+ 440 0161 02       		.uleb128 0x2
+ 441 0162 83020000 		.4byte	.LASF30
+ 442 0166 04       		.byte	0x4
+ 443 0167 56       		.byte	0x56
+ 444 0168 69000000 		.4byte	0x69
+ 445 016c 02       		.uleb128 0x2
+ 446 016d 32040000 		.4byte	.LASF31
+ 447 0171 04       		.byte	0x4
+ 448 0172 5A       		.byte	0x5a
+ 449 0173 69000000 		.4byte	0x69
+ 450 0177 02       		.uleb128 0x2
+ 451 0178 A9050000 		.4byte	.LASF32
+ 452 017c 04       		.byte	0x4
+ 453 017d 5C       		.byte	0x5c
+ 454 017e 3E000000 		.4byte	0x3e
+ 455 0182 02       		.uleb128 0x2
+ 456 0183 A0020000 		.4byte	.LASF33
+ 457 0187 04       		.byte	0x4
+ 458 0188 5E       		.byte	0x5e
+ 459 0189 3E000000 		.4byte	0x3e
+ 460 018d 02       		.uleb128 0x2
+ 461 018e 0A040000 		.4byte	.LASF34
+ 462 0192 04       		.byte	0x4
+ 463 0193 60       		.byte	0x60
+ 464 0194 69000000 		.4byte	0x69
+ 465 0198 09       		.uleb128 0x9
+ 466 0199 28020000 		.4byte	.LASF35
+ 467 019d 05       		.byte	0x5
+ 468 019e C402     		.2byte	0x2c4
+ 469 01a0 A4010000 		.4byte	0x1a4
+ 470 01a4 0A       		.uleb128 0xa
+ 471 01a5 69020000 		.4byte	.LASF41
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 14
+
+
+ 472 01a9 10       		.byte	0x10
+ 473 01aa 05       		.byte	0x5
+ 474 01ab A303     		.2byte	0x3a3
+ 475 01ad E6010000 		.4byte	0x1e6
+ 476 01b1 0B       		.uleb128 0xb
+ 477 01b2 66040000 		.4byte	.LASF36
+ 478 01b6 05       		.byte	0x5
+ 479 01b7 A403     		.2byte	0x3a4
+ 480 01b9 1C070000 		.4byte	0x71c
+ 481 01bd 00       		.byte	0
+ 482 01be 0B       		.uleb128 0xb
+ 483 01bf 26060000 		.4byte	.LASF37
+ 484 01c3 05       		.byte	0x5
+ 485 01c4 A503     		.2byte	0x3a5
+ 486 01c6 AF000000 		.4byte	0xaf
+ 487 01ca 04       		.byte	0x4
+ 488 01cb 0B       		.uleb128 0xb
+ 489 01cc 5F050000 		.4byte	.LASF38
+ 490 01d0 05       		.byte	0x5
+ 491 01d1 A603     		.2byte	0x3a6
+ 492 01d3 1F010000 		.4byte	0x11f
+ 493 01d7 08       		.byte	0x8
+ 494 01d8 0B       		.uleb128 0xb
+ 495 01d9 04060000 		.4byte	.LASF39
+ 496 01dd 05       		.byte	0x5
+ 497 01de A803     		.2byte	0x3a8
+ 498 01e0 DD000000 		.4byte	0xdd
+ 499 01e4 0C       		.byte	0xc
+ 500 01e5 00       		.byte	0
+ 501 01e6 09       		.uleb128 0x9
+ 502 01e7 C9030000 		.4byte	.LASF40
+ 503 01eb 05       		.byte	0x5
+ 504 01ec C602     		.2byte	0x2c6
+ 505 01ee F2010000 		.4byte	0x1f2
+ 506 01f2 0A       		.uleb128 0xa
+ 507 01f3 A8060000 		.4byte	.LASF42
+ 508 01f7 10       		.byte	0x10
+ 509 01f8 05       		.byte	0x5
+ 510 01f9 BA03     		.2byte	0x3ba
+ 511 01fb 41020000 		.4byte	0x241
+ 512 01ff 0B       		.uleb128 0xb
+ 513 0200 9D030000 		.4byte	.LASF43
+ 514 0204 05       		.byte	0x5
+ 515 0205 BB03     		.2byte	0x3bb
+ 516 0207 1C070000 		.4byte	0x71c
+ 517 020b 00       		.byte	0
+ 518 020c 0B       		.uleb128 0xb
+ 519 020d D1050000 		.4byte	.LASF44
+ 520 0211 05       		.byte	0x5
+ 521 0212 BC03     		.2byte	0x3bc
+ 522 0214 1C070000 		.4byte	0x71c
+ 523 0218 04       		.byte	0x4
+ 524 0219 0B       		.uleb128 0xb
+ 525 021a FC020000 		.4byte	.LASF45
+ 526 021e 05       		.byte	0x5
+ 527 021f BD03     		.2byte	0x3bd
+ 528 0221 14010000 		.4byte	0x114
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 15
+
+
+ 529 0225 08       		.byte	0x8
+ 530 0226 0B       		.uleb128 0xb
+ 531 0227 6F000000 		.4byte	.LASF46
+ 532 022b 05       		.byte	0x5
+ 533 022c BE03     		.2byte	0x3be
+ 534 022e 14010000 		.4byte	0x114
+ 535 0232 0A       		.byte	0xa
+ 536 0233 0B       		.uleb128 0xb
+ 537 0234 6A060000 		.4byte	.LASF47
+ 538 0238 05       		.byte	0x5
+ 539 0239 C003     		.2byte	0x3c0
+ 540 023b 14010000 		.4byte	0x114
+ 541 023f 0C       		.byte	0xc
+ 542 0240 00       		.byte	0
+ 543 0241 09       		.uleb128 0x9
+ 544 0242 B4000000 		.4byte	.LASF48
+ 545 0246 05       		.byte	0x5
+ 546 0247 C802     		.2byte	0x2c8
+ 547 0249 4D020000 		.4byte	0x24d
+ 548 024d 0A       		.uleb128 0xa
+ 549 024e 6E040000 		.4byte	.LASF49
+ 550 0252 30       		.byte	0x30
+ 551 0253 05       		.byte	0x5
+ 552 0254 D003     		.2byte	0x3d0
+ 553 0256 DC020000 		.4byte	0x2dc
+ 554 025a 0B       		.uleb128 0xb
+ 555 025b D2030000 		.4byte	.LASF50
+ 556 025f 05       		.byte	0x5
+ 557 0260 D303     		.2byte	0x3d3
+ 558 0262 40010000 		.4byte	0x140
+ 559 0266 00       		.byte	0
+ 560 0267 0B       		.uleb128 0xb
+ 561 0268 B6030000 		.4byte	.LASF51
+ 562 026c 05       		.byte	0x5
+ 563 026d D603     		.2byte	0x3d6
+ 564 026f 16070000 		.4byte	0x716
+ 565 0273 04       		.byte	0x4
+ 566 0274 0B       		.uleb128 0xb
+ 567 0275 37050000 		.4byte	.LASF52
+ 568 0279 05       		.byte	0x5
+ 569 027a D803     		.2byte	0x3d8
+ 570 027c 5B060000 		.4byte	0x65b
+ 571 0280 08       		.byte	0x8
+ 572 0281 0B       		.uleb128 0xb
+ 573 0282 64010000 		.4byte	.LASF53
+ 574 0286 05       		.byte	0x5
+ 575 0287 DA03     		.2byte	0x3da
+ 576 0289 22070000 		.4byte	0x722
+ 577 028d 14       		.byte	0x14
+ 578 028e 0B       		.uleb128 0xb
+ 579 028f 7B010000 		.4byte	.LASF54
+ 580 0293 05       		.byte	0x5
+ 581 0294 DB03     		.2byte	0x3db
+ 582 0296 22070000 		.4byte	0x722
+ 583 029a 18       		.byte	0x18
+ 584 029b 0B       		.uleb128 0xb
+ 585 029c B9050000 		.4byte	.LASF55
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 16
+
+
+ 586 02a0 05       		.byte	0x5
+ 587 02a1 DC03     		.2byte	0x3dc
+ 588 02a3 16070000 		.4byte	0x716
+ 589 02a7 1C       		.byte	0x1c
+ 590 02a8 0B       		.uleb128 0xb
+ 591 02a9 D8040000 		.4byte	.LASF56
+ 592 02ad 05       		.byte	0x5
+ 593 02ae DF03     		.2byte	0x3df
+ 594 02b0 22070000 		.4byte	0x722
+ 595 02b4 20       		.byte	0x20
+ 596 02b5 0B       		.uleb128 0xb
+ 597 02b6 F8010000 		.4byte	.LASF57
+ 598 02ba 05       		.byte	0x5
+ 599 02bb E003     		.2byte	0x3e0
+ 600 02bd 04070000 		.4byte	0x704
+ 601 02c1 24       		.byte	0x24
+ 602 02c2 0B       		.uleb128 0xb
+ 603 02c3 7A000000 		.4byte	.LASF58
+ 604 02c7 05       		.byte	0x5
+ 605 02c8 E103     		.2byte	0x3e1
+ 606 02ca 2A010000 		.4byte	0x12a
+ 607 02ce 28       		.byte	0x28
+ 608 02cf 0C       		.uleb128 0xc
+ 609 02d0 545300   		.ascii	"TS\000"
+ 610 02d3 05       		.byte	0x5
+ 611 02d4 E303     		.2byte	0x3e3
+ 612 02d6 DD000000 		.4byte	0xdd
+ 613 02da 2C       		.byte	0x2c
+ 614 02db 00       		.byte	0
+ 615 02dc 09       		.uleb128 0x9
+ 616 02dd CB010000 		.4byte	.LASF59
+ 617 02e1 05       		.byte	0x5
+ 618 02e2 D402     		.2byte	0x2d4
+ 619 02e4 9E000000 		.4byte	0x9e
+ 620 02e8 09       		.uleb128 0x9
+ 621 02e9 94050000 		.4byte	.LASF60
+ 622 02ed 05       		.byte	0x5
+ 623 02ee D902     		.2byte	0x2d9
+ 624 02f0 F4020000 		.4byte	0x2f4
+ 625 02f4 0A       		.uleb128 0xa
+ 626 02f5 00000000 		.4byte	.LASF61
+ 627 02f9 C4       		.byte	0xc4
+ 628 02fa 05       		.byte	0x5
+ 629 02fb 5004     		.2byte	0x450
+ 630 02fd 98050000 		.4byte	0x598
+ 631 0301 0B       		.uleb128 0xb
+ 632 0302 EC030000 		.4byte	.LASF62
+ 633 0306 05       		.byte	0x5
+ 634 0307 5104     		.2byte	0x451
+ 635 0309 28070000 		.4byte	0x728
+ 636 030d 00       		.byte	0
+ 637 030e 0B       		.uleb128 0xb
+ 638 030f 71050000 		.4byte	.LASF63
+ 639 0313 05       		.byte	0x5
+ 640 0314 5304     		.2byte	0x453
+ 641 0316 AF000000 		.4byte	0xaf
+ 642 031a 04       		.byte	0x4
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 17
+
+
+ 643 031b 0B       		.uleb128 0xb
+ 644 031c B6030000 		.4byte	.LASF51
+ 645 0320 05       		.byte	0x5
+ 646 0321 5604     		.2byte	0x456
+ 647 0323 16070000 		.4byte	0x716
+ 648 0327 08       		.byte	0x8
+ 649 0328 0B       		.uleb128 0xb
+ 650 0329 26040000 		.4byte	.LASF64
+ 651 032d 05       		.byte	0x5
+ 652 032e 5A04     		.2byte	0x45a
+ 653 0330 28070000 		.4byte	0x728
+ 654 0334 0C       		.byte	0xc
+ 655 0335 0B       		.uleb128 0xb
+ 656 0336 66040000 		.4byte	.LASF36
+ 657 033a 05       		.byte	0x5
+ 658 033b 5D04     		.2byte	0x45d
+ 659 033d 04070000 		.4byte	0x704
+ 660 0341 10       		.byte	0x10
+ 661 0342 0B       		.uleb128 0xb
+ 662 0343 67030000 		.4byte	.LASF65
+ 663 0347 05       		.byte	0x5
+ 664 0348 5E04     		.2byte	0x45e
+ 665 034a 04070000 		.4byte	0x704
+ 666 034e 14       		.byte	0x14
+ 667 034f 0B       		.uleb128 0xb
+ 668 0350 50040000 		.4byte	.LASF66
+ 669 0354 05       		.byte	0x5
+ 670 0355 6104     		.2byte	0x461
+ 671 0357 04070000 		.4byte	0x704
+ 672 035b 18       		.byte	0x18
+ 673 035c 0B       		.uleb128 0xb
+ 674 035d 0B030000 		.4byte	.LASF67
+ 675 0361 05       		.byte	0x5
+ 676 0362 6204     		.2byte	0x462
+ 677 0364 04070000 		.4byte	0x704
+ 678 0368 1C       		.byte	0x1c
+ 679 0369 0B       		.uleb128 0xb
+ 680 036a 77040000 		.4byte	.LASF68
+ 681 036e 05       		.byte	0x5
+ 682 036f 6404     		.2byte	0x464
+ 683 0371 2E070000 		.4byte	0x72e
+ 684 0375 20       		.byte	0x20
+ 685 0376 0B       		.uleb128 0xb
+ 686 0377 78020000 		.4byte	.LASF69
+ 687 037b 05       		.byte	0x5
+ 688 037c 6804     		.2byte	0x468
+ 689 037e 28070000 		.4byte	0x728
+ 690 0382 24       		.byte	0x24
+ 691 0383 0B       		.uleb128 0xb
+ 692 0384 A8030000 		.4byte	.LASF70
+ 693 0388 05       		.byte	0x5
+ 694 0389 7004     		.2byte	0x470
+ 695 038b DC020000 		.4byte	0x2dc
+ 696 038f 28       		.byte	0x28
+ 697 0390 0B       		.uleb128 0xb
+ 698 0391 C4050000 		.4byte	.LASF71
+ 699 0395 05       		.byte	0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 18
+
+
+ 700 0396 7104     		.2byte	0x471
+ 701 0398 AF000000 		.4byte	0xaf
+ 702 039c 2C       		.byte	0x2c
+ 703 039d 0B       		.uleb128 0xb
+ 704 039e F5040000 		.4byte	.LASF72
+ 705 03a2 05       		.byte	0x5
+ 706 03a3 7404     		.2byte	0x474
+ 707 03a5 0A070000 		.4byte	0x70a
+ 708 03a9 30       		.byte	0x30
+ 709 03aa 0B       		.uleb128 0xb
+ 710 03ab 9F010000 		.4byte	.LASF73
+ 711 03af 05       		.byte	0x5
+ 712 03b0 7504     		.2byte	0x475
+ 713 03b2 77010000 		.4byte	0x177
+ 714 03b6 34       		.byte	0x34
+ 715 03b7 0B       		.uleb128 0xb
+ 716 03b8 BE030000 		.4byte	.LASF74
+ 717 03bc 05       		.byte	0x5
+ 718 03bd 7604     		.2byte	0x476
+ 719 03bf 82010000 		.4byte	0x182
+ 720 03c3 35       		.byte	0x35
+ 721 03c4 0B       		.uleb128 0xb
+ 722 03c5 80030000 		.4byte	.LASF75
+ 723 03c9 05       		.byte	0x5
+ 724 03ca 7804     		.2byte	0x478
+ 725 03cc 77010000 		.4byte	0x177
+ 726 03d0 36       		.byte	0x36
+ 727 03d1 0B       		.uleb128 0xb
+ 728 03d2 36060000 		.4byte	.LASF76
+ 729 03d6 05       		.byte	0x5
+ 730 03d7 7904     		.2byte	0x479
+ 731 03d9 56010000 		.4byte	0x156
+ 732 03dd 37       		.byte	0x37
+ 733 03de 0B       		.uleb128 0xb
+ 734 03df 2D030000 		.4byte	.LASF77
+ 735 03e3 05       		.byte	0x5
+ 736 03e4 7B04     		.2byte	0x47b
+ 737 03e6 56010000 		.4byte	0x156
+ 738 03ea 38       		.byte	0x38
+ 739 03eb 0B       		.uleb128 0xb
+ 740 03ec C6000000 		.4byte	.LASF78
+ 741 03f0 05       		.byte	0x5
+ 742 03f1 7C04     		.2byte	0x47c
+ 743 03f3 22070000 		.4byte	0x722
+ 744 03f7 3C       		.byte	0x3c
+ 745 03f8 0B       		.uleb128 0xb
+ 746 03f9 70020000 		.4byte	.LASF79
+ 747 03fd 05       		.byte	0x5
+ 748 03fe 8004     		.2byte	0x480
+ 749 0400 C7000000 		.4byte	0xc7
+ 750 0404 40       		.byte	0x40
+ 751 0405 0C       		.uleb128 0xc
+ 752 0406 4F707400 		.ascii	"Opt\000"
+ 753 040a 05       		.byte	0x5
+ 754 040b 8204     		.2byte	0x482
+ 755 040d 4B010000 		.4byte	0x14b
+ 756 0411 44       		.byte	0x44
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 19
+
+
+ 757 0412 0C       		.uleb128 0xc
+ 758 0413 545300   		.ascii	"TS\000"
+ 759 0416 05       		.byte	0x5
+ 760 0417 8804     		.2byte	0x488
+ 761 0419 DD000000 		.4byte	0xdd
+ 762 041d 48       		.byte	0x48
+ 763 041e 0B       		.uleb128 0xb
+ 764 041f 40050000 		.4byte	.LASF80
+ 765 0423 05       		.byte	0x5
+ 766 0424 8D04     		.2byte	0x48d
+ 767 0426 6C010000 		.4byte	0x16c
+ 768 042a 4C       		.byte	0x4c
+ 769 042b 0B       		.uleb128 0xb
+ 770 042c 47050000 		.4byte	.LASF81
+ 771 0430 05       		.byte	0x5
+ 772 0431 9104     		.2byte	0x491
+ 773 0433 8D010000 		.4byte	0x18d
+ 774 0437 50       		.byte	0x50
+ 775 0438 0B       		.uleb128 0xb
+ 776 0439 F0020000 		.4byte	.LASF82
+ 777 043d 05       		.byte	0x5
+ 778 043e 9204     		.2byte	0x492
+ 779 0440 8D010000 		.4byte	0x18d
+ 780 0444 54       		.byte	0x54
+ 781 0445 0B       		.uleb128 0xb
+ 782 0446 26060000 		.4byte	.LASF37
+ 783 044a 05       		.byte	0x5
+ 784 044b 9B04     		.2byte	0x49b
+ 785 044d AF000000 		.4byte	0xaf
+ 786 0451 58       		.byte	0x58
+ 787 0452 0B       		.uleb128 0xb
+ 788 0453 5F050000 		.4byte	.LASF38
+ 789 0457 05       		.byte	0x5
+ 790 0458 9C04     		.2byte	0x49c
+ 791 045a 1F010000 		.4byte	0x11f
+ 792 045e 5C       		.byte	0x5c
+ 793 045f 0B       		.uleb128 0xb
+ 794 0460 A3030000 		.4byte	.LASF83
+ 795 0464 05       		.byte	0x5
+ 796 0465 A004     		.2byte	0x4a0
+ 797 0467 E6010000 		.4byte	0x1e6
+ 798 046b 60       		.byte	0x60
+ 799 046c 0B       		.uleb128 0xb
+ 800 046d 46030000 		.4byte	.LASF84
+ 801 0471 05       		.byte	0x5
+ 802 0472 A204     		.2byte	0x4a2
+ 803 0474 DD000000 		.4byte	0xdd
+ 804 0478 70       		.byte	0x70
+ 805 0479 0B       		.uleb128 0xb
+ 806 047a 36030000 		.4byte	.LASF85
+ 807 047e 05       		.byte	0x5
+ 808 047f A304     		.2byte	0x4a3
+ 809 0481 DD000000 		.4byte	0xdd
+ 810 0485 74       		.byte	0x74
+ 811 0486 0B       		.uleb128 0xb
+ 812 0487 99060000 		.4byte	.LASF86
+ 813 048b 05       		.byte	0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 20
+
+
+ 814 048c A804     		.2byte	0x4a8
+ 815 048e 34070000 		.4byte	0x734
+ 816 0492 78       		.byte	0x78
+ 817 0493 0B       		.uleb128 0xb
+ 818 0494 E3010000 		.4byte	.LASF87
+ 819 0498 05       		.byte	0x5
+ 820 0499 AC04     		.2byte	0x4ac
+ 821 049b 09010000 		.4byte	0x109
+ 822 049f 7C       		.byte	0x7c
+ 823 04a0 0B       		.uleb128 0xb
+ 824 04a1 2D060000 		.4byte	.LASF88
+ 825 04a5 05       		.byte	0x5
+ 826 04a6 AD04     		.2byte	0x4ad
+ 827 04a8 09010000 		.4byte	0x109
+ 828 04ac 80       		.byte	0x80
+ 829 04ad 0B       		.uleb128 0xb
+ 830 04ae BD000000 		.4byte	.LASF89
+ 831 04b2 05       		.byte	0x5
+ 832 04b3 AE04     		.2byte	0x4ae
+ 833 04b5 4B010000 		.4byte	0x14b
+ 834 04b9 84       		.byte	0x84
+ 835 04ba 0B       		.uleb128 0xb
+ 836 04bb 1B040000 		.4byte	.LASF90
+ 837 04bf 05       		.byte	0x5
+ 838 04c0 B204     		.2byte	0x4b2
+ 839 04c2 2A010000 		.4byte	0x12a
+ 840 04c6 86       		.byte	0x86
+ 841 04c7 0B       		.uleb128 0xb
+ 842 04c8 56060000 		.4byte	.LASF91
+ 843 04cc 05       		.byte	0x5
+ 844 04cd B604     		.2byte	0x4b6
+ 845 04cf E8000000 		.4byte	0xe8
+ 846 04d3 88       		.byte	0x88
+ 847 04d4 0B       		.uleb128 0xb
+ 848 04d5 2B050000 		.4byte	.LASF92
+ 849 04d9 05       		.byte	0x5
+ 850 04da B704     		.2byte	0x4b7
+ 851 04dc E8000000 		.4byte	0xe8
+ 852 04e0 8A       		.byte	0x8a
+ 853 04e1 0B       		.uleb128 0xb
+ 854 04e2 04020000 		.4byte	.LASF93
+ 855 04e6 05       		.byte	0x5
+ 856 04e7 B804     		.2byte	0x4b8
+ 857 04e9 F3000000 		.4byte	0xf3
+ 858 04ed 8C       		.byte	0x8c
+ 859 04ee 0B       		.uleb128 0xb
+ 860 04ef 44040000 		.4byte	.LASF94
+ 861 04f3 05       		.byte	0x5
+ 862 04f4 B904     		.2byte	0x4b9
+ 863 04f6 DD000000 		.4byte	0xdd
+ 864 04fa 90       		.byte	0x90
+ 865 04fb 0B       		.uleb128 0xb
+ 866 04fc F3030000 		.4byte	.LASF95
+ 867 0500 05       		.byte	0x5
+ 868 0501 BA04     		.2byte	0x4ba
+ 869 0503 DD000000 		.4byte	0xdd
+ 870 0507 94       		.byte	0x94
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 21
+
+
+ 871 0508 0B       		.uleb128 0xb
+ 872 0509 13050000 		.4byte	.LASF96
+ 873 050d 05       		.byte	0x5
+ 874 050e BB04     		.2byte	0x4bb
+ 875 0510 FE000000 		.4byte	0xfe
+ 876 0514 98       		.byte	0x98
+ 877 0515 0B       		.uleb128 0xb
+ 878 0516 C8040000 		.4byte	.LASF97
+ 879 051a 05       		.byte	0x5
+ 880 051b BC04     		.2byte	0x4bc
+ 881 051d FE000000 		.4byte	0xfe
+ 882 0521 9C       		.byte	0x9c
+ 883 0522 0B       		.uleb128 0xb
+ 884 0523 6F010000 		.4byte	.LASF98
+ 885 0527 05       		.byte	0x5
+ 886 0528 BE04     		.2byte	0x4be
+ 887 052a DD000000 		.4byte	0xdd
+ 888 052e A0       		.byte	0xa0
+ 889 052f 0B       		.uleb128 0xb
+ 890 0530 B9040000 		.4byte	.LASF99
+ 891 0534 05       		.byte	0x5
+ 892 0535 BF04     		.2byte	0x4bf
+ 893 0537 DD000000 		.4byte	0xdd
+ 894 053b A4       		.byte	0xa4
+ 895 053c 0B       		.uleb128 0xb
+ 896 053d 15000000 		.4byte	.LASF100
+ 897 0541 05       		.byte	0x5
+ 898 0542 C304     		.2byte	0x4c3
+ 899 0544 C7000000 		.4byte	0xc7
+ 900 0548 A8       		.byte	0xa8
+ 901 0549 0B       		.uleb128 0xb
+ 902 054a A0060000 		.4byte	.LASF101
+ 903 054e 05       		.byte	0x5
+ 904 054f C404     		.2byte	0x4c4
+ 905 0551 C7000000 		.4byte	0xc7
+ 906 0555 AC       		.byte	0xac
+ 907 0556 0B       		.uleb128 0xb
+ 908 0557 AB040000 		.4byte	.LASF102
+ 909 055b 05       		.byte	0x5
+ 910 055c C804     		.2byte	0x4c8
+ 911 055e DD000000 		.4byte	0xdd
+ 912 0562 B0       		.byte	0xb0
+ 913 0563 0B       		.uleb128 0xb
+ 914 0564 86010000 		.4byte	.LASF103
+ 915 0568 05       		.byte	0x5
+ 916 0569 CB04     		.2byte	0x4cb
+ 917 056b DD000000 		.4byte	0xdd
+ 918 056f B4       		.byte	0xb4
+ 919 0570 0B       		.uleb128 0xb
+ 920 0571 64010000 		.4byte	.LASF53
+ 921 0575 05       		.byte	0x5
+ 922 0576 CF04     		.2byte	0x4cf
+ 923 0578 04070000 		.4byte	0x704
+ 924 057c B8       		.byte	0xb8
+ 925 057d 0B       		.uleb128 0xb
+ 926 057e 7B010000 		.4byte	.LASF54
+ 927 0582 05       		.byte	0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 22
+
+
+ 928 0583 D004     		.2byte	0x4d0
+ 929 0585 04070000 		.4byte	0x704
+ 930 0589 BC       		.byte	0xbc
+ 931 058a 0B       		.uleb128 0xb
+ 932 058b B9050000 		.4byte	.LASF55
+ 933 058f 05       		.byte	0x5
+ 934 0590 D104     		.2byte	0x4d1
+ 935 0592 16070000 		.4byte	0x716
+ 936 0596 C0       		.byte	0xc0
+ 937 0597 00       		.byte	0
+ 938 0598 09       		.uleb128 0x9
+ 939 0599 E8040000 		.4byte	.LASF104
+ 940 059d 05       		.byte	0x5
+ 941 059e E702     		.2byte	0x2e7
+ 942 05a0 A4050000 		.4byte	0x5a4
+ 943 05a4 0A       		.uleb128 0xa
+ 944 05a5 89040000 		.4byte	.LASF105
+ 945 05a9 08       		.byte	0x8
+ 946 05aa 05       		.byte	0x5
+ 947 05ab DF04     		.2byte	0x4df
+ 948 05ad D9050000 		.4byte	0x5d9
+ 949 05b1 0B       		.uleb128 0xb
+ 950 05b2 BB010000 		.4byte	.LASF106
+ 951 05b6 05       		.byte	0x5
+ 952 05b7 E004     		.2byte	0x4e0
+ 953 05b9 04070000 		.4byte	0x704
+ 954 05bd 00       		.byte	0
+ 955 05be 0B       		.uleb128 0xb
+ 956 05bf 6F000000 		.4byte	.LASF46
+ 957 05c3 05       		.byte	0x5
+ 958 05c4 E204     		.2byte	0x4e2
+ 959 05c6 35010000 		.4byte	0x135
+ 960 05ca 04       		.byte	0x4
+ 961 05cb 0B       		.uleb128 0xb
+ 962 05cc 53020000 		.4byte	.LASF107
+ 963 05d0 05       		.byte	0x5
+ 964 05d1 E304     		.2byte	0x4e3
+ 965 05d3 35010000 		.4byte	0x135
+ 966 05d7 06       		.byte	0x6
+ 967 05d8 00       		.byte	0
+ 968 05d9 09       		.uleb128 0x9
+ 969 05da 46020000 		.4byte	.LASF108
+ 970 05de 05       		.byte	0x5
+ 971 05df EC02     		.2byte	0x2ec
+ 972 05e1 E5050000 		.4byte	0x5e5
+ 973 05e5 0A       		.uleb128 0xa
+ 974 05e6 1B020000 		.4byte	.LASF109
+ 975 05ea 20       		.byte	0x20
+ 976 05eb 05       		.byte	0x5
+ 977 05ec 2803     		.2byte	0x328
+ 978 05ee 5B060000 		.4byte	0x65b
+ 979 05f2 0B       		.uleb128 0xb
+ 980 05f3 67030000 		.4byte	.LASF65
+ 981 05f7 05       		.byte	0x5
+ 982 05f8 2903     		.2byte	0x329
+ 983 05fa 0A070000 		.4byte	0x70a
+ 984 05fe 00       		.byte	0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 23
+
+
+ 985 05ff 0B       		.uleb128 0xb
+ 986 0600 66040000 		.4byte	.LASF36
+ 987 0604 05       		.byte	0x5
+ 988 0605 2A03     		.2byte	0x32a
+ 989 0607 0A070000 		.4byte	0x70a
+ 990 060b 04       		.byte	0x4
+ 991 060c 0B       		.uleb128 0xb
+ 992 060d 3D040000 		.4byte	.LASF110
+ 993 0611 05       		.byte	0x5
+ 994 0612 2B03     		.2byte	0x32b
+ 995 0614 04070000 		.4byte	0x704
+ 996 0618 08       		.byte	0x8
+ 997 0619 0B       		.uleb128 0xb
+ 998 061a 5F060000 		.4byte	.LASF111
+ 999 061e 05       		.byte	0x5
+ 1000 061f 2C03     		.2byte	0x32c
+ 1001 0621 10070000 		.4byte	0x710
+ 1002 0625 0C       		.byte	0xc
+ 1003 0626 0B       		.uleb128 0xb
+ 1004 0627 5C040000 		.4byte	.LASF112
+ 1005 062b 05       		.byte	0x5
+ 1006 062c 2D03     		.2byte	0x32d
+ 1007 062e 10070000 		.4byte	0x710
+ 1008 0632 10       		.byte	0x10
+ 1009 0633 0B       		.uleb128 0xb
+ 1010 0634 67050000 		.4byte	.LASF113
+ 1011 0638 05       		.byte	0x5
+ 1012 0639 2E03     		.2byte	0x32e
+ 1013 063b AF000000 		.4byte	0xaf
+ 1014 063f 14       		.byte	0x14
+ 1015 0640 0B       		.uleb128 0xb
+ 1016 0641 A0040000 		.4byte	.LASF114
+ 1017 0645 05       		.byte	0x5
+ 1018 0646 2F03     		.2byte	0x32f
+ 1019 0648 1F010000 		.4byte	0x11f
+ 1020 064c 18       		.byte	0x18
+ 1021 064d 0B       		.uleb128 0xb
+ 1022 064e 83040000 		.4byte	.LASF115
+ 1023 0652 05       		.byte	0x5
+ 1024 0653 3103     		.2byte	0x331
+ 1025 0655 DD000000 		.4byte	0xdd
+ 1026 0659 1C       		.byte	0x1c
+ 1027 065a 00       		.byte	0
+ 1028 065b 09       		.uleb128 0x9
+ 1029 065c D8050000 		.4byte	.LASF116
+ 1030 0660 05       		.byte	0x5
+ 1031 0661 ED02     		.2byte	0x2ed
+ 1032 0663 67060000 		.4byte	0x667
+ 1033 0667 0A       		.uleb128 0xa
+ 1034 0668 78060000 		.4byte	.LASF117
+ 1035 066c 0C       		.byte	0xc
+ 1036 066d 05       		.byte	0x5
+ 1037 066e 3603     		.2byte	0x336
+ 1038 0670 9C060000 		.4byte	0x69c
+ 1039 0674 0B       		.uleb128 0xb
+ 1040 0675 97010000 		.4byte	.LASF118
+ 1041 0679 05       		.byte	0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 24
+
+
+ 1042 067a 3703     		.2byte	0x337
+ 1043 067c 0A070000 		.4byte	0x70a
+ 1044 0680 00       		.byte	0
+ 1045 0681 0B       		.uleb128 0xb
+ 1046 0682 C3010000 		.4byte	.LASF119
+ 1047 0686 05       		.byte	0x5
+ 1048 0687 3803     		.2byte	0x338
+ 1049 0689 0A070000 		.4byte	0x70a
+ 1050 068d 04       		.byte	0x4
+ 1051 068e 0B       		.uleb128 0xb
+ 1052 068f 6F000000 		.4byte	.LASF46
+ 1053 0693 05       		.byte	0x5
+ 1054 0694 3A03     		.2byte	0x33a
+ 1055 0696 35010000 		.4byte	0x135
+ 1056 069a 08       		.byte	0x8
+ 1057 069b 00       		.byte	0
+ 1058 069c 09       		.uleb128 0x9
+ 1059 069d 1F050000 		.4byte	.LASF120
+ 1060 06a1 05       		.byte	0x5
+ 1061 06a2 EE02     		.2byte	0x2ee
+ 1062 06a4 A8060000 		.4byte	0x6a8
+ 1063 06a8 0A       		.uleb128 0xa
+ 1064 06a9 D7010000 		.4byte	.LASF121
+ 1065 06ad 20       		.byte	0x20
+ 1066 06ae 05       		.byte	0x5
+ 1067 06af 4E03     		.2byte	0x34e
+ 1068 06b1 04070000 		.4byte	0x704
+ 1069 06b5 0B       		.uleb128 0xb
+ 1070 06b6 D2030000 		.4byte	.LASF50
+ 1071 06ba 05       		.byte	0x5
+ 1072 06bb 5003     		.2byte	0x350
+ 1073 06bd 40010000 		.4byte	0x140
+ 1074 06c1 00       		.byte	0
+ 1075 06c2 0B       		.uleb128 0xb
+ 1076 06c3 B6030000 		.4byte	.LASF51
+ 1077 06c7 05       		.byte	0x5
+ 1078 06c8 5303     		.2byte	0x353
+ 1079 06ca 16070000 		.4byte	0x716
+ 1080 06ce 04       		.byte	0x4
+ 1081 06cf 0B       		.uleb128 0xb
+ 1082 06d0 37050000 		.4byte	.LASF52
+ 1083 06d4 05       		.byte	0x5
+ 1084 06d5 5503     		.2byte	0x355
+ 1085 06d7 5B060000 		.4byte	0x65b
+ 1086 06db 08       		.byte	0x8
+ 1087 06dc 0B       		.uleb128 0xb
+ 1088 06dd 64010000 		.4byte	.LASF53
+ 1089 06e1 05       		.byte	0x5
+ 1090 06e2 5703     		.2byte	0x357
+ 1091 06e4 AF000000 		.4byte	0xaf
+ 1092 06e8 14       		.byte	0x14
+ 1093 06e9 0B       		.uleb128 0xb
+ 1094 06ea 7B010000 		.4byte	.LASF54
+ 1095 06ee 05       		.byte	0x5
+ 1096 06ef 5803     		.2byte	0x358
+ 1097 06f1 AF000000 		.4byte	0xaf
+ 1098 06f5 18       		.byte	0x18
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 25
+
+
+ 1099 06f6 0B       		.uleb128 0xb
+ 1100 06f7 B9050000 		.4byte	.LASF55
+ 1101 06fb 05       		.byte	0x5
+ 1102 06fc 5903     		.2byte	0x359
+ 1103 06fe 16070000 		.4byte	0x716
+ 1104 0702 1C       		.byte	0x1c
+ 1105 0703 00       		.byte	0
+ 1106 0704 05       		.uleb128 0x5
+ 1107 0705 04       		.byte	0x4
+ 1108 0706 E8020000 		.4byte	0x2e8
+ 1109 070a 05       		.uleb128 0x5
+ 1110 070b 04       		.byte	0x4
+ 1111 070c D9050000 		.4byte	0x5d9
+ 1112 0710 05       		.uleb128 0x5
+ 1113 0711 04       		.byte	0x4
+ 1114 0712 9C060000 		.4byte	0x69c
+ 1115 0716 05       		.uleb128 0x5
+ 1116 0717 04       		.byte	0x4
+ 1117 0718 25000000 		.4byte	0x25
+ 1118 071c 05       		.uleb128 0x5
+ 1119 071d 04       		.byte	0x4
+ 1120 071e 98010000 		.4byte	0x198
+ 1121 0722 05       		.uleb128 0x5
+ 1122 0723 04       		.byte	0x4
+ 1123 0724 41020000 		.4byte	0x241
+ 1124 0728 05       		.uleb128 0x5
+ 1125 0729 04       		.byte	0x4
+ 1126 072a BC000000 		.4byte	0xbc
+ 1127 072e 05       		.uleb128 0x5
+ 1128 072f 04       		.byte	0x4
+ 1129 0730 98050000 		.4byte	0x598
+ 1130 0734 0D       		.uleb128 0xd
+ 1131 0735 61010000 		.4byte	0x161
+ 1132 0739 44070000 		.4byte	0x744
+ 1133 073d 0E       		.uleb128 0xe
+ 1134 073e 44070000 		.4byte	0x744
+ 1135 0742 00       		.byte	0
+ 1136 0743 00       		.byte	0
+ 1137 0744 03       		.uleb128 0x3
+ 1138 0745 04       		.byte	0x4
+ 1139 0746 07       		.byte	0x7
+ 1140 0747 78050000 		.4byte	.LASF122
+ 1141 074b 0F       		.uleb128 0xf
+ 1142 074c 8A030000 		.4byte	.LASF123
+ 1143 0750 01       		.byte	0x1
+ 1144 0751 34       		.byte	0x34
+ 1145 0752 00000000 		.4byte	.LFB0
+ 1146 0756 0A000000 		.4byte	.LFE0-.LFB0
+ 1147 075a 01       		.uleb128 0x1
+ 1148 075b 9C       		.byte	0x9c
+ 1149 075c 0F       		.uleb128 0xf
+ 1150 075d BC020000 		.4byte	.LASF124
+ 1151 0761 01       		.byte	0x1
+ 1152 0762 5D       		.byte	0x5d
+ 1153 0763 00000000 		.4byte	.LFB1
+ 1154 0767 0A000000 		.4byte	.LFE1-.LFB1
+ 1155 076b 01       		.uleb128 0x1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 26
+
+
+ 1156 076c 9C       		.byte	0x9c
+ 1157 076d 0F       		.uleb128 0xf
+ 1158 076e 85060000 		.4byte	.LASF125
+ 1159 0772 01       		.byte	0x1
+ 1160 0773 86       		.byte	0x86
+ 1161 0774 00000000 		.4byte	.LFB2
+ 1162 0778 0A000000 		.4byte	.LFE2-.LFB2
+ 1163 077c 01       		.uleb128 0x1
+ 1164 077d 9C       		.byte	0x9c
+ 1165 077e 0F       		.uleb128 0xf
+ 1166 077f 53030000 		.4byte	.LASF126
+ 1167 0783 01       		.byte	0x1
+ 1168 0784 AC       		.byte	0xac
+ 1169 0785 00000000 		.4byte	.LFB3
+ 1170 0789 0A000000 		.4byte	.LFE3-.LFB3
+ 1171 078d 01       		.uleb128 0x1
+ 1172 078e 9C       		.byte	0x9c
+ 1173 078f 10       		.uleb128 0x10
+ 1174 0790 8A020000 		.4byte	.LASF127
+ 1175 0794 01       		.byte	0x1
+ 1176 0795 BE       		.byte	0xbe
+ 1177 0796 00000000 		.4byte	.LFB4
+ 1178 079a 10000000 		.4byte	.LFE4-.LFB4
+ 1179 079e 01       		.uleb128 0x1
+ 1180 079f 9C       		.byte	0x9c
+ 1181 07a0 B3070000 		.4byte	0x7b3
+ 1182 07a4 11       		.uleb128 0x11
+ 1183 07a5 AA020000 		.4byte	.LASF129
+ 1184 07a9 01       		.byte	0x1
+ 1185 07aa BE       		.byte	0xbe
+ 1186 07ab 04070000 		.4byte	0x704
+ 1187 07af 02       		.uleb128 0x2
+ 1188 07b0 91       		.byte	0x91
+ 1189 07b1 74       		.sleb128 -12
+ 1190 07b2 00       		.byte	0
+ 1191 07b3 10       		.uleb128 0x10
+ 1192 07b4 E5050000 		.4byte	.LASF128
+ 1193 07b8 01       		.byte	0x1
+ 1194 07b9 D0       		.byte	0xd0
+ 1195 07ba 00000000 		.4byte	.LFB5
+ 1196 07be 10000000 		.4byte	.LFE5-.LFB5
+ 1197 07c2 01       		.uleb128 0x1
+ 1198 07c3 9C       		.byte	0x9c
+ 1199 07c4 D7070000 		.4byte	0x7d7
+ 1200 07c8 11       		.uleb128 0x11
+ 1201 07c9 AA020000 		.4byte	.LASF129
+ 1202 07cd 01       		.byte	0x1
+ 1203 07ce D0       		.byte	0xd0
+ 1204 07cf 04070000 		.4byte	0x704
+ 1205 07d3 02       		.uleb128 0x2
+ 1206 07d4 91       		.byte	0x91
+ 1207 07d5 74       		.sleb128 -12
+ 1208 07d6 00       		.byte	0
+ 1209 07d7 10       		.uleb128 0x10
+ 1210 07d8 17030000 		.4byte	.LASF130
+ 1211 07dc 01       		.byte	0x1
+ 1212 07dd E3       		.byte	0xe3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 27
+
+
+ 1213 07de 00000000 		.4byte	.LFB6
+ 1214 07e2 10000000 		.4byte	.LFE6-.LFB6
+ 1215 07e6 01       		.uleb128 0x1
+ 1216 07e7 9C       		.byte	0x9c
+ 1217 07e8 FB070000 		.4byte	0x7fb
+ 1218 07ec 11       		.uleb128 0x11
+ 1219 07ed AA020000 		.4byte	.LASF129
+ 1220 07f1 01       		.byte	0x1
+ 1221 07f2 E3       		.byte	0xe3
+ 1222 07f3 04070000 		.4byte	0x704
+ 1223 07f7 02       		.uleb128 0x2
+ 1224 07f8 91       		.byte	0x91
+ 1225 07f9 74       		.sleb128 -12
+ 1226 07fa 00       		.byte	0
+ 1227 07fb 0F       		.uleb128 0xf
+ 1228 07fc 97000000 		.4byte	.LASF131
+ 1229 0800 01       		.byte	0x1
+ 1230 0801 F9       		.byte	0xf9
+ 1231 0802 00000000 		.4byte	.LFB7
+ 1232 0806 0A000000 		.4byte	.LFE7-.LFB7
+ 1233 080a 01       		.uleb128 0x1
+ 1234 080b 9C       		.byte	0x9c
+ 1235 080c 12       		.uleb128 0x12
+ 1236 080d 3B060000 		.4byte	.LASF132
+ 1237 0811 01       		.byte	0x1
+ 1238 0812 0B01     		.2byte	0x10b
+ 1239 0814 00000000 		.4byte	.LFB8
+ 1240 0818 0A000000 		.4byte	.LFE8-.LFB8
+ 1241 081c 01       		.uleb128 0x1
+ 1242 081d 9C       		.byte	0x9c
+ 1243 081e 00       		.byte	0
+ 1244              		.section	.debug_abbrev,"",%progbits
+ 1245              	.Ldebug_abbrev0:
+ 1246 0000 01       		.uleb128 0x1
+ 1247 0001 11       		.uleb128 0x11
+ 1248 0002 01       		.byte	0x1
+ 1249 0003 25       		.uleb128 0x25
+ 1250 0004 0E       		.uleb128 0xe
+ 1251 0005 13       		.uleb128 0x13
+ 1252 0006 0B       		.uleb128 0xb
+ 1253 0007 03       		.uleb128 0x3
+ 1254 0008 0E       		.uleb128 0xe
+ 1255 0009 1B       		.uleb128 0x1b
+ 1256 000a 0E       		.uleb128 0xe
+ 1257 000b 55       		.uleb128 0x55
+ 1258 000c 17       		.uleb128 0x17
+ 1259 000d 11       		.uleb128 0x11
+ 1260 000e 01       		.uleb128 0x1
+ 1261 000f 10       		.uleb128 0x10
+ 1262 0010 17       		.uleb128 0x17
+ 1263 0011 00       		.byte	0
+ 1264 0012 00       		.byte	0
+ 1265 0013 02       		.uleb128 0x2
+ 1266 0014 16       		.uleb128 0x16
+ 1267 0015 00       		.byte	0
+ 1268 0016 03       		.uleb128 0x3
+ 1269 0017 0E       		.uleb128 0xe
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 28
+
+
+ 1270 0018 3A       		.uleb128 0x3a
+ 1271 0019 0B       		.uleb128 0xb
+ 1272 001a 3B       		.uleb128 0x3b
+ 1273 001b 0B       		.uleb128 0xb
+ 1274 001c 49       		.uleb128 0x49
+ 1275 001d 13       		.uleb128 0x13
+ 1276 001e 00       		.byte	0
+ 1277 001f 00       		.byte	0
+ 1278 0020 03       		.uleb128 0x3
+ 1279 0021 24       		.uleb128 0x24
+ 1280 0022 00       		.byte	0
+ 1281 0023 0B       		.uleb128 0xb
+ 1282 0024 0B       		.uleb128 0xb
+ 1283 0025 3E       		.uleb128 0x3e
+ 1284 0026 0B       		.uleb128 0xb
+ 1285 0027 03       		.uleb128 0x3
+ 1286 0028 0E       		.uleb128 0xe
+ 1287 0029 00       		.byte	0
+ 1288 002a 00       		.byte	0
+ 1289 002b 04       		.uleb128 0x4
+ 1290 002c 24       		.uleb128 0x24
+ 1291 002d 00       		.byte	0
+ 1292 002e 0B       		.uleb128 0xb
+ 1293 002f 0B       		.uleb128 0xb
+ 1294 0030 3E       		.uleb128 0x3e
+ 1295 0031 0B       		.uleb128 0xb
+ 1296 0032 03       		.uleb128 0x3
+ 1297 0033 08       		.uleb128 0x8
+ 1298 0034 00       		.byte	0
+ 1299 0035 00       		.byte	0
+ 1300 0036 05       		.uleb128 0x5
+ 1301 0037 0F       		.uleb128 0xf
+ 1302 0038 00       		.byte	0
+ 1303 0039 0B       		.uleb128 0xb
+ 1304 003a 0B       		.uleb128 0xb
+ 1305 003b 49       		.uleb128 0x49
+ 1306 003c 13       		.uleb128 0x13
+ 1307 003d 00       		.byte	0
+ 1308 003e 00       		.byte	0
+ 1309 003f 06       		.uleb128 0x6
+ 1310 0040 15       		.uleb128 0x15
+ 1311 0041 01       		.byte	0x1
+ 1312 0042 27       		.uleb128 0x27
+ 1313 0043 19       		.uleb128 0x19
+ 1314 0044 01       		.uleb128 0x1
+ 1315 0045 13       		.uleb128 0x13
+ 1316 0046 00       		.byte	0
+ 1317 0047 00       		.byte	0
+ 1318 0048 07       		.uleb128 0x7
+ 1319 0049 05       		.uleb128 0x5
+ 1320 004a 00       		.byte	0
+ 1321 004b 49       		.uleb128 0x49
+ 1322 004c 13       		.uleb128 0x13
+ 1323 004d 00       		.byte	0
+ 1324 004e 00       		.byte	0
+ 1325 004f 08       		.uleb128 0x8
+ 1326 0050 0F       		.uleb128 0xf
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 29
+
+
+ 1327 0051 00       		.byte	0
+ 1328 0052 0B       		.uleb128 0xb
+ 1329 0053 0B       		.uleb128 0xb
+ 1330 0054 00       		.byte	0
+ 1331 0055 00       		.byte	0
+ 1332 0056 09       		.uleb128 0x9
+ 1333 0057 16       		.uleb128 0x16
+ 1334 0058 00       		.byte	0
+ 1335 0059 03       		.uleb128 0x3
+ 1336 005a 0E       		.uleb128 0xe
+ 1337 005b 3A       		.uleb128 0x3a
+ 1338 005c 0B       		.uleb128 0xb
+ 1339 005d 3B       		.uleb128 0x3b
+ 1340 005e 05       		.uleb128 0x5
+ 1341 005f 49       		.uleb128 0x49
+ 1342 0060 13       		.uleb128 0x13
+ 1343 0061 00       		.byte	0
+ 1344 0062 00       		.byte	0
+ 1345 0063 0A       		.uleb128 0xa
+ 1346 0064 13       		.uleb128 0x13
+ 1347 0065 01       		.byte	0x1
+ 1348 0066 03       		.uleb128 0x3
+ 1349 0067 0E       		.uleb128 0xe
+ 1350 0068 0B       		.uleb128 0xb
+ 1351 0069 0B       		.uleb128 0xb
+ 1352 006a 3A       		.uleb128 0x3a
+ 1353 006b 0B       		.uleb128 0xb
+ 1354 006c 3B       		.uleb128 0x3b
+ 1355 006d 05       		.uleb128 0x5
+ 1356 006e 01       		.uleb128 0x1
+ 1357 006f 13       		.uleb128 0x13
+ 1358 0070 00       		.byte	0
+ 1359 0071 00       		.byte	0
+ 1360 0072 0B       		.uleb128 0xb
+ 1361 0073 0D       		.uleb128 0xd
+ 1362 0074 00       		.byte	0
+ 1363 0075 03       		.uleb128 0x3
+ 1364 0076 0E       		.uleb128 0xe
+ 1365 0077 3A       		.uleb128 0x3a
+ 1366 0078 0B       		.uleb128 0xb
+ 1367 0079 3B       		.uleb128 0x3b
+ 1368 007a 05       		.uleb128 0x5
+ 1369 007b 49       		.uleb128 0x49
+ 1370 007c 13       		.uleb128 0x13
+ 1371 007d 38       		.uleb128 0x38
+ 1372 007e 0B       		.uleb128 0xb
+ 1373 007f 00       		.byte	0
+ 1374 0080 00       		.byte	0
+ 1375 0081 0C       		.uleb128 0xc
+ 1376 0082 0D       		.uleb128 0xd
+ 1377 0083 00       		.byte	0
+ 1378 0084 03       		.uleb128 0x3
+ 1379 0085 08       		.uleb128 0x8
+ 1380 0086 3A       		.uleb128 0x3a
+ 1381 0087 0B       		.uleb128 0xb
+ 1382 0088 3B       		.uleb128 0x3b
+ 1383 0089 05       		.uleb128 0x5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 30
+
+
+ 1384 008a 49       		.uleb128 0x49
+ 1385 008b 13       		.uleb128 0x13
+ 1386 008c 38       		.uleb128 0x38
+ 1387 008d 0B       		.uleb128 0xb
+ 1388 008e 00       		.byte	0
+ 1389 008f 00       		.byte	0
+ 1390 0090 0D       		.uleb128 0xd
+ 1391 0091 01       		.uleb128 0x1
+ 1392 0092 01       		.byte	0x1
+ 1393 0093 49       		.uleb128 0x49
+ 1394 0094 13       		.uleb128 0x13
+ 1395 0095 01       		.uleb128 0x1
+ 1396 0096 13       		.uleb128 0x13
+ 1397 0097 00       		.byte	0
+ 1398 0098 00       		.byte	0
+ 1399 0099 0E       		.uleb128 0xe
+ 1400 009a 21       		.uleb128 0x21
+ 1401 009b 00       		.byte	0
+ 1402 009c 49       		.uleb128 0x49
+ 1403 009d 13       		.uleb128 0x13
+ 1404 009e 2F       		.uleb128 0x2f
+ 1405 009f 0B       		.uleb128 0xb
+ 1406 00a0 00       		.byte	0
+ 1407 00a1 00       		.byte	0
+ 1408 00a2 0F       		.uleb128 0xf
+ 1409 00a3 2E       		.uleb128 0x2e
+ 1410 00a4 00       		.byte	0
+ 1411 00a5 3F       		.uleb128 0x3f
+ 1412 00a6 19       		.uleb128 0x19
+ 1413 00a7 03       		.uleb128 0x3
+ 1414 00a8 0E       		.uleb128 0xe
+ 1415 00a9 3A       		.uleb128 0x3a
+ 1416 00aa 0B       		.uleb128 0xb
+ 1417 00ab 3B       		.uleb128 0x3b
+ 1418 00ac 0B       		.uleb128 0xb
+ 1419 00ad 27       		.uleb128 0x27
+ 1420 00ae 19       		.uleb128 0x19
+ 1421 00af 11       		.uleb128 0x11
+ 1422 00b0 01       		.uleb128 0x1
+ 1423 00b1 12       		.uleb128 0x12
+ 1424 00b2 06       		.uleb128 0x6
+ 1425 00b3 40       		.uleb128 0x40
+ 1426 00b4 18       		.uleb128 0x18
+ 1427 00b5 9742     		.uleb128 0x2117
+ 1428 00b7 19       		.uleb128 0x19
+ 1429 00b8 00       		.byte	0
+ 1430 00b9 00       		.byte	0
+ 1431 00ba 10       		.uleb128 0x10
+ 1432 00bb 2E       		.uleb128 0x2e
+ 1433 00bc 01       		.byte	0x1
+ 1434 00bd 3F       		.uleb128 0x3f
+ 1435 00be 19       		.uleb128 0x19
+ 1436 00bf 03       		.uleb128 0x3
+ 1437 00c0 0E       		.uleb128 0xe
+ 1438 00c1 3A       		.uleb128 0x3a
+ 1439 00c2 0B       		.uleb128 0xb
+ 1440 00c3 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 31
+
+
+ 1441 00c4 0B       		.uleb128 0xb
+ 1442 00c5 27       		.uleb128 0x27
+ 1443 00c6 19       		.uleb128 0x19
+ 1444 00c7 11       		.uleb128 0x11
+ 1445 00c8 01       		.uleb128 0x1
+ 1446 00c9 12       		.uleb128 0x12
+ 1447 00ca 06       		.uleb128 0x6
+ 1448 00cb 40       		.uleb128 0x40
+ 1449 00cc 18       		.uleb128 0x18
+ 1450 00cd 9742     		.uleb128 0x2117
+ 1451 00cf 19       		.uleb128 0x19
+ 1452 00d0 01       		.uleb128 0x1
+ 1453 00d1 13       		.uleb128 0x13
+ 1454 00d2 00       		.byte	0
+ 1455 00d3 00       		.byte	0
+ 1456 00d4 11       		.uleb128 0x11
+ 1457 00d5 05       		.uleb128 0x5
+ 1458 00d6 00       		.byte	0
+ 1459 00d7 03       		.uleb128 0x3
+ 1460 00d8 0E       		.uleb128 0xe
+ 1461 00d9 3A       		.uleb128 0x3a
+ 1462 00da 0B       		.uleb128 0xb
+ 1463 00db 3B       		.uleb128 0x3b
+ 1464 00dc 0B       		.uleb128 0xb
+ 1465 00dd 49       		.uleb128 0x49
+ 1466 00de 13       		.uleb128 0x13
+ 1467 00df 02       		.uleb128 0x2
+ 1468 00e0 18       		.uleb128 0x18
+ 1469 00e1 00       		.byte	0
+ 1470 00e2 00       		.byte	0
+ 1471 00e3 12       		.uleb128 0x12
+ 1472 00e4 2E       		.uleb128 0x2e
+ 1473 00e5 00       		.byte	0
+ 1474 00e6 3F       		.uleb128 0x3f
+ 1475 00e7 19       		.uleb128 0x19
+ 1476 00e8 03       		.uleb128 0x3
+ 1477 00e9 0E       		.uleb128 0xe
+ 1478 00ea 3A       		.uleb128 0x3a
+ 1479 00eb 0B       		.uleb128 0xb
+ 1480 00ec 3B       		.uleb128 0x3b
+ 1481 00ed 05       		.uleb128 0x5
+ 1482 00ee 27       		.uleb128 0x27
+ 1483 00ef 19       		.uleb128 0x19
+ 1484 00f0 11       		.uleb128 0x11
+ 1485 00f1 01       		.uleb128 0x1
+ 1486 00f2 12       		.uleb128 0x12
+ 1487 00f3 06       		.uleb128 0x6
+ 1488 00f4 40       		.uleb128 0x40
+ 1489 00f5 18       		.uleb128 0x18
+ 1490 00f6 9742     		.uleb128 0x2117
+ 1491 00f8 19       		.uleb128 0x19
+ 1492 00f9 00       		.byte	0
+ 1493 00fa 00       		.byte	0
+ 1494 00fb 00       		.byte	0
+ 1495              		.section	.debug_aranges,"",%progbits
+ 1496 0000 5C000000 		.4byte	0x5c
+ 1497 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 32
+
+
+ 1498 0006 00000000 		.4byte	.Ldebug_info0
+ 1499 000a 04       		.byte	0x4
+ 1500 000b 00       		.byte	0
+ 1501 000c 0000     		.2byte	0
+ 1502 000e 0000     		.2byte	0
+ 1503 0010 00000000 		.4byte	.LFB0
+ 1504 0014 0A000000 		.4byte	.LFE0-.LFB0
+ 1505 0018 00000000 		.4byte	.LFB1
+ 1506 001c 0A000000 		.4byte	.LFE1-.LFB1
+ 1507 0020 00000000 		.4byte	.LFB2
+ 1508 0024 0A000000 		.4byte	.LFE2-.LFB2
+ 1509 0028 00000000 		.4byte	.LFB3
+ 1510 002c 0A000000 		.4byte	.LFE3-.LFB3
+ 1511 0030 00000000 		.4byte	.LFB4
+ 1512 0034 10000000 		.4byte	.LFE4-.LFB4
+ 1513 0038 00000000 		.4byte	.LFB5
+ 1514 003c 10000000 		.4byte	.LFE5-.LFB5
+ 1515 0040 00000000 		.4byte	.LFB6
+ 1516 0044 10000000 		.4byte	.LFE6-.LFB6
+ 1517 0048 00000000 		.4byte	.LFB7
+ 1518 004c 0A000000 		.4byte	.LFE7-.LFB7
+ 1519 0050 00000000 		.4byte	.LFB8
+ 1520 0054 0A000000 		.4byte	.LFE8-.LFB8
+ 1521 0058 00000000 		.4byte	0
+ 1522 005c 00000000 		.4byte	0
+ 1523              		.section	.debug_ranges,"",%progbits
+ 1524              	.Ldebug_ranges0:
+ 1525 0000 00000000 		.4byte	.LFB0
+ 1526 0004 0A000000 		.4byte	.LFE0
+ 1527 0008 00000000 		.4byte	.LFB1
+ 1528 000c 0A000000 		.4byte	.LFE1
+ 1529 0010 00000000 		.4byte	.LFB2
+ 1530 0014 0A000000 		.4byte	.LFE2
+ 1531 0018 00000000 		.4byte	.LFB3
+ 1532 001c 0A000000 		.4byte	.LFE3
+ 1533 0020 00000000 		.4byte	.LFB4
+ 1534 0024 10000000 		.4byte	.LFE4
+ 1535 0028 00000000 		.4byte	.LFB5
+ 1536 002c 10000000 		.4byte	.LFE5
+ 1537 0030 00000000 		.4byte	.LFB6
+ 1538 0034 10000000 		.4byte	.LFE6
+ 1539 0038 00000000 		.4byte	.LFB7
+ 1540 003c 0A000000 		.4byte	.LFE7
+ 1541 0040 00000000 		.4byte	.LFB8
+ 1542 0044 0A000000 		.4byte	.LFE8
+ 1543 0048 00000000 		.4byte	0
+ 1544 004c 00000000 		.4byte	0
+ 1545              		.section	.debug_line,"",%progbits
+ 1546              	.Ldebug_line0:
+ 1547 0000 7A010000 		.section	.debug_str,"MS",%progbits,1
+ 1547      0200D800 
+ 1547      00000201 
+ 1547      FB0E0D00 
+ 1547      01010101 
+ 1548              	.LASF61:
+ 1549 0000 6F735F74 		.ascii	"os_tcb\000"
+ 1549      636200
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 33
+
+
+ 1550              	.LASF20:
+ 1551 0007 4F535F43 		.ascii	"OS_CTX_SW_CTR\000"
+ 1551      54585F53 
+ 1551      575F4354 
+ 1551      5200
+ 1552              	.LASF100:
+ 1553 0015 53746B55 		.ascii	"StkUsed\000"
+ 1553      73656400 
+ 1554              	.LASF135:
+ 1555 001d 443A5C43 		.ascii	"D:\\CYTEST\\Micrium_CY8CKIT-044_OS3\\Examples\\Cypr"
+ 1555      59544553 
+ 1555      545C4D69 
+ 1555      63726975 
+ 1555      6D5F4359 
+ 1556 004c 6573735C 		.ascii	"ess\\CY8CKIT-044\\OS3\\PSoC\\OS3.cydsn\000"
+ 1556      43593843 
+ 1556      4B49542D 
+ 1556      3034345C 
+ 1556      4F53335C 
+ 1557              	.LASF46:
+ 1558 006f 4E627245 		.ascii	"NbrEntries\000"
+ 1558      6E747269 
+ 1558      657300
+ 1559              	.LASF58:
+ 1560 007a 4F776E65 		.ascii	"OwnerNestingCtr\000"
+ 1560      724E6573 
+ 1560      74696E67 
+ 1560      43747200 
+ 1561              	.LASF19:
+ 1562 008a 4F535F43 		.ascii	"OS_CPU_USAGE\000"
+ 1562      50555F55 
+ 1562      53414745 
+ 1562      00
+ 1563              	.LASF131:
+ 1564 0097 4170705F 		.ascii	"App_OS_TaskSwHook\000"
+ 1564      4F535F54 
+ 1564      61736B53 
+ 1564      77486F6F 
+ 1564      6B00
+ 1565              	.LASF8:
+ 1566 00a9 4350555F 		.ascii	"CPU_INT32U\000"
+ 1566      494E5433 
+ 1566      325500
+ 1567              	.LASF48:
+ 1568 00b4 4F535F4D 		.ascii	"OS_MUTEX\000"
+ 1568      55544558 
+ 1568      00
+ 1569              	.LASF89:
+ 1570 00bd 466C6167 		.ascii	"FlagsOpt\000"
+ 1570      734F7074 
+ 1570      00
+ 1571              	.LASF78:
+ 1572 00c6 4D757465 		.ascii	"MutexGrpHeadPtr\000"
+ 1572      78477270 
+ 1572      48656164 
+ 1572      50747200 
+ 1573              	.LASF133:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 34
+
+
+ 1574 00d6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1574      43313120 
+ 1574      352E342E 
+ 1574      31203230 
+ 1574      31363036 
+ 1575 0109 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1575      20726576 
+ 1575      6973696F 
+ 1575      6E203233 
+ 1575      37373135 
+ 1576 013c 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1576      66756E63 
+ 1576      74696F6E 
+ 1576      2D736563 
+ 1576      74696F6E 
+ 1577              	.LASF53:
+ 1578 0164 44626750 		.ascii	"DbgPrevPtr\000"
+ 1578      72657650 
+ 1578      747200
+ 1579              	.LASF98:
+ 1580 016f 53656D50 		.ascii	"SemPendTime\000"
+ 1580      656E6454 
+ 1580      696D6500 
+ 1581              	.LASF54:
+ 1582 017b 4462674E 		.ascii	"DbgNextPtr\000"
+ 1582      65787450 
+ 1582      747200
+ 1583              	.LASF103:
+ 1584 0186 53636865 		.ascii	"SchedLockTimeMax\000"
+ 1584      644C6F63 
+ 1584      6B54696D 
+ 1584      654D6178 
+ 1584      00
+ 1585              	.LASF118:
+ 1586 0197 48656164 		.ascii	"HeadPtr\000"
+ 1586      50747200 
+ 1587              	.LASF73:
+ 1588 019f 50656E64 		.ascii	"PendOn\000"
+ 1588      4F6E00
+ 1589              	.LASF134:
+ 1590 01a6 2E2E5C2E 		.ascii	"..\\..\\os_app_hooks.c\000"
+ 1590      2E5C6F73 
+ 1590      5F617070 
+ 1590      5F686F6F 
+ 1590      6B732E63 
+ 1591              	.LASF106:
+ 1592 01bb 5443425F 		.ascii	"TCB_Ptr\000"
+ 1592      50747200 
+ 1593              	.LASF119:
+ 1594 01c3 5461696C 		.ascii	"TailPtr\000"
+ 1594      50747200 
+ 1595              	.LASF59:
+ 1596 01cb 4F535F54 		.ascii	"OS_TASK_PTR\000"
+ 1596      41534B5F 
+ 1596      50545200 
+ 1597              	.LASF121:
+ 1598 01d7 6F735F70 		.ascii	"os_pend_obj\000"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 35
+
+
+ 1598      656E645F 
+ 1598      6F626A00 
+ 1599              	.LASF87:
+ 1600 01e3 466C6167 		.ascii	"FlagsPend\000"
+ 1600      7350656E 
+ 1600      6400
+ 1601              	.LASF26:
+ 1602 01ed 4F535F4F 		.ascii	"OS_OBJ_QTY\000"
+ 1602      424A5F51 
+ 1602      545900
+ 1603              	.LASF57:
+ 1604 01f8 4F776E65 		.ascii	"OwnerTCBPtr\000"
+ 1604      72544342 
+ 1604      50747200 
+ 1605              	.LASF93:
+ 1606 0204 43747853 		.ascii	"CtxSwCtr\000"
+ 1606      77437472 
+ 1606      00
+ 1607              	.LASF29:
+ 1608 020d 4F535F50 		.ascii	"OS_PRIO\000"
+ 1608      52494F00 
+ 1609              	.LASF12:
+ 1610 0215 666C6F61 		.ascii	"float\000"
+ 1610      7400
+ 1611              	.LASF109:
+ 1612 021b 6F735F70 		.ascii	"os_pend_data\000"
+ 1612      656E645F 
+ 1612      64617461 
+ 1612      00
+ 1613              	.LASF35:
+ 1614 0228 4F535F4D 		.ascii	"OS_MSG\000"
+ 1614      534700
+ 1615              	.LASF10:
+ 1616 022f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1616      206C6F6E 
+ 1616      6720756E 
+ 1616      7369676E 
+ 1616      65642069 
+ 1617              	.LASF108:
+ 1618 0246 4F535F50 		.ascii	"OS_PEND_DATA\000"
+ 1618      454E445F 
+ 1618      44415441 
+ 1618      00
+ 1619              	.LASF107:
+ 1620 0253 4E627255 		.ascii	"NbrUpdated\000"
+ 1620      70646174 
+ 1620      656400
+ 1621              	.LASF3:
+ 1622 025e 4350555F 		.ascii	"CPU_INT08U\000"
+ 1622      494E5430 
+ 1622      385500
+ 1623              	.LASF41:
+ 1624 0269 6F735F6D 		.ascii	"os_msg\000"
+ 1624      736700
+ 1625              	.LASF79:
+ 1626 0270 53746B53 		.ascii	"StkSize\000"
+ 1626      697A6500 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 36
+
+
+ 1627              	.LASF69:
+ 1628 0278 53746B42 		.ascii	"StkBasePtr\000"
+ 1628      61736550 
+ 1628      747200
+ 1629              	.LASF30:
+ 1630 0283 4F535F52 		.ascii	"OS_REG\000"
+ 1630      454700
+ 1631              	.LASF127:
+ 1632 028a 4170705F 		.ascii	"App_OS_TaskCreateHook\000"
+ 1632      4F535F54 
+ 1632      61736B43 
+ 1632      72656174 
+ 1632      65486F6F 
+ 1633              	.LASF33:
+ 1634 02a0 4F535F53 		.ascii	"OS_STATUS\000"
+ 1634      54415455 
+ 1634      5300
+ 1635              	.LASF129:
+ 1636 02aa 705F7463 		.ascii	"p_tcb\000"
+ 1636      6200
+ 1637              	.LASF24:
+ 1638 02b0 4F535F4D 		.ascii	"OS_MSG_SIZE\000"
+ 1638      53475F53 
+ 1638      495A4500 
+ 1639              	.LASF124:
+ 1640 02bc 4170705F 		.ascii	"App_OS_ClrAllHooks\000"
+ 1640      4F535F43 
+ 1640      6C72416C 
+ 1640      6C486F6F 
+ 1640      6B7300
+ 1641              	.LASF2:
+ 1642 02cf 4350555F 		.ascii	"CPU_CHAR\000"
+ 1642      43484152 
+ 1642      00
+ 1643              	.LASF16:
+ 1644 02d8 4350555F 		.ascii	"CPU_STK_SIZE\000"
+ 1644      53544B5F 
+ 1644      53495A45 
+ 1644      00
+ 1645              	.LASF23:
+ 1646 02e5 4F535F4D 		.ascii	"OS_MSG_QTY\000"
+ 1646      53475F51 
+ 1646      545900
+ 1647              	.LASF82:
+ 1648 02f0 5469636B 		.ascii	"TickCtrPrev\000"
+ 1648      43747250 
+ 1648      72657600 
+ 1649              	.LASF45:
+ 1650 02fc 4E627245 		.ascii	"NbrEntriesSize\000"
+ 1650      6E747269 
+ 1650      65735369 
+ 1650      7A6500
+ 1651              	.LASF67:
+ 1652 030b 5469636B 		.ascii	"TickPrevPtr\000"
+ 1652      50726576 
+ 1652      50747200 
+ 1653              	.LASF130:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 37
+
+
+ 1654 0317 4170705F 		.ascii	"App_OS_TaskReturnHook\000"
+ 1654      4F535F54 
+ 1654      61736B52 
+ 1654      65747572 
+ 1654      6E486F6F 
+ 1655              	.LASF77:
+ 1656 032d 42617365 		.ascii	"BasePrio\000"
+ 1656      5072696F 
+ 1656      00
+ 1657              	.LASF85:
+ 1658 0336 4D736751 		.ascii	"MsgQPendTimeMax\000"
+ 1658      50656E64 
+ 1658      54696D65 
+ 1658      4D617800 
+ 1659              	.LASF84:
+ 1660 0346 4D736751 		.ascii	"MsgQPendTime\000"
+ 1660      50656E64 
+ 1660      54696D65 
+ 1660      00
+ 1661              	.LASF126:
+ 1662 0353 4170705F 		.ascii	"App_OS_StatTaskHook\000"
+ 1662      4F535F53 
+ 1662      74617454 
+ 1662      61736B48 
+ 1662      6F6F6B00 
+ 1663              	.LASF65:
+ 1664 0367 50726576 		.ascii	"PrevPtr\000"
+ 1664      50747200 
+ 1665              	.LASF0:
+ 1666 036f 63686172 		.ascii	"char\000"
+ 1666      00
+ 1667              	.LASF27:
+ 1668 0374 4F535F4F 		.ascii	"OS_OBJ_TYPE\000"
+ 1668      424A5F54 
+ 1668      59504500 
+ 1669              	.LASF75:
+ 1670 0380 5461736B 		.ascii	"TaskState\000"
+ 1670      53746174 
+ 1670      6500
+ 1671              	.LASF123:
+ 1672 038a 4170705F 		.ascii	"App_OS_SetAllHooks\000"
+ 1672      4F535F53 
+ 1672      6574416C 
+ 1672      6C486F6F 
+ 1672      6B7300
+ 1673              	.LASF43:
+ 1674 039d 496E5074 		.ascii	"InPtr\000"
+ 1674      7200
+ 1675              	.LASF83:
+ 1676 03a3 4D736751 		.ascii	"MsgQ\000"
+ 1676      00
+ 1677              	.LASF70:
+ 1678 03a8 5461736B 		.ascii	"TaskEntryAddr\000"
+ 1678      456E7472 
+ 1678      79416464 
+ 1678      7200
+ 1679              	.LASF51:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 38
+
+
+ 1680 03b6 4E616D65 		.ascii	"NamePtr\000"
+ 1680      50747200 
+ 1681              	.LASF74:
+ 1682 03be 50656E64 		.ascii	"PendStatus\000"
+ 1682      53746174 
+ 1682      757300
+ 1683              	.LASF40:
+ 1684 03c9 4F535F4D 		.ascii	"OS_MSG_Q\000"
+ 1684      53475F51 
+ 1684      00
+ 1685              	.LASF50:
+ 1686 03d2 54797065 		.ascii	"Type\000"
+ 1686      00
+ 1687              	.LASF18:
+ 1688 03d7 4350555F 		.ascii	"CPU_TS\000"
+ 1688      545300
+ 1689              	.LASF11:
+ 1690 03de 6C6F6E67 		.ascii	"long long int\000"
+ 1690      206C6F6E 
+ 1690      6720696E 
+ 1690      7400
+ 1691              	.LASF62:
+ 1692 03ec 53746B50 		.ascii	"StkPtr\000"
+ 1692      747200
+ 1693              	.LASF95:
+ 1694 03f3 4379636C 		.ascii	"CyclesStart\000"
+ 1694      65735374 
+ 1694      61727400 
+ 1695              	.LASF5:
+ 1696 03ff 4350555F 		.ascii	"CPU_INT16U\000"
+ 1696      494E5431 
+ 1696      365500
+ 1697              	.LASF34:
+ 1698 040a 4F535F54 		.ascii	"OS_TICK\000"
+ 1698      49434B00 
+ 1699              	.LASF17:
+ 1700 0412 4350555F 		.ascii	"CPU_TS32\000"
+ 1700      54533332 
+ 1700      00
+ 1701              	.LASF90:
+ 1702 041b 53757370 		.ascii	"SuspendCtr\000"
+ 1702      656E6443 
+ 1702      747200
+ 1703              	.LASF64:
+ 1704 0426 53746B4C 		.ascii	"StkLimitPtr\000"
+ 1704      696D6974 
+ 1704      50747200 
+ 1705              	.LASF31:
+ 1706 0432 4F535F53 		.ascii	"OS_SEM_CTR\000"
+ 1706      454D5F43 
+ 1706      545200
+ 1707              	.LASF110:
+ 1708 043d 54434250 		.ascii	"TCBPtr\000"
+ 1708      747200
+ 1709              	.LASF94:
+ 1710 0444 4379636C 		.ascii	"CyclesDelta\000"
+ 1710      65734465 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 39
+
+
+ 1710      6C746100 
+ 1711              	.LASF66:
+ 1712 0450 5469636B 		.ascii	"TickNextPtr\000"
+ 1712      4E657874 
+ 1712      50747200 
+ 1713              	.LASF112:
+ 1714 045c 5264794F 		.ascii	"RdyObjPtr\000"
+ 1714      626A5074 
+ 1714      7200
+ 1715              	.LASF36:
+ 1716 0466 4E657874 		.ascii	"NextPtr\000"
+ 1716      50747200 
+ 1717              	.LASF49:
+ 1718 046e 6F735F6D 		.ascii	"os_mutex\000"
+ 1718      75746578 
+ 1718      00
+ 1719              	.LASF68:
+ 1720 0477 5469636B 		.ascii	"TickListPtr\000"
+ 1720      4C697374 
+ 1720      50747200 
+ 1721              	.LASF115:
+ 1722 0483 52647954 		.ascii	"RdyTS\000"
+ 1722      5300
+ 1723              	.LASF105:
+ 1724 0489 6F735F74 		.ascii	"os_tick_list\000"
+ 1724      69636B5F 
+ 1724      6C697374 
+ 1724      00
+ 1725              	.LASF7:
+ 1726 0496 73686F72 		.ascii	"short int\000"
+ 1726      7420696E 
+ 1726      7400
+ 1727              	.LASF114:
+ 1728 04a0 5264794D 		.ascii	"RdyMsgSize\000"
+ 1728      73675369 
+ 1728      7A6500
+ 1729              	.LASF102:
+ 1730 04ab 496E7444 		.ascii	"IntDisTimeMax\000"
+ 1730      69735469 
+ 1730      6D654D61 
+ 1730      7800
+ 1731              	.LASF99:
+ 1732 04b9 53656D50 		.ascii	"SemPendTimeMax\000"
+ 1732      656E6454 
+ 1732      696D654D 
+ 1732      617800
+ 1733              	.LASF97:
+ 1734 04c8 4379636C 		.ascii	"CyclesTotalPrev\000"
+ 1734      6573546F 
+ 1734      74616C50 
+ 1734      72657600 
+ 1735              	.LASF56:
+ 1736 04d8 4D757465 		.ascii	"MutexGrpNextPtr\000"
+ 1736      78477270 
+ 1736      4E657874 
+ 1736      50747200 
+ 1737              	.LASF104:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 40
+
+
+ 1738 04e8 4F535F54 		.ascii	"OS_TICK_LIST\000"
+ 1738      49434B5F 
+ 1738      4C495354 
+ 1738      00
+ 1739              	.LASF72:
+ 1740 04f5 50656E64 		.ascii	"PendDataTblPtr\000"
+ 1740      44617461 
+ 1740      54626C50 
+ 1740      747200
+ 1741              	.LASF25:
+ 1742 0504 4F535F4E 		.ascii	"OS_NESTING_CTR\000"
+ 1742      45535449 
+ 1742      4E475F43 
+ 1742      545200
+ 1743              	.LASF96:
+ 1744 0513 4379636C 		.ascii	"CyclesTotal\000"
+ 1744      6573546F 
+ 1744      74616C00 
+ 1745              	.LASF120:
+ 1746 051f 4F535F50 		.ascii	"OS_PEND_OBJ\000"
+ 1746      454E445F 
+ 1746      4F424A00 
+ 1747              	.LASF92:
+ 1748 052b 43505555 		.ascii	"CPUUsageMax\000"
+ 1748      73616765 
+ 1748      4D617800 
+ 1749              	.LASF52:
+ 1750 0537 50656E64 		.ascii	"PendList\000"
+ 1750      4C697374 
+ 1750      00
+ 1751              	.LASF80:
+ 1752 0540 53656D43 		.ascii	"SemCtr\000"
+ 1752      747200
+ 1753              	.LASF81:
+ 1754 0547 5469636B 		.ascii	"TickRemain\000"
+ 1754      52656D61 
+ 1754      696E00
+ 1755              	.LASF9:
+ 1756 0552 756E7369 		.ascii	"unsigned int\000"
+ 1756      676E6564 
+ 1756      20696E74 
+ 1756      00
+ 1757              	.LASF38:
+ 1758 055f 4D736753 		.ascii	"MsgSize\000"
+ 1758      697A6500 
+ 1759              	.LASF113:
+ 1760 0567 5264794D 		.ascii	"RdyMsgPtr\000"
+ 1760      73675074 
+ 1760      7200
+ 1761              	.LASF63:
+ 1762 0571 45787450 		.ascii	"ExtPtr\000"
+ 1762      747200
+ 1763              	.LASF122:
+ 1764 0578 73697A65 		.ascii	"sizetype\000"
+ 1764      74797065 
+ 1764      00
+ 1765              	.LASF14:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 41
+
+
+ 1766 0581 4350555F 		.ascii	"CPU_ADDR\000"
+ 1766      41444452 
+ 1766      00
+ 1767              	.LASF21:
+ 1768 058a 4F535F43 		.ascii	"OS_CYCLES\000"
+ 1768      59434C45 
+ 1768      5300
+ 1769              	.LASF60:
+ 1770 0594 4F535F54 		.ascii	"OS_TCB\000"
+ 1770      434200
+ 1771              	.LASF1:
+ 1772 059b 756E7369 		.ascii	"unsigned char\000"
+ 1772      676E6564 
+ 1772      20636861 
+ 1772      7200
+ 1773              	.LASF32:
+ 1774 05a9 4F535F53 		.ascii	"OS_STATE\000"
+ 1774      54415445 
+ 1774      00
+ 1775              	.LASF28:
+ 1776 05b2 4F535F4F 		.ascii	"OS_OPT\000"
+ 1776      505400
+ 1777              	.LASF55:
+ 1778 05b9 4462674E 		.ascii	"DbgNamePtr\000"
+ 1778      616D6550 
+ 1778      747200
+ 1779              	.LASF71:
+ 1780 05c4 5461736B 		.ascii	"TaskEntryArg\000"
+ 1780      456E7472 
+ 1780      79417267 
+ 1780      00
+ 1781              	.LASF44:
+ 1782 05d1 4F757450 		.ascii	"OutPtr\000"
+ 1782      747200
+ 1783              	.LASF116:
+ 1784 05d8 4F535F50 		.ascii	"OS_PEND_LIST\000"
+ 1784      454E445F 
+ 1784      4C495354 
+ 1784      00
+ 1785              	.LASF128:
+ 1786 05e5 4170705F 		.ascii	"App_OS_TaskDelHook\000"
+ 1786      4F535F54 
+ 1786      61736B44 
+ 1786      656C486F 
+ 1786      6F6B00
+ 1787              	.LASF4:
+ 1788 05f8 7369676E 		.ascii	"signed char\000"
+ 1788      65642063 
+ 1788      68617200 
+ 1789              	.LASF39:
+ 1790 0604 4D736754 		.ascii	"MsgTS\000"
+ 1790      5300
+ 1791              	.LASF6:
+ 1792 060a 73686F72 		.ascii	"short unsigned int\000"
+ 1792      7420756E 
+ 1792      7369676E 
+ 1792      65642069 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 42
+
+
+ 1792      6E7400
+ 1793              	.LASF22:
+ 1794 061d 4F535F46 		.ascii	"OS_FLAGS\000"
+ 1794      4C414753 
+ 1794      00
+ 1795              	.LASF37:
+ 1796 0626 4D736750 		.ascii	"MsgPtr\000"
+ 1796      747200
+ 1797              	.LASF88:
+ 1798 062d 466C6167 		.ascii	"FlagsRdy\000"
+ 1798      73526479 
+ 1798      00
+ 1799              	.LASF76:
+ 1800 0636 5072696F 		.ascii	"Prio\000"
+ 1800      00
+ 1801              	.LASF132:
+ 1802 063b 4170705F 		.ascii	"App_OS_TimeTickHook\000"
+ 1802      4F535F54 
+ 1802      696D6554 
+ 1802      69636B48 
+ 1802      6F6F6B00 
+ 1803              	.LASF13:
+ 1804 064f 646F7562 		.ascii	"double\000"
+ 1804      6C6500
+ 1805              	.LASF91:
+ 1806 0656 43505555 		.ascii	"CPUUsage\000"
+ 1806      73616765 
+ 1806      00
+ 1807              	.LASF111:
+ 1808 065f 50656E64 		.ascii	"PendObjPtr\000"
+ 1808      4F626A50 
+ 1808      747200
+ 1809              	.LASF47:
+ 1810 066a 4E627245 		.ascii	"NbrEntriesMax\000"
+ 1810      6E747269 
+ 1810      65734D61 
+ 1810      7800
+ 1811              	.LASF117:
+ 1812 0678 6F735F70 		.ascii	"os_pend_list\000"
+ 1812      656E645F 
+ 1812      6C697374 
+ 1812      00
+ 1813              	.LASF125:
+ 1814 0685 4170705F 		.ascii	"App_OS_IdleTaskHook\000"
+ 1814      4F535F49 
+ 1814      646C6554 
+ 1814      61736B48 
+ 1814      6F6F6B00 
+ 1815              	.LASF86:
+ 1816 0699 52656754 		.ascii	"RegTbl\000"
+ 1816      626C00
+ 1817              	.LASF101:
+ 1818 06a0 53746B46 		.ascii	"StkFree\000"
+ 1818      72656500 
+ 1819              	.LASF42:
+ 1820 06a8 6F735F6D 		.ascii	"os_msg_q\000"
+ 1820      73675F71 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccMvDpHd.s 			page 43
+
+
+ 1820      00
+ 1821              	.LASF15:
+ 1822 06b1 4350555F 		.ascii	"CPU_STK\000"
+ 1822      53544B00 
+ 1823              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

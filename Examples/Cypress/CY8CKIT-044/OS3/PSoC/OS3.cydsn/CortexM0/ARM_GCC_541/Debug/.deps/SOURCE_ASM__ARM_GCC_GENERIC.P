@@ -1,0 +1,8 @@
+D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/CortexM0/ARM_GCC_541/Debug/CyBootAsmGnu.o : D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
+
+D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s : 
+
+D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc : 
+
+D:/CYTEST/Micrium_CY8CKIT-044_OS3/Examples/Cypress/CY8CKIT-044/OS3/PSoC/OS3.cydsn/Generated_Source/PSoC4/cyfittergnu.inc : 
+
